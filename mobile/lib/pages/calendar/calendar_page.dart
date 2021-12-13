@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile/components/base_app_bar.dart';
-import 'package:mobile/components/calendar/calendar.dart';
+import 'package:mobile/pages/components/base_app_bar.dart';
+import 'package:mobile/pages/calendar/calendar.dart';
 
 class CalendarPage extends StatelessWidget {
   const CalendarPage({Key? key}) : super(key: key);

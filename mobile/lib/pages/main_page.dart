@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:mobile/pages/summary_page.dart';
-import 'package:mobile/pages/calendar_page.dart';
-import 'package:mobile/pages/information_page.dart';
+import 'package:mobile/pages/summary/summary_page.dart';
+import 'package:mobile/pages/calendar/calendar_page.dart';
+import 'package:mobile/pages/information/information_page.dart';
 
-class RoutePage extends StatefulWidget {
-  const RoutePage({Key? key}) : super(key: key);
+class MainPage extends StatefulWidget {
+  const MainPage({Key? key}) : super(key: key);
 
   @override
-  _RoutePageState createState() => _RoutePageState();
+  _MainPageState createState() => _MainPageState();
 }
 
-class _RoutePageState extends State<RoutePage> {
+class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
   // @override
   // Widget build(BuildContext context) {

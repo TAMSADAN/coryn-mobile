@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/components/share/coin_image_box.dart';
-import 'package:mobile/components/share/coin_information_summary_box.dart';
-import 'package:mobile/components/share/icon_forward.dart';
+import 'package:mobile/pages/components/coin/coin_image_box.dart';
+import 'package:mobile/pages/components/coin/coin_information_summary_box.dart';
+import 'package:mobile/pages/components/icon_forward.dart';
 
 class DetailTitle extends StatelessWidget {
   final String coinImagePath;

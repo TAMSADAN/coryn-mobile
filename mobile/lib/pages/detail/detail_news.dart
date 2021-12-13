@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile/components/share/coin_news_list_item.dart';
+import 'package:mobile/pages/components/coin/coin_news_list_item.dart';
 
 class DetailNews extends StatelessWidget {
   final String coinNewsTitle;

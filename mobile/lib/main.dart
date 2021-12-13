@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/pages/route_page.dart';
+import 'package:mobile/pages/main_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,8 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: RoutePage(),
-      // home: DetailPage(),
+      home: MainPage(),
     );
   }
 }

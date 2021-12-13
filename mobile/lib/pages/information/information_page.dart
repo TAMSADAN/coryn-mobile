@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/components/base_app_bar.dart';
-import 'package:mobile/components/base_sub_title.dart';
-import 'package:mobile/components/information/information_caution.dart';
+import 'package:mobile/pages/components/base_app_bar.dart';
+import 'package:mobile/pages/components/base_sub_title.dart';
+import 'package:mobile/pages/information/information_caution.dart';
 
 class InformationPage extends StatelessWidget {
   const InformationPage({Key? key}) : super(key: key);

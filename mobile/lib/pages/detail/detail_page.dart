@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:mobile/components/back_app_bar.dart';
-import 'package:mobile/components/base_sub_title.dart';
-import 'package:mobile/components/detail/detail_title.dart';
-import 'package:mobile/components/detail/detail_chart.dart';
-import 'package:mobile/components/detail/detail_news.dart';
-import 'package:mobile/components/detail/detail_chart_option.dart';
-import 'package:mobile/components/detail/detail_news_option.dart';
+import 'package:mobile/pages/components/back_app_bar.dart';
+import 'package:mobile/pages/components/base_sub_title.dart';
+import 'package:mobile/pages/detail/detail_title.dart';
+import 'package:mobile/pages/detail/detail_chart.dart';
+import 'package:mobile/pages/detail/detail_news.dart';
+import 'package:mobile/pages/detail/detail_chart_option.dart';
+import 'package:mobile/pages/detail/detail_news_option.dart';
 
 class DetailPage extends StatelessWidget {
   const DetailPage({Key? key}) : super(key: key);
