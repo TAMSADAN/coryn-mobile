@@ -11,8 +11,7 @@ class ListCover extends StatelessWidget {
       padding: const EdgeInsets.all(15),
       child: Container(
         child: Padding(
-            padding:
-                const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 10),
+            padding: const EdgeInsets.only(left: 15, top: 10, bottom: 10),
             child: innerList),
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,

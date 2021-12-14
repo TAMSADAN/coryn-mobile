@@ -14,47 +14,30 @@ class InformationPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xfff2f2f6),
       appBar: BaseAppBar(AppBar(), "정보"),
-      body: Column(
+      body: ListView(
         children: [
           BaseSubTitle("앱 정보"),
           InformationCaution(),
-          Expanded(
-            child: ListCover(
-              ListView(
-                children: [
-                  InformationListItem(CupertinoIcons.info_circle, Colors.white,
-                      Colors.blueAccent, "앱 정보"),
-                  InformationListItem(CupertinoIcons.info_circle, Colors.white,
-                      Colors.blueAccent, "앱 정보"),
-                ],
-              ),
+          ListCover(
+            Column(
+              children: [
+                InformationListItem(CupertinoIcons.info_circle, Colors.white,
+                    Colors.blueAccent, "앱 정보"),
+                Container(
+                    padding: const EdgeInsets.only(left: 40),
+                    child: Divider(color: Colors.black, thickness: 0.1)),
+                InformationListItem(CupertinoIcons.info_circle, Colors.white,
+                    Colors.blueAccent, "개발자 정보"),
+                Container(
+                    padding: const EdgeInsets.only(left: 40),
+                    child: Divider(color: Colors.black, thickness: 0.1)),
+                InformationListItem(CupertinoIcons.info_circle, Colors.white,
+                    Colors.blueAccent, "앱 정보"),
+              ],
             ),
-          )
+          ),
         ],
       ),
     );
   }
 }
-
-// return Scaffold(
-//         backgroundColor: const Color(0xfff2f2f6),
-//         appBar: BaseAppBar(AppBar(), "정보"),
-//         body: Padding(
-//           padding: const EdgeInsets.symmetric(horizontal: 20),
-//           child: ListView(
-//             children: [
-//               BaseSubTitle("앱 정보"),
-//               InformationCaution(),
-//               Expanded(
-//                 child: Row(
-//                   children: [
-//                     InformationListItem(CupertinoIcons.info_circle,
-//                         Colors.white, Colors.blueAccent, "앱 정보"),
-//                     InformationListItem(CupertinoIcons.info_circle,
-//                         Colors.white, Colors.blueAccent, "앱 정보"),
-//                   ],
-//                 ),
-//               )
-//             ],
-//           ),
-//         ));

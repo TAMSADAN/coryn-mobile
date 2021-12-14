@@ -39,7 +39,7 @@ class InformationListItem extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(right: 0),
+          padding: const EdgeInsets.only(right: 15),
           child: Icon(
             CupertinoIcons.forward,
             size: 20,
