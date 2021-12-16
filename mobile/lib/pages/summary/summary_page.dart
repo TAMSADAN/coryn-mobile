@@ -4,6 +4,7 @@ import 'package:mobile/pages/components/base_app_bar.dart';
 import 'package:mobile/pages/components/base_sub_title.dart';
 import 'package:mobile/pages/summary/summary_search.dart';
 import 'package:mobile/pages/summary/summary_coin_list_item.dart';
+import 'package:mobile/pages/list_cover.dart';
 
 class SummaryPage extends StatelessWidget {
   const SummaryPage({Key? key}) : super(key: key);
@@ -22,13 +23,19 @@ class SummaryPage extends StatelessWidget {
             ),
             SummarySearch(),
             BaseSubTitle("전체 코인"),
-            SummaryCoinListItem(
-                "bitcoin_icon1", "비트코인", "BTC/KRW", "67,330,729", "15.8"),
-            Container(
-                padding: const EdgeInsets.only(left: 58),
-                child: Divider(color: Colors.black, thickness: 0.1)),
-            SummaryCoinListItem(
-                "bitcoin_icon1", "비트코인", "BTC/KRW", "670,729", "15.8"),
+            ListCover(
+              Column(
+                children: [
+                  SummaryCoinListItem(
+                      "bitcoin_icon1", "비트코인", "BTC/KRW", "67,330,729", "15.8"),
+                  Container(
+                      padding: const EdgeInsets.only(left: 58),
+                      child: Divider(color: Colors.black, thickness: 0.1)),
+                  SummaryCoinListItem(
+                      "bitcoin_icon1", "비트코인", "BTC/KRW", "670,729", "15.8"),
+                ],
+              ),
+            ),
           ],
         ),
       ),

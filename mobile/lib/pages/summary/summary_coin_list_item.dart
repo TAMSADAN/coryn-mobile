@@ -38,7 +38,10 @@ class SummaryCoinListItem extends StatelessWidget {
           Row(
             children: [
               CoinPriceRateBox(coinPriceRate),
-              IconForward(key: key),
+              Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: IconForward(key: key),
+              ),
             ],
           ),
         ],

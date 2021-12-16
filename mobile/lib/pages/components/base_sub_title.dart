@@ -8,21 +8,13 @@ class BaseSubTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            subTitle,
-            style: TextStyle(
-              fontSize: 23,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Container(
-            child: Divider(color: Colors.black, thickness: 0.1),
-          ),
-        ],
+      padding: const EdgeInsets.only(top: 20, left: 15, bottom: 5),
+      child: Text(
+        subTitle,
+        style: TextStyle(
+          fontSize: 13,
+          color: Colors.black54,
+        ),
       ),
     );
   }
