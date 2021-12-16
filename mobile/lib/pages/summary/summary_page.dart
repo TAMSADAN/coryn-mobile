@@ -11,7 +11,7 @@ class SummaryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xfff2f2f6),
       appBar: BaseAppBar(AppBar(), "홈"),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
