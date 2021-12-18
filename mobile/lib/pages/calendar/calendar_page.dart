@@ -9,14 +9,25 @@ class CalendarPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: BaseAppBar(AppBar(), "캘린더"),
-      body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 0),
-            child: Calendar(),
-          )),
-    );
+        backgroundColor: Colors.white,
+        body: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerboxIsScrolled) {
+            return <Widget>[
+              CupertinoSliverNavigationBar(
+                backgroundColor: Colors.white,
+                border: Border(),
+                largeTitle: Text("캘린더"),
+              ),
+            ];
+          },
+          body: Column(
+            children: [
+              SizedBox(
+                height: 600,
+                child: Calendar(),
+              ),
+            ],
+          ),
+        ));
   }
 }

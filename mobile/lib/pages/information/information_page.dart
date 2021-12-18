@@ -12,24 +12,31 @@ class InformationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xfff2f2f6),
-      appBar: BaseAppBar(AppBar(), "정보"),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: ListView(
-          children: [
-            BaseSubTitle("앱 관련"),
-            ListCover(
-              Column(
-                children: [
-                  InformationListItem(CupertinoIcons.info_circle, Colors.white,
-                      Colors.blueAccent, "앱 정보"),
-                ],
+        backgroundColor: const Color(0xfff2f2f6),
+        body: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerboxIsScrolled) {
+            return <Widget>[
+              CupertinoSliverNavigationBar(
+                backgroundColor: const Color(0xfff2f2f6),
+                border: Border(),
+                largeTitle: Text("정보"),
               ),
-            ),
-          ],
-        ),
-      ),
-    );
+            ];
+          },
+          body: ListView(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            children: [
+              BaseSubTitle("앱 관련"),
+              ListCover(
+                Column(
+                  children: [
+                    InformationListItem(CupertinoIcons.info_circle,
+                        Colors.white, Colors.blueAccent, "앱 정보"),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ));
   }
 }
