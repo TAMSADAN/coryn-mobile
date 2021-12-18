@@ -25,7 +25,6 @@ class DetailTitle extends StatelessWidget {
             CoinInformationSummaryBox(coinName, coinExchange, coinPrice),
           ],
         ),
-        const IconForward(),
       ],
     );
   }
