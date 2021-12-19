@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:mobile/models/summary.dart';
 import 'package:mobile/pages/components/back_app_bar.dart';
 import 'package:mobile/pages/components/base_sub_title.dart';
+import 'package:mobile/pages/components/coin/coin_news_list_item.dart';
 import 'package:mobile/pages/detail/detail_title.dart';
 import 'package:mobile/pages/detail/detail_chart.dart';
-import 'package:mobile/pages/detail/detail_news.dart';
 import 'package:mobile/pages/detail/detail_chart_option.dart';
 import 'package:mobile/pages/detail/detail_news_option.dart';
+import 'package:mobile/models/detail.dart';
 
 class DetailPage extends StatelessWidget {
   const DetailPage({Key? key}) : super(key: key);
@@ -23,26 +25,30 @@ class DetailPage extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            DetailTitle("obsr_icon1", "옵저버", "OBSR/KRW", "8.9"),
+            DetailTitle(summary: bitcoinDetail.summary),
             BaseSubTitle("차트"),
             DetailChart(),
             DetailChartOption(),
             BaseSubTitle("뉴스"),
             DetailNewsOption(),
-            DetailNews("옵저버 이대로 괜찮을까..?", "2021/11/18", "2021/01/14",
-                "coinmarcketcal"),
-            DetailNews("옵저버 이대로 괜찮을까..?", "2021/11/18", "2021/01/14",
-                "coinmarcketcal"),
-            DetailNews("옵저버 이대로 괜찮을까..?", "2021/11/18", "2021/01/14",
-                "coinmarcketcal"),
-            DetailNews("옵저버 이대로 괜찮을까..?", "2021/11/18", "2021/01/14",
-                "coinmarcketcal"),
-            DetailNews("옵저버 이대로 괜찮을까..?", "2021/11/18", "2021/01/14",
-                "coinmarcketcal"),
-            DetailNews("옵저버 이대로 괜찮을까..?", "2021/11/18", "2021/01/14",
-                "coinmarcketcal"),
-            DetailNews("옵저버 이대로 괜찮을까..?", "2021/11/18", "2021/01/14",
-                "coinmarcketcal"),
+            ...List.generate(
+                bitcoinDetail.newsList.length,
+                (index) =>
+                    CoinNewsListItem(news: bitcoinDetail.newsList[index]))
+            // DetailNews("옵저버 이대로 괜찮을까..?", "2021/11/18", "2021/01/14",
+            //     "coinmarcketcal"),
+            // DetailNews("옵저버 이대로 괜찮을까..?", "2021/11/18", "2021/01/14",
+            //     "coinmarcketcal"),
+            // DetailNews("옵저버 이대로 괜찮을까..?", "2021/11/18", "2021/01/14",
+            //     "coinmarcketcal"),
+            // DetailNews("옵저버 이대로 괜찮을까..?", "2021/11/18", "2021/01/14",
+            //     "coinmarcketcal"),
+            // DetailNews("옵저버 이대로 괜찮을까..?", "2021/11/18", "2021/01/14",
+            //     "coinmarcketcal"),
+            // DetailNews("옵저버 이대로 괜찮을까..?", "2021/11/18", "2021/01/14",
+            //     "coinmarcketcal"),
+            // DetailNews("옵저버 이대로 괜찮을까..?", "2021/11/18", "2021/01/14",
+            //     "coinmarcketcal"),
           ],
         ),
       ),

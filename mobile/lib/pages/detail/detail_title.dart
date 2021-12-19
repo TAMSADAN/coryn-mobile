@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:mobile/pages/components/coin/coin_image_box.dart';
 import 'package:mobile/pages/components/coin/coin_information_summary_box.dart';
 import 'package:mobile/pages/components/icon_forward.dart';
+import 'package:mobile/models/summary.dart';
 
 class DetailTitle extends StatelessWidget {
-  final String coinImagePath;
-  final String coinName;
-  final String coinExchange;
-  final String coinPrice;
+  final Summary summary;
+  // final String coinName;
+  // final double coinPrice;
+  // final String coinTicker;
+  // final String coinMarket;
 
-  // ignore: use_key_in_widget_constructors
-  const DetailTitle(
-      this.coinImagePath, this.coinName, this.coinExchange, this.coinPrice);
+  const DetailTitle({Key? key, required this.summary}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +20,10 @@ class DetailTitle extends StatelessWidget {
       children: [
         Row(
           children: [
-            CoinImageBox(coinImagePath),
+            CoinImageBox(summary.coinImageUri),
             const SizedBox(width: 10),
-            CoinInformationSummaryBox(coinName, coinExchange, coinPrice),
+            CoinInformationSummaryBox(summary.coinName, summary.coinPrice,
+                summary.coinTicker, summary.coinMarcket),
           ],
         ),
       ],

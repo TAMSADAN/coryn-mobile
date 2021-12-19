@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class CoinPriceRateBox extends StatelessWidget {
-  final String coinPriceRate;
+  final double dayRange;
 
-  const CoinPriceRateBox(this.coinPriceRate);
+  const CoinPriceRateBox(this.dayRange);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class CoinPriceRateBox extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          "+$coinPriceRate%",
+          "+$dayRange%",
           style: TextStyle(
               color: Colors.redAccent,
               fontWeight: FontWeight.bold,

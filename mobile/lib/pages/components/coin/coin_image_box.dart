@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class CoinImageBox extends StatelessWidget {
-  final String coinImagePath;
+  final String coinImageUri;
 
-  const CoinImageBox(this.coinImagePath);
+  const CoinImageBox(this.coinImageUri);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class CoinImageBox extends StatelessWidget {
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,
           image: DecorationImage(
-            image: AssetImage("assets/images/$coinImagePath.png"),
+            image: NetworkImage(coinImageUri),
           ),
         ),
       ),

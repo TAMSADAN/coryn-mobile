@@ -5,16 +5,13 @@ import 'package:mobile/pages/components/coin/coin_image_box.dart';
 import 'package:mobile/pages/components/coin/coin_price_rate_box.dart';
 import 'package:mobile/pages/components/coin/coin_information_summary_box.dart';
 import 'package:mobile/pages/components/icon_forward.dart';
+import 'package:mobile/models/summary.dart';
 
 class SummaryCoinListItem extends StatelessWidget {
-  final String coinImagePath;
-  final String coinName;
-  final String coinExchange;
-  final String coinPrice;
-  final String coinPriceRate;
+  final Summary summary;
 
-  const SummaryCoinListItem(this.coinImagePath, this.coinName,
-      this.coinExchange, this.coinPrice, this.coinPriceRate);
+  const SummaryCoinListItem({Key? key, required this.summary})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +26,15 @@ class SummaryCoinListItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          CoinImageBox(coinImagePath),
+          CoinImageBox(summary.coinImageUri),
           const SizedBox(width: 8),
           Expanded(
-              child:
-                  CoinInformationSummaryBox(coinName, coinExchange, coinPrice)),
+              child: CoinInformationSummaryBox(summary.coinName,
+                  summary.coinPrice, summary.coinTicker, summary.coinMarcket)),
           const SizedBox(width: 15),
           Row(
             children: [
-              CoinPriceRateBox(coinPriceRate),
+              CoinPriceRateBox(summary.dayRange),
               Padding(
                 padding: const EdgeInsets.only(right: 10),
                 child: IconForward(key: key),

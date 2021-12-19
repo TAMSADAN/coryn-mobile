@@ -1,14 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile/models/news.dart';
 
 class CoinNewsListItem extends StatelessWidget {
-  final String coinNewsTitle;
-  final String coinNewsPublishDate;
-  final String coinNewsTargetDate;
-  final String coinNewsSource;
+  final News news;
 
-  const CoinNewsListItem(this.coinNewsTitle, this.coinNewsPublishDate,
-      this.coinNewsTargetDate, this.coinNewsSource);
+  const CoinNewsListItem({Key? key, required this.news}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +32,7 @@ class CoinNewsListItem extends StatelessWidget {
                         SizedBox(
                           width: 290,
                           child: Text(
-                            coinNewsTitle,
+                            news.title,
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -43,7 +40,7 @@ class CoinNewsListItem extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "생성일 : $coinNewsPublishDate 타겟일 : $coinNewsTargetDate",
+                          "생성일 : ${news.createDate} 타겟일 : ${news.targetDate}",
                           style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
@@ -51,7 +48,7 @@ class CoinNewsListItem extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "출처 : $coinNewsSource",
+                          "출처 : ${news.sourceName}",
                           style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
