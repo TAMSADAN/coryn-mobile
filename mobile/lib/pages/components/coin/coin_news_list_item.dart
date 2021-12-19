@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/models/news.dart';
+import 'package:intl/intl.dart';
 
 class CoinNewsListItem extends StatelessWidget {
   final News news;
@@ -40,7 +41,7 @@ class CoinNewsListItem extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "생성일 : ${news.createDate} 타겟일 : ${news.targetDate}",
+                          "생성일 : ${news.getStringFromDatetime(news.createDate)} 타겟일 : ${news.getStringFromDatetime(news.targetDate)}",
                           style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
