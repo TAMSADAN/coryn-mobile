@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/pages/components/base_app_bar.dart';
 import 'package:mobile/pages/components/base_sub_title.dart';
-import 'package:mobile/pages/information/information_caution.dart';
-import 'package:mobile/pages/information/information_list_item.dart';
+import 'package:mobile/pages/information/components/information_caution.dart';
+import 'package:mobile/pages/information/components/information_list_item.dart';
 import 'package:mobile/pages/list_cover.dart';
+import 'package:mobile/pages/information/information_app_page.dart';
 
 class InformationPage extends StatelessWidget {
   const InformationPage({Key? key}) : super(key: key);
@@ -30,8 +31,17 @@ class InformationPage extends StatelessWidget {
               ListCover(
                 Column(
                   children: [
-                    InformationListItem(CupertinoIcons.info_circle,
-                        Colors.white, Colors.blueAccent, "앱 정보"),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const InformationAppPage()),
+                        );
+                      },
+                      child: InformationListItem(CupertinoIcons.info_circle,
+                          Colors.white, Colors.blueAccent, "앱 정보"),
+                    ),
                   ],
                 ),
               ),
