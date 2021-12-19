@@ -17,14 +17,20 @@ class DetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: BackAppBar(AppBar(), "상세 정보"),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: ListView(
-          children: [
-            SizedBox(
-              height: 20,
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerboxIsScrolled) {
+          return <Widget>[
+            CupertinoSliverNavigationBar(
+              backgroundColor: Colors.white,
+              border: Border(),
+              largeTitle: Text("상세"),
+              previousPageTitle: "홈",
             ),
+          ];
+        },
+        body: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          children: [
             DetailTitle(summary: bitcoinDetail.summary),
             BaseSubTitle("차트"),
             DetailChart(),
@@ -34,21 +40,7 @@ class DetailPage extends StatelessWidget {
             ...List.generate(
                 bitcoinDetail.newsList.length,
                 (index) =>
-                    CoinNewsListItem(news: bitcoinDetail.newsList[index]))
-            // DetailNews("옵저버 이대로 괜찮을까..?", "2021/11/18", "2021/01/14",
-            //     "coinmarcketcal"),
-            // DetailNews("옵저버 이대로 괜찮을까..?", "2021/11/18", "2021/01/14",
-            //     "coinmarcketcal"),
-            // DetailNews("옵저버 이대로 괜찮을까..?", "2021/11/18", "2021/01/14",
-            //     "coinmarcketcal"),
-            // DetailNews("옵저버 이대로 괜찮을까..?", "2021/11/18", "2021/01/14",
-            //     "coinmarcketcal"),
-            // DetailNews("옵저버 이대로 괜찮을까..?", "2021/11/18", "2021/01/14",
-            //     "coinmarcketcal"),
-            // DetailNews("옵저버 이대로 괜찮을까..?", "2021/11/18", "2021/01/14",
-            //     "coinmarcketcal"),
-            // DetailNews("옵저버 이대로 괜찮을까..?", "2021/11/18", "2021/01/14",
-            //     "coinmarcketcal"),
+                    CoinNewsListItem(news: bitcoinDetail.newsList[index])),
           ],
         ),
       ),
