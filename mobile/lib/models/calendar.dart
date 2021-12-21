@@ -1,12 +1,19 @@
-import 'package:mobile/models/config/news.dart';
-import 'package:mobile/models/config/price.dart';
+import 'package:mobile/models/dto/coin.dart';
+import 'package:mobile/models/dto/news.dart';
 
 class Calendar {
-  final List<News> newsList;
+  final Coin coin;
+  final News news;
 
   Calendar({
-    required this.newsList,
+    required this.coin,
+    required this.news,
   });
 }
 
-Calendar dummyCalendar = new Calendar(newsList: dummyNewsList);
+List<Calendar> dummyCalendarList = [
+  Calendar(coin: dummyBitcoinCoin, news: dummyBitcoinNewsList[0]),
+  Calendar(coin: dummyBitcoinCoin, news: dummyBitcoinNewsList[1]),
+  Calendar(coin: dummyDogecoinCoin, news: dummyDogecoinNewsList[0]),
+  Calendar(coin: dummyDogecoinCoin, news: dummyDogecoinNewsList[1]),
+];

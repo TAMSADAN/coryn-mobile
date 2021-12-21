@@ -12,7 +12,7 @@ class CalendarBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return SfCalendar(
       view: CalendarView.month,
-      headerStyle: CalendarHeaderStyle(textStyle: TextStyle(fontSize: 10)),
+      headerStyle: CalendarHeaderStyle(textStyle: TextStyle(fontSize: 20)),
       dataSource: getCalendarDataSource(),
       monthViewSettings: const MonthViewSettings(
         showAgenda: true,
