@@ -1,6 +1,6 @@
 import 'package:mobile/models/summary.dart';
-import 'package:mobile/models/news.dart';
-import 'package:mobile/models/price.dart';
+import 'package:mobile/models/config/news.dart';
+import 'package:mobile/models/config/price.dart';
 
 class Detail {
   final Summary summary;
@@ -14,8 +14,8 @@ class Detail {
   });
 }
 
-Detail bitcoinDetail = Detail(
+Detail dummyDetail = Detail(
   summary: summaryList[0],
-  priceList: bitcoinPriceList,
-  newsList: bitcoinNewsList,
+  priceList: dummyPriceList,
+  newsList: dummyNewsList,
 );

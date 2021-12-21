@@ -31,16 +31,14 @@ class DetailPage extends StatelessWidget {
         body: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           children: [
-            DetailTitle(summary: bitcoinDetail.summary),
+            DetailTitle(summary: dummyDetail.summary),
             BaseSubTitle("차트"),
             DetailChart(),
             DetailChartOption(),
             BaseSubTitle("뉴스"),
             DetailNewsOption(),
-            ...List.generate(
-                bitcoinDetail.newsList.length,
-                (index) =>
-                    CoinNewsListItem(news: bitcoinDetail.newsList[index])),
+            ...List.generate(dummyDetail.newsList.length,
+                (index) => CoinNewsListItem(news: dummyDetail.newsList[index])),
           ],
         ),
       ),

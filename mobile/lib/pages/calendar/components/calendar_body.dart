@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:mobile/pages/detail/detail_page.dart';
+import 'package:mobile/models/config/news.dart';
 
 class CalendarBody extends StatelessWidget {
-  const CalendarBody({Key? key}) : super(key: key);
+  final List<News> newsList;
+
+  const CalendarBody({Key? key, required this.newsList}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,41 +40,17 @@ class CalendarBody extends StatelessWidget {
 
   _DataSource getCalendarDataSource() {
     final List<Appointment> appointments = <Appointment>[];
-    appointments.add(Appointment(
-      startTime: DateTime.now(),
-      endTime: DateTime.now().add(const Duration(hours: 1)),
-      subject: 'Meeting',
-      color: Colors.pink,
-      isAllDay: true,
-    ));
-    appointments.add(Appointment(
-      startTime: DateTime.now().add(const Duration(hours: 4, days: -1)),
-      endTime: DateTime.now().add(const Duration(hours: 5, days: -1)),
-      subject: 'Release Meeting',
-      color: Colors.lightBlueAccent,
-      isAllDay: true,
-    ));
-    appointments.add(Appointment(
-      startTime: DateTime.now().add(const Duration(hours: 2, days: -2)),
-      endTime: DateTime.now().add(const Duration(hours: 4, days: -2)),
-      subject: 'Performance check',
-      color: Colors.amber,
-      isAllDay: true,
-    ));
-    appointments.add(Appointment(
-      startTime: DateTime.now().add(const Duration(hours: 6, days: -3)),
-      endTime: DateTime.now().add(const Duration(hours: 7, days: -3)),
-      subject: 'Support',
-      color: Colors.green,
-      isAllDay: true,
-    ));
-    appointments.add(Appointment(
-      startTime: DateTime.now().add(const Duration(hours: 6, days: 2)),
-      endTime: DateTime.now().add(const Duration(hours: 7, days: 2)),
-      subject: 'Retrospective',
-      color: Colors.purple,
-      isAllDay: true,
-    ));
+    this.newsList.forEach((news) {
+      if (news.sourceName == "good") {
+        appointments.add(Appointment(
+          startTime: news.targetDate,
+          endTime: news.targetDate,
+          subject: news.title,
+          color: Colors.blueAccent,
+          isAllDay: true,
+        ));
+      }
+    });
 
     return _DataSource(appointments);
   }

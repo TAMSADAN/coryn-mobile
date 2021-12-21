@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile/models/news.dart';
-import 'package:intl/intl.dart';
+import 'package:mobile/models/config/news.dart';
 
 class CoinNewsListItem extends StatelessWidget {
   final News news;

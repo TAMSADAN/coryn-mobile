@@ -12,7 +12,7 @@ class Price {
   });
 }
 
-List<Price> bitcoinPriceList = [
+List<Price> dummyPriceList = [
   Price(
     platform: "Upbit",
     market: "KRW",

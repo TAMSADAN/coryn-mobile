@@ -22,7 +22,7 @@ class News {
   }
 }
 
-List<News> bitcoinNewsList = [
+List<News> dummyNewsList = [
   News(
       title: "비트코인 뉴스 1",
       createDate: DateTime(2021, 12, 19),
@@ -44,19 +44,19 @@ List<News> bitcoinNewsList = [
   News(
       title: "비트코인 뉴스 4",
       createDate: DateTime(2021, 12, 23),
-      targetDate: DateTime(2021, 12, 20),
+      targetDate: DateTime(2021, 12, 23),
       sourceUri: "sourceUri",
       sourceName: "good"),
   News(
       title: "비트코인 뉴스 5",
       createDate: DateTime(2021, 12, 24),
-      targetDate: DateTime(2021, 12, 20),
+      targetDate: DateTime(2021, 12, 24),
       sourceUri: "sourceUri",
       sourceName: "good"),
   News(
       title: "비트코인 뉴스 6",
       createDate: DateTime(2021, 12, 25),
-      targetDate: DateTime(2021, 12, 20),
+      targetDate: DateTime(2021, 12, 25),
       sourceUri: "sourceUri",
       sourceName: "good"),
 ];

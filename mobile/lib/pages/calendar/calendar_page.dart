@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/pages/components/base_app_bar.dart';
 import 'package:mobile/pages/calendar/components/calendar_body.dart';
+import 'package:mobile/models/calendar.dart';
 
 class CalendarPage extends StatelessWidget {
   const CalendarPage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +25,9 @@ class CalendarPage extends StatelessWidget {
             children: [
               SizedBox(
                 height: 600,
-                child: CalendarBody(),
+                child: CalendarBody(
+                  newsList: dummyCalendar.newsList,
+                ),
               ),
             ],
           ),
