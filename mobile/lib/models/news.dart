@@ -28,7 +28,7 @@ List<News> bitcoinNewsList = [
       createDate: DateTime(2021, 12, 19),
       targetDate: DateTime(2021, 12, 20),
       sourceUri: "sourceUri",
-      sourceName: "sourceName 1"),
+      sourceName: "good"),
   News(
       title: "비트코인 뉴스 2",
       createDate: DateTime(2021, 12, 20),
@@ -41,4 +41,22 @@ List<News> bitcoinNewsList = [
       targetDate: DateTime(2021, 12, 23),
       sourceUri: "sourceUri",
       sourceName: "sourceName 3"),
+  News(
+      title: "비트코인 뉴스 4",
+      createDate: DateTime(2021, 12, 23),
+      targetDate: DateTime(2021, 12, 20),
+      sourceUri: "sourceUri",
+      sourceName: "good"),
+  News(
+      title: "비트코인 뉴스 5",
+      createDate: DateTime(2021, 12, 24),
+      targetDate: DateTime(2021, 12, 20),
+      sourceUri: "sourceUri",
+      sourceName: "good"),
+  News(
+      title: "비트코인 뉴스 6",
+      createDate: DateTime(2021, 12, 25),
+      targetDate: DateTime(2021, 12, 20),
+      sourceUri: "sourceUri",
+      sourceName: "good"),
 ];
