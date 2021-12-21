@@ -23,7 +23,7 @@ class DetailTitle extends StatelessWidget {
             CoinImageBox(summary.coinImageUri),
             const SizedBox(width: 10),
             CoinInformationSummaryBox(summary.coinName, summary.coinPrice,
-                summary.coinTicker, summary.coinMarcket),
+                summary.coinTicker, summary.coinMarket),
           ],
         ),
       ],

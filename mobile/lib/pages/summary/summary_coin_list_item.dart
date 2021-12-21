@@ -30,7 +30,7 @@ class SummaryCoinListItem extends StatelessWidget {
           const SizedBox(width: 8),
           Expanded(
               child: CoinInformationSummaryBox(summary.coinName,
-                  summary.coinPrice, summary.coinTicker, summary.coinMarcket)),
+                  summary.coinPrice, summary.coinTicker, summary.coinMarket)),
           const SizedBox(width: 15),
           Row(
             children: [

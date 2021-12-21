@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/pages/components/base_app_bar.dart';
-import 'package:mobile/pages/calendar/calendar.dart';
+import 'package:mobile/pages/calendar/components/calendar_body.dart';
 
 class CalendarPage extends StatelessWidget {
   const CalendarPage({Key? key}) : super(key: key);
@@ -20,11 +20,12 @@ class CalendarPage extends StatelessWidget {
               ),
             ];
           },
-          body: Column(
+          body: ListView(
+            shrinkWrap: true,
             children: [
               SizedBox(
                 height: 600,
-                child: Calendar(),
+                child: CalendarBody(),
               ),
             ],
           ),

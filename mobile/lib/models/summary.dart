@@ -3,7 +3,7 @@ class Summary {
   final String coinImageUri;
   final double coinPrice;
   final String coinTicker;
-  final String coinMarcket;
+  final String coinMarket;
   final double dayRange;
 
   Summary({
@@ -11,7 +11,7 @@ class Summary {
     required this.coinImageUri,
     required this.coinPrice,
     required this.coinTicker,
-    required this.coinMarcket,
+    required this.coinMarket,
     required this.dayRange,
   });
 }
@@ -22,7 +22,7 @@ List<Summary> summaryList = [
     coinImageUri: "https://static.upbit.com/logos/BTC.png",
     coinPrice: 5944000000,
     coinTicker: "BTC",
-    coinMarcket: "KRW",
+    coinMarket: "KRW",
     dayRange: 12.4,
   ),
   Summary(
@@ -30,7 +30,7 @@ List<Summary> summaryList = [
     coinImageUri: "https://static.upbit.com/logos/DOGE.png",
     coinPrice: 215,
     coinTicker: "DOGE",
-    coinMarcket: "KRW",
+    coinMarket: "KRW",
     dayRange: 7.4,
   ),
   Summary(
@@ -38,7 +38,7 @@ List<Summary> summaryList = [
     coinImageUri: "https://static.upbit.com/logos/STX.png",
     coinPrice: 2705,
     coinTicker: "STX",
-    coinMarcket: "KRW",
+    coinMarket: "KRW",
     dayRange: -3.2,
   )
 ];
