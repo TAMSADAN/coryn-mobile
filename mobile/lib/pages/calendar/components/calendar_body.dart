@@ -43,7 +43,17 @@ class CalendarBody extends StatelessWidget {
 
   _DataSource getCalendarDataSource() {
     final List<Appointment> appointments = <Appointment>[];
+    Map<DateTime, Coin> _coinDateMap = {};
+
     for (var calendar in calenderList) {
+      //  같은 날짜에 코인 1개만 표시
+      if (_coinDateMap.containsKey(calendar.news.targetingDate)) {
+        if (_coinDateMap[calendar.news.targetingDate]!.market ==
+            calendar.coin.market) {
+          continue;
+        }
+      }
+
       if (calendar.news.type == "good") {
         appointments.add(Appointment(
           startTime: calendar.news.targetingDate,
@@ -53,6 +63,7 @@ class CalendarBody extends StatelessWidget {
           isAllDay: true,
           id: calendar.coin,
         ));
+        _coinDateMap[calendar.news.targetingDate] = calendar.coin;
       }
     }
 
@@ -67,4 +78,14 @@ class _DataSource extends CalendarDataSource {
 
   @override
   List<dynamic> get appointments => source;
+}
+
+class _CoinDate {
+  Coin coin;
+  DateTime date;
+
+  _CoinDate({
+    required this.coin,
+    required this.date,
+  });
 }
