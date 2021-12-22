@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:mobile/pages/detail/detail_page.dart';
 import 'package:mobile/models/dto/news.dart';
+import 'package:mobile/models/dto/coin.dart';
 import 'package:mobile/models/calendar.dart';
 
 class CalendarBody extends StatelessWidget {
@@ -31,10 +32,11 @@ class CalendarBody extends StatelessWidget {
   void calendarTapped(CalendarTapDetails details, BuildContext context) {
     if (details.targetElement == CalendarElement.appointment) {
       final Appointment appointmentDetails = details.appointments![0];
-      final _subject = appointmentDetails.subject;
+      final Coin _coin = appointmentDetails.id as Coin;
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const DetailPage()),
+        MaterialPageRoute(
+            builder: (context) => DetailPage(coin: _coin, defaultOption: 1)),
       );
     }
   }
@@ -49,6 +51,7 @@ class CalendarBody extends StatelessWidget {
           subject: calendar.coin.market,
           color: Colors.blueAccent,
           isAllDay: true,
+          id: calendar.coin,
         ));
       }
     }

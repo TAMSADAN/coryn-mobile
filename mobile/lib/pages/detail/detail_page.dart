@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:mobile/models/dto/coin.dart';
 import 'package:mobile/models/dto/news.dart';
 import 'package:mobile/models/summary.dart';
 import 'package:mobile/pages/components/back_app_bar.dart';
@@ -14,7 +15,11 @@ import 'package:mobile/models/dto/price.dart';
 import 'package:mobile/models/chart.dart';
 
 class DetailPage extends StatefulWidget {
-  const DetailPage({Key? key}) : super(key: key);
+  final Coin coin;
+  final int defaultOption;
+
+  const DetailPage({Key? key, required this.coin, required this.defaultOption})
+      : super(key: key);
 
   @override
   _DetailPageState createState() => _DetailPageState();
@@ -47,9 +52,12 @@ class _DetailPageState extends State<DetailPage> {
             DetailTitle(detail: _detail),
             BaseSubTitle("차트"),
             DetailChart(chartList: _chartList),
-            // DetailChartOption(chartOptionController: ChartOptionController),
+            DetailChartOption(chartOptionController: ChartOptionController),
             BaseSubTitle("뉴스"),
-            DetailNewsOption(newsOptionController: NewsOptionController),
+            DetailNewsOption(
+              newsOptionController: NewsOptionController,
+              defaultOption: widget.defaultOption,
+            ),
             ...List.generate(_detail.newsList!.length,
                 (index) => CoinNewsListItem(news: _newsList![index])),
           ],
@@ -60,9 +68,12 @@ class _DetailPageState extends State<DetailPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+
+    // detail 초기화
     _detail = dummyBitcoinDetail;
+
+    // chartList 초기화
     _chartList = [
       ...List.generate(
           _detail.priceList.length,
@@ -71,7 +82,12 @@ class _DetailPageState extends State<DetailPage> {
                 price: _detail.priceList[index].openingPrice,
               ))
     ];
+
+    // newsList 초기화
     _newsList = _detail.newsList;
+
+    // 뉴스 컴포넌트 초기화
+    NewsOptionController(widget.defaultOption);
   }
 
   // 분, 일, 주, 월 버튼 컨트롤러

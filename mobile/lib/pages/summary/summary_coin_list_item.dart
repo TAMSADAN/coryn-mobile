@@ -19,7 +19,9 @@ class SummaryCoinListItem extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const DetailPage()),
+          MaterialPageRoute(
+              builder: (context) =>
+                  DetailPage(coin: summary.coin, defaultOption: 0)),
         );
       },
       child: Row(

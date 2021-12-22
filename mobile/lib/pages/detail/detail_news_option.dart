@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 
 class DetailNewsOption extends StatefulWidget {
   final Function newsOptionController;
+  final int defaultOption;
 
-  const DetailNewsOption({Key? key, required this.newsOptionController})
+  const DetailNewsOption(
+      {Key? key,
+      required this.newsOptionController,
+      required this.defaultOption})
       : super(key: key);
 
   @override
@@ -12,12 +16,11 @@ class DetailNewsOption extends StatefulWidget {
 }
 
 class _DetailNewsOptionState extends State<DetailNewsOption> {
-  int _sliding = 0;
+  late int _sliding;
 
   @override
   Widget build(BuildContext context) {
     return CupertinoSlidingSegmentedControl(
-      // thumbColor: Colors.blue.shade50,
       children: {
         0: Text('날짜 우선'),
         1: Text('호재 우선'),
@@ -28,5 +31,11 @@ class _DetailNewsOptionState extends State<DetailNewsOption> {
         widget.newsOptionController(value);
       },
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _sliding = widget.defaultOption;
   }
 }
