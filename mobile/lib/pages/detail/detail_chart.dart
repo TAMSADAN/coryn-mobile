@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 import 'package:mobile/models/dto/price.dart';
+import 'package:mobile/models/chart.dart';
 
 class DetailChart extends StatelessWidget {
-  final List<Price> priceList;
+  final List<Chart> chartList;
 
-  DetailChart({Key? key, required this.priceList}) : super(key: key);
+  DetailChart({Key? key, required this.chartList}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    print("detail_chart");
     return SfCartesianChart(
         primaryXAxis: CategoryAxis(
           majorGridLines: const MajorGridLines(width: 0),
@@ -22,25 +24,25 @@ class DetailChart extends StatelessWidget {
         legend: Legend(isVisible: false),
         // Enable tooltip
         tooltipBehavior: TooltipBehavior(enable: true),
-        series: <ChartSeries<Price, String>>[
-          SplineSeries<Price, String>(
+        series: <ChartSeries<Chart, String>>[
+          SplineSeries<Chart, String>(
             dataLabelSettings: DataLabelSettings(isVisible: false),
-            dataSource: priceList,
+            dataSource: chartList,
             color: Colors.black38,
             isVisible: true,
             isVisibleInLegend: false,
             enableTooltip: true,
-            xValueMapper: (Price price, _) => price.timestamp.toString(),
-            yValueMapper: (Price price, _) => price.openingPrice,
+            xValueMapper: (Chart chart, _) => chart.date,
+            yValueMapper: (Chart chart, _) => chart.price,
             name: 'Price',
           )
         ]);
   }
 }
 
-// class _PriceData {
-//   _PriceData(this.timestamp, this.price);
+class _ChartData {
+  _ChartData(this.date, this.price);
 
-//   final String timestamp;
-//   final double price;
-// }
+  final String date;
+  final int price;
+}

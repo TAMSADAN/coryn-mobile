@@ -11,6 +11,7 @@ import 'package:mobile/pages/detail/detail_chart_option.dart';
 import 'package:mobile/pages/detail/detail_news_option.dart';
 import 'package:mobile/models/detail.dart';
 import 'package:mobile/models/dto/price.dart';
+import 'package:mobile/models/chart.dart';
 
 class DetailPage extends StatefulWidget {
   const DetailPage({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class DetailPage extends StatefulWidget {
 class _DetailPageState extends State<DetailPage> {
   late Detail _detail;
   late List<News>? _newsList;
-  late List<Price> _priceList;
+  late List<Chart> _chartList;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +37,7 @@ class _DetailPageState extends State<DetailPage> {
               border: Border(),
               largeTitle: Text("상세"),
               previousPageTitle: "홈",
+              heroTag: "detail",
             ),
           ];
         },
@@ -44,7 +46,7 @@ class _DetailPageState extends State<DetailPage> {
           children: [
             DetailTitle(detail: _detail),
             BaseSubTitle("차트"),
-            // DetailChart(priceList: _priceList),
+            DetailChart(chartList: _chartList),
             // DetailChartOption(chartOptionController: ChartOptionController),
             BaseSubTitle("뉴스"),
             DetailNewsOption(newsOptionController: NewsOptionController),
@@ -61,7 +63,14 @@ class _DetailPageState extends State<DetailPage> {
     // TODO: implement initState
     super.initState();
     _detail = dummyBitcoinDetail;
-    _priceList = _detail.priceList;
+    _chartList = [
+      ...List.generate(
+          _detail.priceList.length,
+          (index) => Chart(
+                date: index.toString(),
+                price: _detail.priceList[index].openingPrice,
+              ))
+    ];
     _newsList = _detail.newsList;
   }
 

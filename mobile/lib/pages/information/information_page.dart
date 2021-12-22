@@ -21,6 +21,7 @@ class InformationPage extends StatelessWidget {
                 backgroundColor: const Color(0xfff2f2f6),
                 border: Border(),
                 largeTitle: Text("정보"),
+                heroTag: "information",
               ),
             ];
           },

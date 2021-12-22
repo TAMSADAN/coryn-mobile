@@ -24,6 +24,7 @@ class _CalendarPageState extends State<CalendarPage> {
                 backgroundColor: Colors.white,
                 border: Border(),
                 largeTitle: Text("캘린더"),
+                heroTag: "calendar",
               ),
             ];
           },
@@ -41,7 +42,6 @@ class _CalendarPageState extends State<CalendarPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _calendarList = dummyCalendarList;
   }

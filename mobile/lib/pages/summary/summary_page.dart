@@ -30,6 +30,7 @@ class _SummaryPageState extends State<SummaryPage> {
               backgroundColor: const Color(0xfff2f2f6),
               border: Border(),
               largeTitle: Text("홈"),
+              heroTag: "home",
             ),
           ];
         },
