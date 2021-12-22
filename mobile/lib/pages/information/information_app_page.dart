@@ -43,12 +43,10 @@ class InformationAppPage extends StatelessWidget {
                       children: [
                         ContentItem(title: "앱 버전", content: "1.12"),
                         ItemLine(),
-                        LinkItem(title: "오픈소스 라이센스", contentUri: "testUri"),
-                        ItemLine(),
                         LinkItem(
-                          title: "랜딩 페이지",
-                          contentUri: "testUri",
-                        ),
+                            title: "오픈소스 라이센스",
+                            contentUrl:
+                                "https://moyoung.notion.site/Open-source-lisence-ef6efb24b1484a81a832ecae65d78912"),
                       ],
                     ),
                   ),
@@ -68,7 +66,10 @@ class InformationAppPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        LinkItem(title: "TAMSADAN 탐사단", contentUri: "testUri"),
+                        LinkItem(
+                            title: "TAMSADAN 탐사단",
+                            contentUrl:
+                                "https://moyoung.notion.site/CORYN-e44fbce06d7a44c98dab7d902a8b2b3d"),
                       ],
                     ),
                   ),
