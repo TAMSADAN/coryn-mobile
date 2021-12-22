@@ -25,9 +25,7 @@ class CalendarPage extends StatelessWidget {
             children: [
               SizedBox(
                 height: 600,
-                child: CalendarBody(
-                  newsList: dummyCalendar.newsList,
-                ),
+                child: CalendarBody(calenderList: dummyCalendarList),
               ),
             ],
           ),

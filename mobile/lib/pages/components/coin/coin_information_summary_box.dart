@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
 class CoinInformationSummaryBox extends StatelessWidget {
-  final String coinName;
-  final double coinPrice;
-  final String coinTicker;
+  final String coinKoreanName;
   final String coinMarket;
+  final String priceCurrency;
+  final double priceOpeningPrice;
 
   const CoinInformationSummaryBox(
-      this.coinName, this.coinPrice, this.coinTicker, this.coinMarket);
+      {Key? key,
+      required this.coinKoreanName,
+      required this.coinMarket,
+      required this.priceCurrency,
+      required this.priceOpeningPrice});
 
   @override
   Widget build(BuildContext context) {
@@ -17,19 +21,19 @@ class CoinInformationSummaryBox extends StatelessWidget {
         Row(
           children: [
             Text(
-              coinName,
-              style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+              coinKoreanName,
+              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
             ),
             const SizedBox(width: 5),
             Text(
-              "$coinTicker/$coinMarket",
-              style: TextStyle(color: Colors.grey, fontSize: 13),
+              "$coinMarket/$priceCurrency",
+              style: const TextStyle(color: Colors.grey, fontSize: 13),
             )
           ],
         ),
         Text(
-          coinPrice.toString(),
-          style: TextStyle(
+          priceOpeningPrice.toString(),
+          style: const TextStyle(
               fontSize: 13, fontWeight: FontWeight.w700, color: Colors.black),
         ),
       ],

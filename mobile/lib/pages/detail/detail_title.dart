@@ -3,15 +3,12 @@ import 'package:mobile/pages/components/coin/coin_image_box.dart';
 import 'package:mobile/pages/components/coin/coin_information_summary_box.dart';
 import 'package:mobile/pages/components/icon_forward.dart';
 import 'package:mobile/models/summary.dart';
+import 'package:mobile/models/detail.dart';
 
 class DetailTitle extends StatelessWidget {
-  final Summary summary;
-  // final String coinName;
-  // final double coinPrice;
-  // final String coinTicker;
-  // final String coinMarket;
+  final Detail detail;
 
-  const DetailTitle({Key? key, required this.summary}) : super(key: key);
+  const DetailTitle({Key? key, required this.detail}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +17,14 @@ class DetailTitle extends StatelessWidget {
       children: [
         Row(
           children: [
-            CoinImageBox(summary.coinImageUri),
+            CoinImageBox(detail.coin.logoUri),
             const SizedBox(width: 10),
-            CoinInformationSummaryBox(summary.coinName, summary.coinPrice,
-                summary.coinTicker, summary.coinMarket),
+            CoinInformationSummaryBox(
+              coinKoreanName: detail.coin.koreanName,
+              coinMarket: detail.coin.market,
+              priceCurrency: detail.priceList[0].currency,
+              priceOpeningPrice: detail.priceList[0].openingPrice,
+            ),
           ],
         ),
       ],

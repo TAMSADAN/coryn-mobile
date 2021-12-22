@@ -2,7 +2,7 @@ class News {
   final int id;
   final String title;
   final DateTime postedDate;
-  final DateTime? targetingDate;
+  final DateTime targetingDate;
   final String type;
   final String source;
   final String url;
@@ -16,6 +16,14 @@ class News {
     required this.source,
     required this.url,
   });
+
+  getStringFromDatetime(DateTime _datetime) {
+    return _datetime.year.toString() +
+        "-" +
+        _datetime.month.toString() +
+        "-" +
+        _datetime.day.toString();
+  }
 }
 
 List<News> dummyBitcoinNewsList = [
@@ -23,7 +31,7 @@ List<News> dummyBitcoinNewsList = [
     id: 0,
     title: "[코인 투자 분석] 반등세를 이끈 비트코인 미결제약정",
     postedDate: DateTime(2021, 12, 21),
-    targetingDate: null,
+    targetingDate: DateTime(2021, 12, 21),
     type: "news",
     source: "coindesk",
     url: "https://www.coindeskkorea.com/news/articleView.html?idxno=76735",

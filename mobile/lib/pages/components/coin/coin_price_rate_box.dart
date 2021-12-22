@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 
 class CoinPriceRateBox extends StatelessWidget {
-  final double dayRange;
+  final double changeRate;
 
-  const CoinPriceRateBox(this.dayRange);
+  const CoinPriceRateBox({Key? key, required this.changeRate})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (dayRange > 0)
-      return _redRangeBox(dayRange);
+    if (changeRate > 0)
+      return _redRangeBox(changeRate);
     else
-      return _blueRangeBox(dayRange);
+      return _blueRangeBox(changeRate);
   }
 
-  Widget _redRangeBox(_dayRange) {
+  Widget _redRangeBox(double _changeRate) {
     return Container(
       padding: const EdgeInsets.all(4.0),
       decoration: BoxDecoration(
@@ -23,7 +24,7 @@ class CoinPriceRateBox extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          "+$_dayRange%",
+          "+$_changeRate%",
           style: TextStyle(
               color: Colors.redAccent,
               fontWeight: FontWeight.bold,
@@ -33,7 +34,7 @@ class CoinPriceRateBox extends StatelessWidget {
     );
   }
 
-  Widget _blueRangeBox(_dayRange) {
+  Widget _blueRangeBox(double _changeRate) {
     return Container(
       padding: const EdgeInsets.all(4.0),
       decoration: BoxDecoration(
@@ -43,7 +44,7 @@ class CoinPriceRateBox extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          "$_dayRange%",
+          "$_changeRate%",
           style: TextStyle(
               color: Colors.blueAccent,
               fontWeight: FontWeight.bold,

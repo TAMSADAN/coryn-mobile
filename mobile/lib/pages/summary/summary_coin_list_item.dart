@@ -26,15 +26,19 @@ class SummaryCoinListItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          CoinImageBox(summary.coinImageUri),
+          CoinImageBox(summary.coin.logoUri),
           const SizedBox(width: 8),
           Expanded(
-              child: CoinInformationSummaryBox(summary.coinName,
-                  summary.coinPrice, summary.coinTicker, summary.coinMarket)),
+              child: CoinInformationSummaryBox(
+            coinKoreanName: summary.coin.koreanName,
+            coinMarket: summary.coin.market,
+            priceCurrency: summary.price.currency,
+            priceOpeningPrice: summary.price.openingPrice,
+          )),
           const SizedBox(width: 15),
           Row(
             children: [
-              CoinPriceRateBox(summary.dayRange),
+              CoinPriceRateBox(changeRate: summary.price.changeRate),
               Padding(
                 padding: const EdgeInsets.only(right: 10),
                 child: IconForward(key: key),

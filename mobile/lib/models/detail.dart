@@ -1,21 +1,33 @@
-import 'package:mobile/models/summary.dart';
-import 'package:mobile/models/config/news.dart';
-import 'package:mobile/models/config/price.dart';
+import 'package:mobile/models/dto/coin.dart';
+import 'package:mobile/models/dto/news.dart';
+import 'package:mobile/models/dto/price.dart';
 
 class Detail {
-  final Summary summary;
+  final Coin coin;
   final List<Price> priceList;
-  final List<News> newsList;
+  final List<News>? newsList;
 
   Detail({
-    required this.summary,
+    required this.coin,
     required this.priceList,
     required this.newsList,
   });
 }
 
-Detail dummyDetail = Detail(
-  summary: summaryList[0],
-  priceList: dummyPriceList,
-  newsList: dummyNewsList,
+Detail dummyBitcoinDetail = Detail(
+  coin: dummyBitcoinCoin,
+  priceList: dummyBitcoinPriceList,
+  newsList: dummyBitcoinNewsList,
+);
+
+Detail dummyDogecoinDetail = Detail(
+  coin: dummyDogecoinCoin,
+  priceList: dummyDogecoinPriceList,
+  newsList: dummyDogecoinNewsList,
+);
+
+Detail dummyStacksDetail = Detail(
+  coin: dummyStacksCoin,
+  priceList: dummyStacksPriceList,
+  newsList: null,
 );

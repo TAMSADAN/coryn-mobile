@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:mobile/pages/detail/detail_page.dart';
-import 'package:mobile/models/config/news.dart';
+import 'package:mobile/models/dto/news.dart';
+import 'package:mobile/models/calendar.dart';
 
 class CalendarBody extends StatelessWidget {
-  final List<News> newsList;
+  final List<Calendar> calenderList;
 
-  const CalendarBody({Key? key, required this.newsList}) : super(key: key);
+  const CalendarBody({Key? key, required this.calenderList}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +41,13 @@ class CalendarBody extends StatelessWidget {
 
   _DataSource getCalendarDataSource() {
     final List<Appointment> appointments = <Appointment>[];
-    this.newsList.forEach((news) {
-      if (news.sourceName == "good") {
+    this.calenderList.forEach((calendar) {
+      print(calendar.news.type);
+      if (calendar.news.type == "good") {
         appointments.add(Appointment(
-          startTime: news.targetDate,
-          endTime: news.targetDate,
-          subject: news.title,
+          startTime: calendar.news.postedDate,
+          endTime: calendar.news.targetingDate,
+          subject: calendar.coin.market,
           color: Colors.blueAccent,
           isAllDay: true,
         ));
