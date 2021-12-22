@@ -26,6 +26,28 @@ class Price {
     required this.unit,
     required this.currency,
   });
+
+  getChartDate() {
+    if (this.unit == "minute") {
+      return this.timestamp.hour.toString() +
+          '.' +
+          this.timestamp.minute.toString();
+    } else if (this.unit == "day") {
+      return this.timestamp.month.toString() +
+          '/' +
+          this.timestamp.day.toString();
+    } else if (this.unit == "month") {
+      return this.timestamp.year.toString() +
+          '/' +
+          this.timestamp.month.toString();
+    } else if (this.unit == "year") {
+      return this.timestamp.year.toString();
+    } else {
+      return this.timestamp.month.toString() +
+          '/' +
+          this.timestamp.day.toString();
+    }
+  }
 }
 
 List<Price> dummyBitcoinPriceList = [

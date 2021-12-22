@@ -52,7 +52,7 @@ List<News> dummyDogecoinNewsList = [
     id: 2,
     title: "도지코인 뉴스 2",
     postedDate: DateTime(2021, 12, 22),
-    targetingDate: DateTime(2021, 12, 18),
+    targetingDate: DateTime(2021, 12, 22),
     type: "good",
     source: "coindesk",
     url: "https://www.coindeskkorea.com/news/articleView.html?idxno=76735",

@@ -2,7 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DetailChartOption extends StatelessWidget {
-  const DetailChartOption({Key? key}) : super(key: key);
+  final Function chartOptionController;
+
+  const DetailChartOption({Key? key, required this.chartOptionController})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +16,7 @@ class DetailChartOption extends StatelessWidget {
         2: Text('주'),
         3: Text("월"),
       },
-      onValueChanged: (v) {
-        print(v);
-      },
+      onValueChanged: (v) => chartOptionController(v),
     );
   }
 }

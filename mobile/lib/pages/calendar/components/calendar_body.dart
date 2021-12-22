@@ -41,18 +41,17 @@ class CalendarBody extends StatelessWidget {
 
   _DataSource getCalendarDataSource() {
     final List<Appointment> appointments = <Appointment>[];
-    this.calenderList.forEach((calendar) {
-      print(calendar.news.type);
+    for (var calendar in calenderList) {
       if (calendar.news.type == "good") {
         appointments.add(Appointment(
-          startTime: calendar.news.postedDate,
+          startTime: calendar.news.targetingDate,
           endTime: calendar.news.targetingDate,
           subject: calendar.coin.market,
           color: Colors.blueAccent,
           isAllDay: true,
         ));
       }
-    });
+    }
 
     return _DataSource(appointments);
   }

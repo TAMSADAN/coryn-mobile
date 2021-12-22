@@ -15,8 +15,8 @@ class SummaryPage extends StatefulWidget {
 }
 
 class _SummaryPageState extends State<SummaryPage> {
-  List<Summary> _originSummaryList = [];
-  List<Summary> _editedSummaryList = [];
+  late List<Summary> _originSummaryList;
+  late List<Summary> _editedSummaryList;
   TextEditingController _controller = new TextEditingController();
 
   @override
@@ -73,22 +73,15 @@ class _SummaryPageState extends State<SummaryPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _editedSummaryList = [...dummySummaryList];
     _originSummaryList = [...dummySummaryList];
-    print(_editedSummaryList);
-    print(_originSummaryList);
   }
 
   void _onChangedController(String value) {
-    print(value);
     setState(() {
-      print(_editedSummaryList);
-      print(_originSummaryList);
       _editedSummaryList.clear();
       for (var summary in _originSummaryList) {
-        print(summary.coin.koreanName);
         //한글이름 체크
         if (summary.coin.koreanName.contains(value)) {
           _editedSummaryList.add(summary);
@@ -105,7 +98,6 @@ class _SummaryPageState extends State<SummaryPage> {
             .contains(value.toUpperCase())) {
           _editedSummaryList.add(summary);
         }
-        print(_editedSummaryList);
       }
     });
   }
