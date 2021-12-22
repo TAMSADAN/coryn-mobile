@@ -9,6 +9,12 @@ class CoinNewsListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color _itemColor;
+    if (news.type == "good") {
+      _itemColor = Colors.blue.shade50;
+    } else {
+      _itemColor = Colors.grey.shade50;
+    }
     return Padding(
       padding: const EdgeInsets.only(top: 10),
       child: Container(
@@ -16,7 +22,7 @@ class CoinNewsListItem extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.all(Radius.circular(15)),
-            color: Colors.grey[50],
+            color: _itemColor,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

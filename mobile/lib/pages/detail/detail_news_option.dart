@@ -17,10 +17,10 @@ class _DetailNewsOptionState extends State<DetailNewsOption> {
   @override
   Widget build(BuildContext context) {
     return CupertinoSlidingSegmentedControl(
-      thumbColor: Colors.blue.shade100,
+      // thumbColor: Colors.blue.shade50,
       children: {
-        0: Text('호재 우선'),
-        1: Text('날짜 우선'),
+        0: Text('날짜 우선'),
+        1: Text('호재 우선'),
       },
       groupValue: _sliding,
       onValueChanged: (value) {

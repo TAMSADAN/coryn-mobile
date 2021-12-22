@@ -95,10 +95,10 @@ class _DetailPageState extends State<DetailPage> {
       _newsList!.clear();
       if (value == 0) {
         print("호재 우선 버튼 클릭");
-        _newsList!.addAll([..._goodNewsList, ..._basicNewsList]);
+        _newsList!.addAll([..._basicNewsList, ..._goodNewsList]);
       } else {
         print("날짜 우선 버튼 클릭");
-        _newsList!.addAll([..._basicNewsList, ..._goodNewsList]);
+        _newsList!.addAll([..._goodNewsList, ..._basicNewsList]);
       }
     });
   }
