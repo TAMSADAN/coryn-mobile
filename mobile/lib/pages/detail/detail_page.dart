@@ -2,16 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mobile/models/dto/coin.dart';
 import 'package:mobile/models/dto/news.dart';
-import 'package:mobile/models/summary.dart';
-import 'package:mobile/pages/components/back_app_bar.dart';
 import 'package:mobile/pages/components/base_sub_title.dart';
 import 'package:mobile/pages/components/coin/coin_news_list_item.dart';
-import 'package:mobile/pages/detail/detail_title.dart';
-import 'package:mobile/pages/detail/detail_chart.dart';
-import 'package:mobile/pages/detail/detail_chart_option.dart';
-import 'package:mobile/pages/detail/detail_news_option.dart';
+import 'package:mobile/pages/detail/components/detail_title.dart';
+import 'package:mobile/pages/detail/components/detail_chart.dart';
+import 'package:mobile/pages/detail/components/detail_chart_option.dart';
+import 'package:mobile/pages/detail/components/detail_news_option.dart';
 import 'package:mobile/models/detail.dart';
-import 'package:mobile/models/dto/price.dart';
 import 'package:mobile/models/chart.dart';
 
 class DetailPage extends StatefulWidget {
