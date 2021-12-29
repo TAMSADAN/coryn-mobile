@@ -26,7 +26,7 @@ class CoinInformationSummaryBox extends StatelessWidget {
             ),
             const SizedBox(width: 5),
             Text(
-              "$coinMarket/$priceCurrency",
+              coinMarket,
               style: const TextStyle(color: Colors.grey, fontSize: 13),
             )
           ],

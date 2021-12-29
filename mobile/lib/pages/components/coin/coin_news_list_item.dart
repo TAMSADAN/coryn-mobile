@@ -11,7 +11,8 @@ class CoinNewsListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color _itemColor;
-    if (news.type == "good") {
+
+    if (news.newsType == "good") {
       _itemColor = Colors.blue.shade50;
     } else {
       _itemColor = Colors.grey.shade50;
@@ -49,7 +50,7 @@ class CoinNewsListItem extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "생성일 : ${news.getStringFromDatetime(news.postedDate)} 타겟일 : ${news.getStringFromDatetime(news.targetingDate)}",
+                            "생성일 : ${news.postedDate != null ? news.getStringFromDatetime(news.postedDate!) : ""} 타겟일 : ${news.targetingDate != null ? news.getStringFromDatetime(news.targetingDate!) : ""}",
                             style: TextStyle(
                               fontSize: 10,
                               fontWeight: FontWeight.bold,

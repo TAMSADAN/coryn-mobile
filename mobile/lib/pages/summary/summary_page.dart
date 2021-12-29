@@ -6,6 +6,8 @@ import 'package:mobile/pages/summary/summary_search.dart';
 import 'package:mobile/pages/summary/summary_coin_list_item.dart';
 import 'package:mobile/pages/list_cover.dart';
 import 'package:mobile/models/summary.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class SummaryPage extends StatefulWidget {
   const SummaryPage({Key? key}) : super(key: key);
@@ -75,8 +77,13 @@ class _SummaryPageState extends State<SummaryPage> {
   @override
   void initState() {
     super.initState();
-    _editedSummaryList = [...dummySummaryList];
-    _originSummaryList = [...dummySummaryList];
+    fetchSummary();
+    _editedSummaryList = [];
+    _originSummaryList = [];
+    // setState(() {
+    //   _originSummaryList.clear();
+    //   _originSummaryList.addAll(tmp);
+    // });
   }
 
   void _onChangedController(String value) {
@@ -101,6 +108,29 @@ class _SummaryPageState extends State<SummaryPage> {
         }
       }
     });
+  }
+
+  Future<bool> fetchSummary() async {
+    List<Summary>? summaryList = [];
+    final response =
+        await http.get(Uri.http("13.125.161.94:8080", "/api/v1/coins"));
+    // print(json.decode(response.body));
+
+    if (response.statusCode == 200) {
+      for (var summaryJson in json.decode(utf8.decode(response.bodyBytes))) {
+        var summary = Summary.fromJson(summaryJson);
+        if (summary.coin.market.contains("KRW")) summaryList.add(summary);
+      }
+      setState(() {
+        _originSummaryList.clear();
+        _originSummaryList.addAll([...summaryList]);
+        _editedSummaryList.clear();
+        _editedSummaryList.addAll([...summaryList]);
+      });
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 

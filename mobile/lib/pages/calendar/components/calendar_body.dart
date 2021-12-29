@@ -54,16 +54,16 @@ class CalendarBody extends StatelessWidget {
         }
       }
 
-      if (calendar.news.type == "good") {
+      if (calendar.news.newsType == "good") {
         appointments.add(Appointment(
-          startTime: calendar.news.targetingDate,
-          endTime: calendar.news.targetingDate,
+          startTime: calendar.news.targetingDate!,
+          endTime: calendar.news.targetingDate!,
           subject: calendar.coin.market,
           color: Colors.blueAccent,
           isAllDay: true,
           id: calendar.coin,
         ));
-        _coinDateMap[calendar.news.targetingDate] = calendar.coin;
+        _coinDateMap[calendar.news.targetingDate!] = calendar.coin;
       }
     }
 

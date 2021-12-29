@@ -8,13 +8,14 @@ class CoinPriceRateBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String _changeRate = changeRate.toStringAsFixed(2) + "%";
     if (changeRate > 0)
-      return _redRangeBox(changeRate);
+      return _redRangeBox(_changeRate);
     else
-      return _blueRangeBox(changeRate);
+      return _blueRangeBox(_changeRate);
   }
 
-  Widget _redRangeBox(double _changeRate) {
+  Widget _redRangeBox(String _changeRate) {
     return Container(
       padding: const EdgeInsets.all(4.0),
       decoration: BoxDecoration(
@@ -24,7 +25,7 @@ class CoinPriceRateBox extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          "+$_changeRate%",
+          _changeRate,
           style: TextStyle(
               color: Colors.redAccent,
               fontWeight: FontWeight.bold,
@@ -34,7 +35,7 @@ class CoinPriceRateBox extends StatelessWidget {
     );
   }
 
-  Widget _blueRangeBox(double _changeRate) {
+  Widget _blueRangeBox(String _changeRate) {
     return Container(
       padding: const EdgeInsets.all(4.0),
       decoration: BoxDecoration(
@@ -44,7 +45,7 @@ class CoinPriceRateBox extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          "$_changeRate%",
+          _changeRate,
           style: TextStyle(
               color: Colors.blueAccent,
               fontWeight: FontWeight.bold,

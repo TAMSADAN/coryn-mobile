@@ -11,7 +11,7 @@ class DetailChartOption extends StatefulWidget {
 }
 
 class _DetailChartOptionState extends State<DetailChartOption> {
-  int _sliding = 0;
+  int _sliding = 1;
   @override
   Widget build(BuildContext context) {
     return CupertinoSlidingSegmentedControl(
@@ -23,9 +23,9 @@ class _DetailChartOptionState extends State<DetailChartOption> {
       },
       groupValue: _sliding,
       onValueChanged: (value) {
-        setState(() {
-          _sliding = int.tryParse(value.toString())!;
-        });
+        // setState(() {
+        //   _sliding = int.tryParse(value.toString())!;
+        // });
         widget.chartOptionController(value);
       },
     );

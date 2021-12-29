@@ -7,6 +7,8 @@ class Price {
   final double tradePrice;
   final double closedPrice;
   final double changeRate;
+  final double changePrice;
+  final double tradeVolume;
   final DateTime timestamp;
   final String source;
   final String unit;
@@ -21,11 +23,31 @@ class Price {
     required this.tradePrice,
     required this.closedPrice,
     required this.changeRate,
+    required this.changePrice,
+    required this.tradeVolume,
     required this.timestamp,
     required this.source,
     required this.unit,
     required this.currency,
   });
+
+  factory Price.fromJson(Map<String, dynamic> json) {
+    return Price(
+        id: json["id"],
+        market: json["market"],
+        openingPrice: json["opening_price"],
+        highPrice: json["high_price"],
+        lowPrice: json["low_price"],
+        tradePrice: json["trade_price"],
+        closedPrice: json["closed_price"],
+        changeRate: json["change_rate"],
+        changePrice: json["change_price"],
+        tradeVolume: json["trade_volume"],
+        timestamp: DateTime.fromMillisecondsSinceEpoch(json["timestamp"]),
+        source: json["source"],
+        unit: json["unit"],
+        currency: json["currency"]);
+  }
 
   getChartDate() {
     if (this.unit == "minute") {
@@ -55,19 +77,23 @@ List<Price> dummyBitcoinPriceList = [
     id: 0,
     market: "BTC",
     openingPrice: 579.76083,
+    changePrice: 10,
     highPrice: 579.76083,
     lowPrice: 579.76083,
     tradePrice: 579.76083,
     closedPrice: 579.76083,
     changeRate: 29.9,
+    tradeVolume: 10,
     timestamp: DateTime(2021, 12, 14),
     source: "Upbit",
     unit: "day",
     currency: "KRW",
   ),
   Price(
+    changePrice: 10,
     id: 0,
     market: "BTC",
+    tradeVolume: 10,
     openingPrice: 579.76084,
     highPrice: 579.76084,
     lowPrice: 579.76084,
@@ -80,9 +106,11 @@ List<Price> dummyBitcoinPriceList = [
     currency: "KRW",
   ),
   Price(
+    changePrice: 10,
     id: 0,
     market: "BTC",
     openingPrice: 579.76085,
+    tradeVolume: 10,
     highPrice: 579.76085,
     lowPrice: 579.76085,
     tradePrice: 579.76085,
@@ -95,7 +123,9 @@ List<Price> dummyBitcoinPriceList = [
   ),
   Price(
     id: 0,
+    changePrice: 10,
     market: "BTC",
+    tradeVolume: 10,
     openingPrice: 579.76086,
     highPrice: 579.76086,
     lowPrice: 579.76086,
@@ -112,7 +142,9 @@ List<Price> dummyBitcoinPriceList = [
 List<Price> dummyDogecoinPriceList = [
   Price(
     id: 0,
+    changePrice: 10,
     market: "DOGE",
+    tradeVolume: 10,
     highPrice: 213,
     openingPrice: 213,
     lowPrice: 213,
@@ -126,7 +158,9 @@ List<Price> dummyDogecoinPriceList = [
   ),
   Price(
     id: 0,
+    changePrice: 10,
     market: "DOGE",
+    tradeVolume: 10,
     openingPrice: 214,
     highPrice: 214,
     lowPrice: 214,
@@ -140,6 +174,8 @@ List<Price> dummyDogecoinPriceList = [
   ),
   Price(
     id: 0,
+    tradeVolume: 10,
+    changePrice: 10,
     market: "DOGE",
     openingPrice: 215,
     highPrice: 215,
@@ -154,6 +190,8 @@ List<Price> dummyDogecoinPriceList = [
   ),
   Price(
     id: 0,
+    tradeVolume: 10,
+    changePrice: 10,
     market: "DOGE",
     openingPrice: 216,
     highPrice: 216,
@@ -171,7 +209,9 @@ List<Price> dummyDogecoinPriceList = [
 List<Price> dummyStacksPriceList = [
   Price(
     id: 0,
+    changePrice: 10,
     market: "STX",
+    tradeVolume: 10,
     openingPrice: 106,
     highPrice: 106,
     lowPrice: 106,
@@ -185,7 +225,9 @@ List<Price> dummyStacksPriceList = [
   ),
   Price(
     id: 0,
+    changePrice: 10,
     market: "STX",
+    tradeVolume: 10,
     openingPrice: 106,
     highPrice: 106,
     lowPrice: 106,
@@ -200,8 +242,10 @@ List<Price> dummyStacksPriceList = [
   Price(
     id: 0,
     market: "STX",
+    changePrice: 10,
     openingPrice: 106,
     highPrice: 106,
+    tradeVolume: 10,
     lowPrice: 106,
     tradePrice: 106,
     closedPrice: 106,
@@ -214,8 +258,10 @@ List<Price> dummyStacksPriceList = [
   Price(
     id: 0,
     market: "STX",
+    changePrice: 10,
     openingPrice: 107,
     highPrice: 107,
+    tradeVolume: 10,
     lowPrice: 107,
     tradePrice: 107,
     closedPrice: 107,

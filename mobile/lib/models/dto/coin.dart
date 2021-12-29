@@ -1,12 +1,12 @@
+import 'package:mobile/models/summary.dart';
+
 class Coin {
-  final int id;
   final String market;
   final String koreanName;
   final String englishName;
   final String logoUri;
 
   Coin({
-    required this.id,
     required this.market,
     required this.koreanName,
     required this.englishName,
@@ -15,7 +15,6 @@ class Coin {
 }
 
 Coin dummyBitcoinCoin = Coin(
-  id: 0,
   market: "BTC",
   koreanName: "비트코인",
   englishName: "Bitcoin",
@@ -23,7 +22,6 @@ Coin dummyBitcoinCoin = Coin(
 );
 
 Coin dummyDogecoinCoin = Coin(
-  id: 1,
   market: "DOGE",
   koreanName: "도지코인",
   englishName: "Dogecoin",
@@ -31,7 +29,6 @@ Coin dummyDogecoinCoin = Coin(
 );
 
 Coin dummyStacksCoin = Coin(
-  id: 2,
   market: "STX",
   koreanName: "스택스",
   englishName: "Stacks",

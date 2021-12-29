@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mobile/models/dto/coin.dart';
 import 'package:mobile/models/dto/news.dart';
+import 'package:mobile/models/dto/price.dart';
 import 'package:mobile/pages/components/base_sub_title.dart';
 import 'package:mobile/pages/components/coin/coin_news_list_item.dart';
 import 'package:mobile/pages/detail/components/detail_title.dart';
@@ -10,6 +11,8 @@ import 'package:mobile/pages/detail/components/detail_chart_option.dart';
 import 'package:mobile/pages/detail/components/detail_news_option.dart';
 import 'package:mobile/models/detail.dart';
 import 'package:mobile/models/chart.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class DetailPage extends StatefulWidget {
   final Coin coin;
@@ -25,6 +28,7 @@ class DetailPage extends StatefulWidget {
 class _DetailPageState extends State<DetailPage> {
   late Detail _detail;
   late List<News>? _newsList;
+  late List<Price>? _priceList;
   late List<Chart> _chartList;
 
   @override
@@ -46,7 +50,10 @@ class _DetailPageState extends State<DetailPage> {
         body: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           children: [
-            DetailTitle(detail: _detail),
+            DetailTitle(
+              coin: widget.coin,
+              price: _priceList!.length > 0 ? _priceList![0] : null,
+            ),
             BaseSubTitle("차트"),
             DetailChart(chartList: _chartList),
             DetailChartOption(chartOptionController: ChartOptionController),
@@ -55,8 +62,9 @@ class _DetailPageState extends State<DetailPage> {
               newsOptionController: NewsOptionController,
               defaultOption: widget.defaultOption,
             ),
-            ...List.generate(_detail.newsList!.length,
-                (index) => CoinNewsListItem(news: _newsList![index])),
+            if (_newsList != null)
+              ...List.generate(_newsList!.length,
+                  (index) => CoinNewsListItem(news: _newsList![index]))
           ],
         ),
       ),
@@ -66,22 +74,11 @@ class _DetailPageState extends State<DetailPage> {
   @override
   void initState() {
     super.initState();
-
-    // detail 초기화
-    _detail = dummyBitcoinDetail;
-
-    // chartList 초기화
-    _chartList = [
-      ...List.generate(
-          _detail.priceList.length,
-          (index) => Chart(
-                date: index.toString(),
-                price: _detail.priceList[index].openingPrice,
-              ))
-    ];
-
-    // newsList 초기화
-    _newsList = _detail.newsList;
+    _newsList = [];
+    _priceList = [];
+    _chartList = [];
+    fetchPrice(widget.coin.market);
+    fetchNews(widget.coin.market);
 
     // 뉴스 컴포넌트 초기화
     NewsOptionController(widget.defaultOption);
@@ -97,8 +94,7 @@ class _DetailPageState extends State<DetailPage> {
       List<News>? _goodNewsList = [];
       List<News>? _basicNewsList = [];
       _newsList!.forEach((news) {
-        print("컨트롤러");
-        if (news.type == "good") {
+        if (news.newsType == "good") {
           _goodNewsList.add(news);
         } else {
           _basicNewsList.add(news);
@@ -107,13 +103,62 @@ class _DetailPageState extends State<DetailPage> {
       // 0 -> good sort, 1 -> basic sort
       _newsList!.clear();
       if (value == 0) {
-        print("호재 우선 버튼 클릭");
         _newsList!.addAll([..._basicNewsList, ..._goodNewsList]);
       } else {
-        print("날짜 우선 버튼 클릭");
         _newsList!.addAll([..._goodNewsList, ..._basicNewsList]);
       }
     });
+  }
+
+  Future<bool> fetchPrice(String market) async {
+    List<Price> priceList = [];
+    final response = await http
+        .get(Uri.http("13.125.161.94:8080", "/api/v1/coins/$market/prices"));
+
+    if (response.statusCode == 200) {
+      for (var priceJson in json.decode(utf8.decode(response.bodyBytes))) {
+        var price = Price.fromJson(priceJson);
+        priceList.add(price);
+      }
+      setState(() {
+        _priceList!.clear();
+        _priceList!.addAll([...priceList]);
+        // chartList 초기화
+        _chartList = [
+          ...List.generate(
+              _priceList!.length,
+              (index) => Chart(
+                    date: index.toString(),
+                    price: _priceList![index].openingPrice > 10000
+                        ? _priceList![index].openingPrice / 10000
+                        : _priceList![index].openingPrice,
+                  ))
+        ];
+      });
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> fetchNews(String market) async {
+    List<News>? newsList = [];
+    final response =
+        await http.get(Uri.http("13.125.161.94:8080", "/api/v1/news/$market"));
+
+    if (response.statusCode == 200) {
+      for (var newsJson in json.decode(utf8.decode(response.bodyBytes))) {
+        var news = News.fromJson(newsJson);
+        newsList.add(news);
+      }
+      setState(() {
+        _newsList!.clear();
+        _newsList!.addAll([...newsList]);
+      });
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 
