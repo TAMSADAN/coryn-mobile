@@ -4,10 +4,16 @@ import 'package:mobile/pages/components/base_sub_title.dart';
 import 'package:mobile/pages/information/components/info_list_item.dart';
 import 'package:mobile/pages/list_cover.dart';
 import 'package:mobile/pages/information/info_app_page.dart';
+import 'package:mobile/pages/ad_banner.dart';
 
-class InformationPage extends StatelessWidget {
+class InformationPage extends StatefulWidget {
   const InformationPage({Key? key}) : super(key: key);
 
+  @override
+  _InformationPageState createState() => _InformationPageState();
+}
+
+class _InformationPageState extends State<InformationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,27 +29,38 @@ class InformationPage extends StatelessWidget {
               ),
             ];
           },
-          body: ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+          body: Column(
             children: [
-              BaseSubTitle("앱 관련"),
-              ListCover(
-                Column(
+              Expanded(
+                child: ListView(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const InformationAppPage()),
-                        );
-                      },
-                      child: InformationListItem(CupertinoIcons.info_circle,
-                          Colors.white, Colors.blueAccent, "앱 정보"),
+                    BaseSubTitle("앱 관련"),
+                    ListCover(
+                      Column(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const InformationAppPage()),
+                              );
+                            },
+                            child: InformationListItem(
+                                CupertinoIcons.info_circle,
+                                Colors.white,
+                                Colors.blueAccent,
+                                "앱 정보"),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
+              AdBanner()
             ],
           ),
         ));

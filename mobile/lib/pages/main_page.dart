@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:mobile/pages/summary/summary_page.dart';
 import 'package:mobile/pages/calendar/calendar_page.dart';
 import 'package:mobile/pages/information/info_page.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -13,48 +14,6 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
-  // @override
-  // Widget build(BuildContext context) {
-  //   return CupertinoTabScaffold(
-  //     tabBar: CupertinoTabBar(
-  //       backgroundColor: Colors.white,
-  //       items: const <BottomNavigationBarItem>[
-  //         BottomNavigationBarItem(
-  //           icon: Icon(CupertinoIcons.home),
-  //         ),
-  //         BottomNavigationBarItem(
-  //           icon: Icon(CupertinoIcons.calendar),
-  //         ),
-  //         BottomNavigationBarItem(
-  //           icon: Icon(CupertinoIcons.info),
-  //         ),
-  //       ],
-  //     ),
-  //     tabBuilder: (context, index) {
-  //       currentIndex = index;
-  //       switch (index) {
-  //         case 0:
-  //           return CupertinoTabView(builder: (context) {
-  //             return CupertinoPageScaffold(child: SummaryPage());
-  //           });
-  //           break;
-  //         case 1:
-  //           return CupertinoTabView(builder: (context) {
-  //             return CupertinoPageScaffold(child: CalendarPage());
-  //           });
-  //           break;
-  //         case 2:
-  //           return CupertinoTabView(
-  //             builder: (context) {
-  //               return CupertinoPageScaffold(child: InformationPage());
-  //             },
-  //           );
-  //           break;
-  //         default:
-  //           return const CupertinoTabView();
-  //       }
-  //     },
-  //   );
 
   static const List<Widget> _widgetPages = <Widget>[
     SummaryPage(),
@@ -95,5 +54,10 @@ class _MainPageState extends State<MainPage> {
         ],
       ),
     );
+  }
+
+  Future<InitializationStatus> _initGoogleMobileAds() {
+    // TODO: Initialize Google Mobile Ads SDK
+    return MobileAds.instance.initialize();
   }
 }

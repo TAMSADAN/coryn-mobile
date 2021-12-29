@@ -13,6 +13,7 @@ import 'package:mobile/models/detail.dart';
 import 'package:mobile/models/chart.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:mobile/pages/ad_banner.dart';
 
 class DetailPage extends StatefulWidget {
   final Coin coin;
@@ -47,24 +48,32 @@ class _DetailPageState extends State<DetailPage> {
             ),
           ];
         },
-        body: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+        body: Column(
           children: [
-            DetailTitle(
-              coin: widget.coin,
-              price: _priceList!.length > 0 ? _priceList![0] : null,
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                children: [
+                  DetailTitle(
+                    coin: widget.coin,
+                    price: _priceList!.length > 0 ? _priceList![0] : null,
+                  ),
+                  BaseSubTitle("차트"),
+                  DetailChart(chartList: _chartList),
+                  DetailChartOption(
+                      chartOptionController: ChartOptionController),
+                  BaseSubTitle("뉴스"),
+                  DetailNewsOption(
+                    newsOptionController: NewsOptionController,
+                    defaultOption: widget.defaultOption,
+                  ),
+                  if (_newsList != null)
+                    ...List.generate(_newsList!.length,
+                        (index) => CoinNewsListItem(news: _newsList![index]))
+                ],
+              ),
             ),
-            BaseSubTitle("차트"),
-            DetailChart(chartList: _chartList),
-            DetailChartOption(chartOptionController: ChartOptionController),
-            BaseSubTitle("뉴스"),
-            DetailNewsOption(
-              newsOptionController: NewsOptionController,
-              defaultOption: widget.defaultOption,
-            ),
-            if (_newsList != null)
-              ...List.generate(_newsList!.length,
-                  (index) => CoinNewsListItem(news: _newsList![index]))
+            AdBanner()
           ],
         ),
       ),
@@ -161,41 +170,3 @@ class _DetailPageState extends State<DetailPage> {
     }
   }
 }
-
-// class DetailPage extends StatelessWidget {
-//   const DetailPage({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Colors.white,
-//       body: NestedScrollView(
-//         headerSliverBuilder: (BuildContext context, bool innerboxIsScrolled) {
-//           return <Widget>[
-//             CupertinoSliverNavigationBar(
-//               backgroundColor: Colors.white,
-//               border: Border(),
-//               largeTitle: Text("상세"),
-//               previousPageTitle: "홈",
-//             ),
-//           ];
-//         },
-//         body: ListView(
-//           padding: const EdgeInsets.symmetric(horizontal: 20),
-//           children: [
-//             DetailTitle(detail: dummyBitcoinDetail),
-//             BaseSubTitle("차트"),
-//             DetailChart(),
-//             DetailChartOption(),
-//             BaseSubTitle("뉴스"),
-//             DetailNewsOption(),
-//             ...List.generate(
-//                 dummyBitcoinDetail.newsList!.length,
-//                 (index) => CoinNewsListItem(
-//                     news: dummyBitcoinDetail.newsList![index])),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
