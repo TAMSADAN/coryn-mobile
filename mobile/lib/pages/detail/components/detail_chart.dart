@@ -11,7 +11,6 @@ class DetailChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("detail_chart");
     return SfCartesianChart(
         primaryXAxis: CategoryAxis(
           majorGridLines: const MajorGridLines(width: 0),

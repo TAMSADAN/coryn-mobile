@@ -152,8 +152,11 @@ class _DetailPageState extends State<DetailPage> {
 
   Future<bool> fetchNews(String market) async {
     List<News>? newsList = [];
-    final response =
-        await http.get(Uri.http("13.125.161.94:8080", "/api/v1/news/$market"));
+    final queryParameters = {
+      'market': market,
+    };
+    final response = await http
+        .get(Uri.http("13.125.161.94:8080", "/api/v1/news", queryParameters));
 
     if (response.statusCode == 200) {
       for (var newsJson in json.decode(utf8.decode(response.bodyBytes))) {
