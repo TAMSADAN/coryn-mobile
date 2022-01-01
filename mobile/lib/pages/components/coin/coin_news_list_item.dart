@@ -40,7 +40,7 @@ class CoinNewsListItem extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
-                            width: 290,
+                            width: 260,
                             child: Text(
                               news.title,
                               style: TextStyle(

@@ -12,6 +12,15 @@ class Coin {
     required this.englishName,
     required this.logoUri,
   });
+
+  factory Coin.fromJson(Map<String, dynamic> json) {
+    return Coin(
+      market: json["coin"]["market"],
+      koreanName: json["coin"]["korean_name"],
+      englishName: json["coin"]["english_name"],
+      logoUri: json["coin"]["logo_uri"],
+    );
+  }
 }
 
 Coin dummyBitcoinCoin = Coin(

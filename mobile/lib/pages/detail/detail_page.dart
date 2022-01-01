@@ -16,10 +16,11 @@ import 'dart:convert';
 import 'package:mobile/pages/ad_banner.dart';
 
 class DetailPage extends StatefulWidget {
-  final Coin coin;
+  final String market;
   final int defaultOption;
 
-  const DetailPage({Key? key, required this.coin, required this.defaultOption})
+  const DetailPage(
+      {Key? key, required this.market, required this.defaultOption})
       : super(key: key);
 
   @override
@@ -27,7 +28,7 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
-  late Detail _detail;
+  late Coin _coin;
   late List<News>? _newsList;
   late List<Price>? _priceList;
   late List<Chart> _chartList;
@@ -54,10 +55,27 @@ class _DetailPageState extends State<DetailPage> {
               child: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 children: [
-                  DetailTitle(
-                    coin: widget.coin,
-                    price: _priceList!.length > 0 ? _priceList![0] : null,
-                  ),
+                  FutureBuilder(
+                      future: fetchCoin(widget.market),
+                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                        if (snapshot.hasData == false) {
+                          return CircularProgressIndicator();
+                        } else if (snapshot.hasError) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'Error: ${snapshot.error}',
+                              style: TextStyle(fontSize: 15),
+                            ),
+                          );
+                        } else {
+                          return DetailTitle(
+                            coin: _coin,
+                            price:
+                                _priceList!.length > 0 ? _priceList![0] : null,
+                          );
+                        }
+                      }),
                   BaseSubTitle("차트"),
                   DetailChart(chartList: _chartList),
                   DetailChartOption(
@@ -73,7 +91,7 @@ class _DetailPageState extends State<DetailPage> {
                 ],
               ),
             ),
-            AdBanner()
+            // AdBanner()
           ],
         ),
       ),
@@ -86,8 +104,8 @@ class _DetailPageState extends State<DetailPage> {
     _newsList = [];
     _priceList = [];
     _chartList = [];
-    fetchPrice(widget.coin.market);
-    fetchNews(widget.coin.market);
+    fetchPrice(widget.market);
+    fetchNews(widget.market);
 
     // 뉴스 컴포넌트 초기화
     NewsOptionController(widget.defaultOption);
@@ -117,6 +135,22 @@ class _DetailPageState extends State<DetailPage> {
         _newsList!.addAll([..._goodNewsList, ..._basicNewsList]);
       }
     });
+  }
+
+  Future<bool> fetchCoin(String market) async {
+    Coin coin;
+    final response =
+        await http.get(Uri.http("13.125.161.94:8080", "/api/v1/coins/$market"));
+
+    if (response.statusCode == 200) {
+      coin = Coin.fromJson(json.decode(utf8.decode(response.bodyBytes)));
+      setState(() {
+        _coin = coin;
+      });
+      return true;
+    } else {
+      return false;
+    }
   }
 
   Future<bool> fetchPrice(String market) async {
@@ -167,6 +201,7 @@ class _DetailPageState extends State<DetailPage> {
         _newsList!.clear();
         _newsList!.addAll([...newsList]);
       });
+      NewsOptionController(widget.defaultOption);
       return true;
     } else {
       return false;

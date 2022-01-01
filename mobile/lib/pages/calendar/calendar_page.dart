@@ -40,13 +40,13 @@ class _CalendarPageState extends State<CalendarPage> {
                   shrinkWrap: true,
                   children: [
                     SizedBox(
-                      height: 600,
+                      height: 700,
                       child: CalendarBody(calenderList: _calendarList),
                     ),
                   ],
                 ),
               ),
-              AdBanner()
+              // AdBanner()
             ],
           ),
         ));

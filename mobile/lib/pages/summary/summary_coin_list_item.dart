@@ -21,7 +21,7 @@ class SummaryCoinListItem extends StatelessWidget {
           context,
           MaterialPageRoute(
               builder: (context) =>
-                  DetailPage(coin: summary.coin, defaultOption: 0)),
+                  DetailPage(market: summary.coin.market, defaultOption: 0)),
         );
       },
       child: Row(

@@ -32,11 +32,12 @@ class CalendarBody extends StatelessWidget {
   void calendarTapped(CalendarTapDetails details, BuildContext context) {
     if (details.targetElement == CalendarElement.appointment) {
       final Appointment appointmentDetails = details.appointments![0];
-      final Coin _coin = appointmentDetails.id as Coin;
+      final String _market = appointmentDetails.id as String;
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => DetailPage(coin: _coin, defaultOption: 1)),
+            builder: (context) =>
+                DetailPage(market: _market, defaultOption: 1)),
       );
     }
   }
@@ -57,10 +58,10 @@ class CalendarBody extends StatelessWidget {
         appointments.add(Appointment(
           startTime: calendar.news.targetingDate!,
           endTime: calendar.news.targetingDate!,
-          subject: calendar.market,
+          subject: calendar.market.split("-")[1],
           color: Colors.blueAccent,
           isAllDay: true,
-          id: calendar.news.id,
+          id: calendar.market,
         ));
         _coinDateMap[calendar.news.targetingDate!] = calendar.market;
       }
