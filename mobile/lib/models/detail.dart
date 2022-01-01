@@ -14,20 +14,20 @@ class Detail {
   });
 }
 
-Detail dummyBitcoinDetail = Detail(
-  coin: dummyBitcoinCoin,
-  priceList: dummyBitcoinPriceList,
-  newsList: dummyBitcoinNewsList,
-);
+// Detail dummyBitcoinDetail = Detail(
+//   coin: dummyBitcoinCoin,
+//   priceList: dummyBitcoinPriceList,
+//   newsList: dummyBitcoinNewsList,
+// );
 
-Detail dummyDogecoinDetail = Detail(
-  coin: dummyDogecoinCoin,
-  priceList: dummyDogecoinPriceList,
-  newsList: dummyDogecoinNewsList,
-);
+// Detail dummyDogecoinDetail = Detail(
+//   coin: dummyDogecoinCoin,
+//   priceList: dummyDogecoinPriceList,
+//   newsList: dummyDogecoinNewsList,
+// );
 
-Detail dummyStacksDetail = Detail(
-  coin: dummyStacksCoin,
-  priceList: dummyStacksPriceList,
-  newsList: null,
-);
+// Detail dummyStacksDetail = Detail(
+//   coin: dummyStacksCoin,
+//   priceList: dummyStacksPriceList,
+//   newsList: null,
+// );

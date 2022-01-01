@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:mobile/pages/components/base_app_bar.dart';
 import 'package:mobile/pages/calendar/components/calendar_body.dart';
 import 'package:mobile/models/calendar.dart';
+import 'package:mobile/models/dto/news.dart';
 import 'package:mobile/pages/ad_banner.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class CalendarPage extends StatefulWidget {
   const CalendarPage({Key? key}) : super(key: key);
@@ -52,6 +55,37 @@ class _CalendarPageState extends State<CalendarPage> {
   @override
   void initState() {
     super.initState();
-    _calendarList = dummyCalendarList;
+    _calendarList = [];
+    fetchCalendar();
+  }
+
+  Future<bool> fetchCalendar() async {
+    List<Calendar>? calendarList = [];
+    final queryParameters = {
+      "type": "good",
+    };
+    final response = await http
+        .get(Uri.http("13.125.161.94:8080", "/api/v1/news", queryParameters));
+
+    if (response.statusCode == 200) {
+      for (var newsJson in json.decode(utf8.decode(response.bodyBytes))) {
+        var news = News.fromJson(newsJson);
+        List<String>? symbolList = [];
+        for (var market in news.marketList) {
+          var symbol = market.toString().split("-")[1];
+          if (!symbolList.contains(symbol)) {
+            symbolList.add(symbol);
+            calendarList.add(Calendar(market: market, news: news));
+          }
+        }
+      }
+      setState(() {
+        _calendarList.clear();
+        _calendarList.addAll([...calendarList]);
+      });
+      return true;
+    } else {
+      return false;
+    }
   }
 }
