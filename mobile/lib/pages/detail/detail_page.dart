@@ -78,8 +78,8 @@ class _DetailPageState extends State<DetailPage> {
                       }),
                   BaseSubTitle("차트"),
                   DetailChart(chartList: _chartList),
-                  DetailChartOption(
-                      chartOptionController: ChartOptionController),
+                  // DetailChartOption(
+                  //     chartOptionController: ChartOptionController),
                   BaseSubTitle("뉴스"),
                   DetailNewsOption(
                     newsOptionController: NewsOptionController,
