@@ -77,7 +77,7 @@ class _SummaryPageState extends State<SummaryPage> {
                 ],
               ),
             ),
-            // AdBanner()
+            AdBanner()
           ],
         ),
       ),

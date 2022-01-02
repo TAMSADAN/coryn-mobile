@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.mobile">
+    package="com.O2Apps.coho">
    <application
-        android:label="mobile"
+        android:label="coryn"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

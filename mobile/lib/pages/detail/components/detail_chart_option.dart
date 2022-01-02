@@ -23,6 +23,7 @@ class _DetailChartOptionState extends State<DetailChartOption> {
       },
       groupValue: _sliding,
       onValueChanged: (value) {
+        // 현재 일  고정
         // setState(() {
         //   _sliding = int.tryParse(value.toString())!;
         // });

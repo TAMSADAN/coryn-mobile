@@ -91,7 +91,7 @@ class _DetailPageState extends State<DetailPage> {
                 ],
               ),
             ),
-            // AdBanner()
+            AdBanner()
           ],
         ),
       ),
