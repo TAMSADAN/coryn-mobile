@@ -46,7 +46,7 @@ class _CalendarPageState extends State<CalendarPage> {
                   ],
                 ),
               ),
-              AdBanner()
+              AdBanner(),
             ],
           ),
         ));
@@ -61,7 +61,9 @@ class _CalendarPageState extends State<CalendarPage> {
 
   Future<bool> fetchCalendar() async {
     List<Calendar>? calendarList = [];
-    final queryParameters = {"type": "good"};
+    final queryParameters = {
+      "type": "good",
+    };
     final response = await http
         .get(Uri.http("13.125.161.94:8080", "/api/v1/news", queryParameters));
 
