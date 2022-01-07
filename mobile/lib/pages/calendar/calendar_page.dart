@@ -7,6 +7,7 @@ import 'package:mobile/models/dto/news.dart';
 import 'package:mobile/pages/ad_banner.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:mobile/models/calendar_model.dart';
 
 class CalendarPage extends StatefulWidget {
   const CalendarPage({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class CalendarPage extends StatefulWidget {
 }
 
 class _CalendarPageState extends State<CalendarPage> {
-  late List<Calendar> _calendarList;
+  final _calendarModel = CalendarModel();
 
   @override
   Widget build(BuildContext context) {
@@ -37,15 +38,25 @@ class _CalendarPageState extends State<CalendarPage> {
             children: [
               // 캘린더
               Expanded(
-                child: ListView(
-                  shrinkWrap: true,
-                  children: [
-                    SizedBox(
-                      height: 700,
-                      child: CalendarBody(calenderList: _calendarList),
-                    ),
-                  ],
-                ),
+                child: FutureBuilder(
+                    future: _calendarModel.fetchCalendar(),
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (snapshot.hasData == false) {
+                        return Center(child: CupertinoActivityIndicator());
+                      } else if (snapshot.hasError) {
+                        return Text('Error: ${snapshot.error}');
+                      } else {
+                        return ListView(
+                          shrinkWrap: true,
+                          children: [
+                            SizedBox(
+                              height: 700,
+                              child: CalendarBody(calenderList: snapshot.data),
+                            ),
+                          ],
+                        );
+                      }
+                    }),
               ),
               // 배너 광고
               AdBanner(),
@@ -57,37 +68,5 @@ class _CalendarPageState extends State<CalendarPage> {
   @override
   void initState() {
     super.initState();
-    _calendarList = [];
-    fetchCalendar();
-  }
-
-  Future<bool> fetchCalendar() async {
-    List<Calendar>? calendarList = [];
-    final queryParameters = {
-      "type": "good",
-    };
-    final response = await http
-        .get(Uri.http("13.125.161.94:8080", "/api/v1/news", queryParameters));
-
-    if (response.statusCode == 200) {
-      for (var newsJson in json.decode(utf8.decode(response.bodyBytes))) {
-        var news = News.fromJson(newsJson);
-        List<String>? symbolList = [];
-        for (var market in news.marketList) {
-          var symbol = market.toString().split("-")[1];
-          if (!symbolList.contains(symbol)) {
-            symbolList.add(symbol);
-            calendarList.add(Calendar(market: market, news: news));
-          }
-        }
-      }
-      setState(() {
-        _calendarList.clear();
-        _calendarList.addAll([...calendarList]);
-      });
-      return true;
-    } else {
-      return false;
-    }
   }
 }

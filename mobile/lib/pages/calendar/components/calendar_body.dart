@@ -79,13 +79,3 @@ class _DataSource extends CalendarDataSource {
   @override
   List<dynamic> get appointments => source;
 }
-
-class _CoinDate {
-  Coin coin;
-  DateTime date;
-
-  _CoinDate({
-    required this.coin,
-    required this.date,
-  });
-}
