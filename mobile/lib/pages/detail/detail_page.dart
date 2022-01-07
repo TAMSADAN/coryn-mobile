@@ -4,17 +4,13 @@ import 'package:mobile/models/dto/coin.dart';
 import 'package:mobile/models/dto/news.dart';
 import 'package:mobile/models/dto/price.dart';
 import 'package:mobile/pages/components/base_sub_title.dart';
-import 'package:mobile/pages/detail/components/detail_news_item.dart';
 import 'package:mobile/pages/detail/components/detail_title.dart';
 import 'package:mobile/pages/detail/components/detail_chart.dart';
 import 'package:mobile/pages/detail/components/detail_chart_option.dart';
-import 'package:mobile/pages/detail/components/detail_news_option.dart';
-import 'package:mobile/models/detail.dart';
 import 'package:mobile/models/chart.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:mobile/pages/ad_banner.dart';
 import 'package:mobile/models/detail_model.dart';
+import 'package:mobile/pages/detail/components/detail_news.dart';
 
 /*
   [page] DetailPage
@@ -56,7 +52,7 @@ class _DetailPageState extends State<DetailPage> {
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerboxIsScrolled) {
           return <Widget>[
-            CupertinoSliverNavigationBar(
+            const CupertinoSliverNavigationBar(
               backgroundColor: Colors.white,
               border: Border(),
               largeTitle: Text("상세"),
@@ -75,7 +71,7 @@ class _DetailPageState extends State<DetailPage> {
                       future: _detailModel.fetchCoin(widget.market),
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         if (snapshot.hasData == false) {
-                          return CircularProgressIndicator();
+                          return Center(child: CupertinoActivityIndicator());
                         } else if (snapshot.hasError) {
                           return Text('Error: ${snapshot.error}');
                         } else {
@@ -87,34 +83,23 @@ class _DetailPageState extends State<DetailPage> {
                       future: _detailModel.fetchChartList(widget.market),
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         if (snapshot.hasData == false) {
-                          return CircularProgressIndicator();
+                          return Center(child: CupertinoActivityIndicator());
                         } else if (snapshot.hasError) {
                           return Text('Error: ${snapshot.error}');
                         } else {
                           return DetailChart(chartList: snapshot.data);
                         }
                       }),
-                  // DetailChartOption(
-                  //     chartOptionController: ChartOptionController),
-                  BaseSubTitle("뉴스"),
-                  DetailNewsOption(
-                    newsOptionController: NewsOptionController,
-                    defaultOption: widget.defaultOption,
-                  ),
+                  const BaseSubTitle("뉴스"),
                   FutureBuilder(
                       future: _detailModel.fetchNewsList(widget.market),
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         if (snapshot.hasData == false) {
-                          return CircularProgressIndicator();
+                          return Center(child: CupertinoActivityIndicator());
                         } else if (snapshot.hasError) {
                           return Text('Error: ${snapshot.error}');
                         } else {
-                          print(snapshot.data[0].id);
-                          return Column(
-                              children: List.generate(
-                                  snapshot.data.length,
-                                  (index) => DetailNewsItem(
-                                      news: snapshot.data[index])));
+                          return DetailNews(newsList: snapshot.data, option: 0);
                         }
                       }),
                 ],
@@ -130,37 +115,5 @@ class _DetailPageState extends State<DetailPage> {
   @override
   void initState() {
     super.initState();
-    _newsList = [];
-    _priceList = [];
-    _chartList = [];
-
-    // 뉴스 컴포넌트 초기화
-    NewsOptionController(widget.defaultOption);
-  }
-
-  // 분, 일, 주, 월 버튼 컨트롤러
-  void ChartOptionController(Object value) {
-    setState(() {});
-  }
-
-  void NewsOptionController(Object value) {
-    setState(() {
-      List<News>? _goodNewsList = [];
-      List<News>? _basicNewsList = [];
-      _newsList!.forEach((news) {
-        if (news.newsType == "good") {
-          _goodNewsList.add(news);
-        } else {
-          _basicNewsList.add(news);
-        }
-      });
-      // 0 -> good sort, 1 -> basic sort
-      _newsList!.clear();
-      if (value == 0) {
-        _newsList!.addAll([..._basicNewsList, ..._goodNewsList]);
-      } else {
-        _newsList!.addAll([..._goodNewsList, ..._basicNewsList]);
-      }
-    });
   }
 }
