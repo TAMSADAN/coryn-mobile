@@ -3,6 +3,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 import 'package:mobile/models/dto/price.dart';
 import 'package:mobile/models/chart.dart';
+import 'dart:math';
 
 /*
   [component] DetailChart
@@ -28,6 +29,8 @@ class DetailChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    late List<Chart> _chartList = _normalizeChartList(chartList);
+
     return SfCartesianChart(
         primaryXAxis: CategoryAxis(
           majorGridLines: const MajorGridLines(width: 0),
@@ -43,7 +46,7 @@ class DetailChart extends StatelessWidget {
         series: <ChartSeries<Chart, String>>[
           SplineSeries<Chart, String>(
             dataLabelSettings: DataLabelSettings(isVisible: false),
-            dataSource: chartList,
+            dataSource: _chartList,
             color: Colors.black38,
             isVisible: true,
             isVisibleInLegend: false,
@@ -54,11 +57,27 @@ class DetailChart extends StatelessWidget {
           )
         ]);
   }
-}
 
-class _ChartData {
-  _ChartData(this.date, this.price);
+  List<Chart> _normalizeChartList(List<Chart> chartList) {
+    List<Chart> _normalizedChartList = [];
+    List<double> _priceList;
+    double _normalizedPrice;
+    double _maxPrice;
+    double _minPrice;
 
-  final String date;
-  final int price;
+    _priceList =
+        List.generate(chartList.length, (index) => chartList[index].price);
+    _priceList.sort();
+    _minPrice = _priceList.first;
+    _maxPrice = _priceList.last;
+
+    for (var chart in chartList) {
+      _normalizedPrice = (chart.price - _minPrice) / (_maxPrice - _minPrice);
+      _normalizedPrice = _normalizedPrice * 100 + 10;
+      _normalizedChartList
+          .add(Chart(date: chart.date, price: _normalizedPrice));
+    }
+
+    return _normalizedChartList;
+  }
 }
