@@ -14,6 +14,7 @@ import 'package:mobile/models/chart.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:mobile/pages/ad_banner.dart';
+import 'package:mobile/models/detail_model.dart';
 
 /*
   [page] DetailPage
@@ -41,6 +42,8 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
+  final _detailModel = DetailModel();
+
   late Coin _coin;
   late List<News>? _newsList;
   late List<Price>? _priceList;
@@ -69,28 +72,28 @@ class _DetailPageState extends State<DetailPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 children: [
                   FutureBuilder(
-                      future: fetchCoin(widget.market),
+                      future: _detailModel.fetchCoin(widget.market),
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         if (snapshot.hasData == false) {
                           return CircularProgressIndicator();
                         } else if (snapshot.hasError) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              'Error: ${snapshot.error}',
-                              style: TextStyle(fontSize: 15),
-                            ),
-                          );
+                          return Text('Error: ${snapshot.error}');
                         } else {
-                          return DetailTitle(
-                            coin: _coin,
-                            price:
-                                _priceList!.length > 0 ? _priceList![0] : null,
-                          );
+                          return DetailTitle(coin: snapshot.data);
                         }
                       }),
                   BaseSubTitle("차트"),
-                  DetailChart(chartList: _chartList),
+                  FutureBuilder(
+                      future: _detailModel.fetchChartList(widget.market),
+                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                        if (snapshot.hasData == false) {
+                          return CircularProgressIndicator();
+                        } else if (snapshot.hasError) {
+                          return Text('Error: ${snapshot.error}');
+                        } else {
+                          return DetailChart(chartList: snapshot.data);
+                        }
+                      }),
                   // DetailChartOption(
                   //     chartOptionController: ChartOptionController),
                   BaseSubTitle("뉴스"),
@@ -98,9 +101,22 @@ class _DetailPageState extends State<DetailPage> {
                     newsOptionController: NewsOptionController,
                     defaultOption: widget.defaultOption,
                   ),
-                  if (_newsList != null)
-                    ...List.generate(_newsList!.length,
-                        (index) => DetailNewsItem(news: _newsList![index]))
+                  FutureBuilder(
+                      future: _detailModel.fetchNewsList(widget.market),
+                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                        if (snapshot.hasData == false) {
+                          return CircularProgressIndicator();
+                        } else if (snapshot.hasError) {
+                          return Text('Error: ${snapshot.error}');
+                        } else {
+                          print(snapshot.data[0].id);
+                          return Column(
+                              children: List.generate(
+                                  snapshot.data.length,
+                                  (index) => DetailNewsItem(
+                                      news: snapshot.data[index])));
+                        }
+                      }),
                 ],
               ),
             ),
@@ -117,8 +133,6 @@ class _DetailPageState extends State<DetailPage> {
     _newsList = [];
     _priceList = [];
     _chartList = [];
-    fetchPrice(widget.market);
-    fetchNews(widget.market);
 
     // 뉴스 컴포넌트 초기화
     NewsOptionController(widget.defaultOption);
@@ -148,76 +162,5 @@ class _DetailPageState extends State<DetailPage> {
         _newsList!.addAll([..._goodNewsList, ..._basicNewsList]);
       }
     });
-  }
-
-  Future<bool> fetchCoin(String market) async {
-    Coin coin;
-    final response =
-        await http.get(Uri.http("13.125.161.94:8080", "/api/v1/coins/$market"));
-
-    if (response.statusCode == 200) {
-      coin = Coin.fromJson(json.decode(utf8.decode(response.bodyBytes)));
-      setState(() {
-        _coin = coin;
-      });
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  Future<bool> fetchPrice(String market) async {
-    List<Price> priceList = [];
-    final response = await http
-        .get(Uri.http("13.125.161.94:8080", "/api/v1/coins/$market/prices"));
-
-    if (response.statusCode == 200) {
-      for (var priceJson in json.decode(utf8.decode(response.bodyBytes))) {
-        var price = Price.fromJson(priceJson);
-        priceList.add(price);
-      }
-      setState(() {
-        _priceList!.clear();
-        _priceList!.addAll([...priceList]);
-        // chartList 초기화
-        _chartList = [
-          ...List.generate(
-              _priceList!.length,
-              (index) => Chart(
-                    date: index.toString(),
-                    price: _priceList![index].openingPrice > 10000
-                        ? _priceList![index].openingPrice / 10000
-                        : _priceList![index].openingPrice,
-                  ))
-        ];
-      });
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  Future<bool> fetchNews(String market) async {
-    List<News>? newsList = [];
-    final queryParameters = {
-      'market': market,
-    };
-    final response = await http
-        .get(Uri.http("13.125.161.94:8080", "/api/v1/news", queryParameters));
-
-    if (response.statusCode == 200) {
-      for (var newsJson in json.decode(utf8.decode(response.bodyBytes))) {
-        var news = News.fromJson(newsJson);
-        newsList.add(news);
-      }
-      setState(() {
-        _newsList!.clear();
-        _newsList!.addAll([...newsList]);
-      });
-      NewsOptionController(widget.defaultOption);
-      return true;
-    } else {
-      return false;
-    }
   }
 }

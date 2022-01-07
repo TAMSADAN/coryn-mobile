@@ -10,10 +10,3 @@ class Calendar {
     required this.news,
   });
 }
-
-// List<Calendar> dummyCalendarList = [
-//   Calendar(coin: dummyBitcoinCoin, news: dummyBitcoinNewsList[0]),
-//   Calendar(coin: dummyBitcoinCoin, news: dummyBitcoinNewsList[1]),
-//   Calendar(coin: dummyDogecoinCoin, news: dummyDogecoinNewsList[0]),
-//   Calendar(coin: dummyDogecoinCoin, news: dummyDogecoinNewsList[1]),
-// ];

@@ -3,7 +3,6 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 import 'package:mobile/models/dto/price.dart';
 import 'package:mobile/models/chart.dart';
-import 'dart:math';
 
 /*
   [component] DetailChart

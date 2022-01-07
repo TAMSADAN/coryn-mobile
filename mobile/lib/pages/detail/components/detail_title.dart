@@ -8,11 +8,9 @@ import 'package:mobile/models/dto/coin.dart';
 import 'package:mobile/models/dto/price.dart';
 
 class DetailTitle extends StatelessWidget {
-  final Coin? coin;
-  final Price? price;
+  final Coin coin;
 
-  const DetailTitle({Key? key, required this.coin, required this.price})
-      : super(key: key);
+  const DetailTitle({Key? key, required this.coin}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +19,13 @@ class DetailTitle extends StatelessWidget {
       children: [
         Row(
           children: [
-            CoinImageBox(coin!.logoUri),
+            CoinImageBox(coin.logoUri),
             const SizedBox(width: 10),
             CoinInformationSummaryBox(
-              coinKoreanName: coin!.koreanName,
-              coinMarket: coin!.market,
-              priceCurrency: price != null ? price!.currency : "",
-              priceOpeningPrice: price != null ? price!.openingPrice : 0.0,
+              coinKoreanName: coin.koreanName,
+              coinMarket: coin.market,
+              priceCurrency: coin.price.currency,
+              priceOpeningPrice: coin.price.openingPrice,
             ),
           ],
         ),

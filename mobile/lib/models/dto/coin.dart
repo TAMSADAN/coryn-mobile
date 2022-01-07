@@ -1,51 +1,26 @@
-import 'package:mobile/models/summary.dart';
+import 'package:mobile/models/dto/price.dart';
 
 class Coin {
   final String market;
   final String koreanName;
   final String englishName;
   final String logoUri;
+  final Price price;
 
   Coin({
     required this.market,
     required this.koreanName,
     required this.englishName,
     required this.logoUri,
+    required this.price,
   });
 
   factory Coin.fromJson(Map<String, dynamic> json) {
     return Coin(
-      market: json["coin"]["market"],
-      koreanName: json["coin"]["korean_name"],
-      englishName: json["coin"]["english_name"],
-      logoUri: json["coin"]["logo_uri"],
-    );
+        market: json["coin"]["market"],
+        koreanName: json["coin"]["korean_name"],
+        englishName: json["coin"]["english_name"],
+        logoUri: json["coin"]["logo_uri"],
+        price: Price.fromJson(json["price"]));
   }
 }
-
-Coin dummyBitcoinCoin = Coin(
-  market: "BTC",
-  koreanName: "비트코인",
-  englishName: "Bitcoin",
-  logoUri: "https://static.upbit.com/logos/BTC.png",
-);
-
-Coin dummyDogecoinCoin = Coin(
-  market: "DOGE",
-  koreanName: "도지코인",
-  englishName: "Dogecoin",
-  logoUri: "https://static.upbit.com/logos/DOGE.png",
-);
-
-Coin dummyStacksCoin = Coin(
-  market: "STX",
-  koreanName: "스택스",
-  englishName: "Stacks",
-  logoUri: "https://static.upbit.com/logos/STX.png",
-);
-
-List<Coin> dummyCoinList = [
-  dummyBitcoinCoin,
-  dummyDogecoinCoin,
-  dummyStacksCoin
-];
