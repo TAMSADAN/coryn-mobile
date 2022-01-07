@@ -3,10 +3,29 @@ import 'package:flutter/material.dart';
 import 'package:mobile/models/dto/news.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class CoinNewsListItem extends StatelessWidget {
+/*
+  [component] DetailNewsItem
+
+  info
+  코인 뉴스 정보를 담은 컴포넌트 입니다.
+  사용자는 해당 컴포넌트에서 뉴스 정보를 확인합니다.
+  
+  contents
+  - 뉴스 제목
+  - 생성일 - 타겟일(null 허용)
+  - 출처
+
+  events
+  - 클릭시 해당 뉴스 URL로 이동
+
+  etc
+  - 
+*/
+
+class DetailNewsItem extends StatelessWidget {
   final News news;
 
-  const CoinNewsListItem({Key? key, required this.news}) : super(key: key);
+  const DetailNewsItem({Key? key, required this.news}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +69,7 @@ class CoinNewsListItem extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "생성일 : ${news.postedDate != null ? news.getStringFromDatetime(news.postedDate!) : ""} 타겟일 : ${news.targetingDate != null ? news.getStringFromDatetime(news.targetingDate!) : ""}",
+                            "생성일 : ${news.postedDate != null ? news.getStringFromDatetime(news.postedDate!) : ""} ${news.targetingDate != null ? "타겟일 :" + news.getStringFromDatetime(news.targetingDate!) : ""}",
                             style: TextStyle(
                               fontSize: 10,
                               fontWeight: FontWeight.bold,

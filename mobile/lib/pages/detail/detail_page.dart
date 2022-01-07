@@ -4,7 +4,7 @@ import 'package:mobile/models/dto/coin.dart';
 import 'package:mobile/models/dto/news.dart';
 import 'package:mobile/models/dto/price.dart';
 import 'package:mobile/pages/components/base_sub_title.dart';
-import 'package:mobile/pages/components/coin/coin_news_list_item.dart';
+import 'package:mobile/pages/detail/components/detail_news_item.dart';
 import 'package:mobile/pages/detail/components/detail_title.dart';
 import 'package:mobile/pages/detail/components/detail_chart.dart';
 import 'package:mobile/pages/detail/components/detail_chart_option.dart';
@@ -14,6 +14,19 @@ import 'package:mobile/models/chart.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:mobile/pages/ad_banner.dart';
+
+/*
+  [page] DetailPage
+
+  body
+  - DetailTitle         코인 정보
+  - BaseSubTitle        소제목 "차트"
+  - DetailChart         코인 차트
+  - DetailChartOption   코인 차트 옵션
+  - BaseSubTitle        소제목 "뉴스"
+  - DetailNewsOption    코인 뉴스 옵션 "날짜 우선", "호재 우선"
+  - DetailNewsItem      코인 뉴스
+*/
 
 class DetailPage extends StatefulWidget {
   final String market;
@@ -87,7 +100,7 @@ class _DetailPageState extends State<DetailPage> {
                   ),
                   if (_newsList != null)
                     ...List.generate(_newsList!.length,
-                        (index) => CoinNewsListItem(news: _newsList![index]))
+                        (index) => DetailNewsItem(news: _newsList![index]))
                 ],
               ),
             ),

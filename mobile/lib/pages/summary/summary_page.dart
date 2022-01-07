@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mobile/pages/components/base_app_bar.dart';
 import 'package:mobile/pages/components/base_sub_title.dart';
-import 'package:mobile/pages/summary/summary_search.dart';
-import 'package:mobile/pages/summary/summary_coin_list_item.dart';
+import 'package:mobile/pages/summary/components/summary_search.dart';
+import 'package:mobile/pages/summary/components/summary_coin_list_item.dart';
 import 'package:mobile/pages/list_cover.dart';
 import 'package:mobile/models/summary.dart';
 import 'package:http/http.dart' as http;
@@ -52,6 +52,7 @@ class _SummaryPageState extends State<SummaryPage> {
                     ),
                   ),
                   BaseSubTitle("전체 코인"),
+                  // 코인 리스트
                   ListCover(
                     Column(
                         children:
@@ -77,6 +78,7 @@ class _SummaryPageState extends State<SummaryPage> {
                 ],
               ),
             ),
+            // 배너 광고
             AdBanner()
           ],
         ),

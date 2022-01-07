@@ -4,6 +4,23 @@ import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 import 'package:mobile/models/dto/price.dart';
 import 'package:mobile/models/chart.dart';
 
+/*
+  [component] DetailChart
+
+  info
+  코인 차트 컴포넌트 입니다.
+  사용자는 차트를 확인할 수 있습니다.
+
+  contents
+  - 차트
+
+  events
+  - 
+
+  etc
+  -
+*/
+
 class DetailChart extends StatelessWidget {
   final List<Chart> chartList;
 

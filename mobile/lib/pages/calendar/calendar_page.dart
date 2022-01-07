@@ -35,6 +35,7 @@ class _CalendarPageState extends State<CalendarPage> {
           },
           body: Column(
             children: [
+              // 캘린더
               Expanded(
                 child: ListView(
                   shrinkWrap: true,
@@ -46,6 +47,7 @@ class _CalendarPageState extends State<CalendarPage> {
                   ],
                 ),
               ),
+              // 배너 광고
               AdBanner(),
             ],
           ),
