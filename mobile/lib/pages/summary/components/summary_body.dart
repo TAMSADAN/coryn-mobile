@@ -64,16 +64,12 @@ class _SummaryBodyState extends State<SummaryBody> {
   void _onChangedController(String value) {
     List<Coin> _originCoinList = [...widget.coinList];
     List<Coin> _searchedCoinList = [];
-    _searchedCoinList.clear();
-
-    if (value == "") {
+    _searchedCoinList = [];
+    if (value == " ") {
       _searchedCoinList = widget.coinList;
     }
     for (int i = 0; i < _originCoinList.length; i++) {
       //한글이름 체크
-      // print(i);
-      // print(value);
-      // print(_originCoinList[i].koreanName);
       if (_originCoinList[i].koreanName.contains(value)) {
         _searchedCoinList.add(_originCoinList[i]);
       }
