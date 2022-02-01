@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:mobile/pages/summary/controllers/coin_list_controller.dart';
 import 'package:mobile/pages/summary/controllers/market_drop_down_button_controller.dart';
 import 'package:get/get.dart';
 
@@ -8,7 +9,7 @@ class MarketDropDownButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _controller = Get.put(MarketDropDownButtonController());
+    final _coinListController = Get.find<CoinListController>();
 
     return GetBuilder<MarketDropDownButtonController>(
       builder: (_) => DropdownButton2(
@@ -21,7 +22,10 @@ class MarketDropDownButton extends StatelessWidget {
                 style: const TextStyle(fontSize: 14),
               ));
         }).toList(),
-        onChanged: (value) => _controller.onchanged(value),
+        onChanged: (value) {
+          _.onchanged(value);
+          _coinListController.remainMarket(value.toString());
+        },
         buttonWidth: 70,
       ),
     );

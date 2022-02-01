@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mobile/pages/ad_banner.dart';
-import 'package:mobile/pages/bottom_navigation.dart';
 import 'package:mobile/pages/summary/summary_binding.dart';
 import 'package:mobile/utils/coryn_size.dart';
 import 'package:mobile/pages/summary/coin_list_helper.dart';

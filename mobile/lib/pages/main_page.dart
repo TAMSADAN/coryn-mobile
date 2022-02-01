@@ -4,7 +4,6 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:mobile/pages/summary/summary_page.dart';
 import 'package:mobile/pages/calendar/calendar_page.dart';
 import 'package:mobile/pages/information/info_page.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);

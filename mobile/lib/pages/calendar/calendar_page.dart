@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile/pages/bottom_navigation.dart';
 
-// import 'package:mobile/pages/components/base_app_bar.dart';
 import 'package:mobile/pages/calendar/coin_calendar.dart';
 import 'package:mobile/models/calendar.dart';
 // import 'package:mobile/models/dto/news.dart';
