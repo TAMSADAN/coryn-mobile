@@ -9,8 +9,6 @@ class PlatformDropDownButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _controller = Get.put(PlatformDropDownButtonController());
-
     return GetBuilder<PlatformDropDownButtonController>(
       builder: (_) => DropdownButton2(
         value: _.platform,
@@ -22,7 +20,7 @@ class PlatformDropDownButton extends StatelessWidget {
                 style: const TextStyle(fontSize: 14),
               ));
         }).toList(),
-        onChanged: (value) => _controller.onchanged(value),
+        onChanged: (value) => _.onchanged(value),
         buttonWidth: 80,
       ),
     );

@@ -23,7 +23,7 @@ class CoinSortButton extends StatelessWidget {
               TextButton(
                 onPressed: () {
                   _.onchanged(_.coinSortList[index]);
-                  _coinListController.sortBy(index);
+                  _coinListController.sort();
                 },
                 child: Text(
                   _.coinSortList[index],

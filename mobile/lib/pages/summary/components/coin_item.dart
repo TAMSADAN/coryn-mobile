@@ -50,18 +50,36 @@ class CoinItem extends StatelessWidget {
               ),
             ],
           ),
-          Container(
-            padding: const EdgeInsets.all(4.0),
-            decoration: BoxDecoration(
-              color: Colors.blueAccent,
-              borderRadius: BorderRadius.all(Radius.circular(15)),
-              shape: BoxShape.rectangle,
-            ),
-            child: Center(
-              child: Text(coin.price.changeRate.toString(),
-                  style: CorynTextStyle.rateUpTextStyle),
-            ),
-          )
+          if (coin.price.changeRate > 0)
+            Container(
+              padding: const EdgeInsets.all(6.0),
+              decoration: BoxDecoration(
+                color: Colors.redAccent,
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                shape: BoxShape.rectangle,
+              ),
+              child: Center(
+                child: Text(
+                    "+" + coin.price.changeRate.toStringAsFixed(3) + '%',
+                    style: CorynTextStyle.rateUpTextStyle),
+              ),
+            )
+          else
+            Container(
+              padding: const EdgeInsets.all(6.0),
+              decoration: BoxDecoration(
+                color: Colors.blueAccent,
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                shape: BoxShape.rectangle,
+              ),
+              child: Center(
+                child: Text(
+                    "-" +
+                        (coin.price.changeRate.abs()).toStringAsFixed(3) +
+                        '%',
+                    style: CorynTextStyle.rateUpTextStyle),
+              ),
+            )
         ],
       ),
     );

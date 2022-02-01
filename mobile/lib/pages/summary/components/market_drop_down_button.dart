@@ -24,7 +24,7 @@ class MarketDropDownButton extends StatelessWidget {
         }).toList(),
         onChanged: (value) {
           _.onchanged(value);
-          _coinListController.remainMarket(value.toString());
+          _coinListController.sort();
         },
         buttonWidth: 70,
       ),
