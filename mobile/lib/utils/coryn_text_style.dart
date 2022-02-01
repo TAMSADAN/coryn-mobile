@@ -34,13 +34,13 @@ class CorynTextStyle {
   );
 
   static const TextStyle rateUpTextStyle = TextStyle(
-    color: Colors.white,
+    color: Colors.redAccent,
     fontWeight: FontWeight.bold,
-    fontSize: 12,
+    fontSize: 14,
   );
   static const TextStyle rateDownTextStyle = TextStyle(
-    color: Colors.white,
+    color: Colors.blueAccent,
     fontWeight: FontWeight.bold,
-    fontSize: 12,
+    fontSize: 14,
   );
 }

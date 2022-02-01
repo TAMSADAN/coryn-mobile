@@ -18,18 +18,7 @@ class CoinListHelper extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                Container(
-                  width: 35,
-                  height: 35,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: Colors.blueAccent),
-                ),
-                SizedBox(width: 10),
-                PlatformDropDownButton()
-              ],
-            ),
+            PlatformDropDownButton(),
             MarketDropDownButton(),
           ],
         ),
