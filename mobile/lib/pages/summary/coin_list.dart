@@ -8,8 +8,6 @@ class CoinList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _controller = Get.put(CoinListController());
-
     return GetBuilder<CoinListController>(
       builder: (_) => ListView(
         shrinkWrap: true,

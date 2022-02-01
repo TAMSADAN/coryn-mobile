@@ -24,16 +24,17 @@ class _MainPageState extends State<MainPage> {
   void _onBottomBarTap(int index) {
     setState(() {
       _currentIndex = index;
+      print(index);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: _currentIndex,
-        children: _widgetPages,
-      ),
+      // body: IndexedStack(
+      //   index: _currentIndex,
+      //   children: _widgetPages,
+      // ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
         currentIndex: _currentIndex,

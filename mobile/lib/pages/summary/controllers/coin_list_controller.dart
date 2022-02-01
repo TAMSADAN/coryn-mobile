@@ -12,6 +12,8 @@ class CoinListController extends GetxController {
     super.onInit();
   }
 
+  void sortCoinList() {}
+
   void fetchCoinList() async {
     coinList = await CoinService().fetchCoinList();
     update();
