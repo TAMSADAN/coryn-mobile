@@ -22,7 +22,7 @@ class _CoinSortButtonState extends State<CoinSortButton> {
           child: Text("거래량", style: _textStyle),
           style: _buttonStyle,
         ),
-        SizedBox(width: CorynSize.contextDefaultHorizontal),
+        SizedBox(width: CorynSize.contextHorizontal),
         TextButton(
           onPressed: null,
           child: Text("등락률", style: _textStyle),

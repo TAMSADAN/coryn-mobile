@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/pages/summary/components/coin_search_bar.dart';
-import 'package:mobile/pages/summary/components/platform_drop_down_button.dart';
-import 'package:mobile/pages/summary/components/market_drop_down_button.dart';
-import 'package:mobile/pages/summary/components/coin_sort_button.dart';
-import 'package:mobile/pages/summary/components/coin_update_text.dart';
-import 'package:mobile/pages/summary/coin_list.dart';
+import 'components/coin_search_bar.dart';
+import 'components/platform_drop_down_button.dart';
+import 'components/market_drop_down_button.dart';
+import 'components/coin_sort_button.dart';
+import 'components/coin_update_text.dart';
 import 'package:mobile/utils/coryn_size.dart';
 
 class CoinListHelper extends StatelessWidget {
@@ -15,7 +14,7 @@ class CoinListHelper extends StatelessWidget {
     return Column(
       children: [
         CoinSearchBar(),
-        SizedBox(height: CorynSize.componentDefaultVertical),
+        SizedBox(height: CorynSize.componentVertical),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -34,7 +33,7 @@ class CoinListHelper extends StatelessWidget {
             MarketDropDownButton(),
           ],
         ),
-        SizedBox(height: CorynSize.componentDefaultVertical),
+        SizedBox(height: CorynSize.componentVertical),
         CoinSortButton(),
         Container(
           alignment: Alignment.centerRight,

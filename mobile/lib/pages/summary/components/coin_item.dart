@@ -8,8 +8,8 @@ class CoinItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-          vertical: CorynSize.contextDefaultVertical),
+      padding:
+          const EdgeInsets.symmetric(vertical: CorynSize.contextHorizontal),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -21,17 +21,17 @@ class CoinItem extends StatelessWidget {
                 decoration: BoxDecoration(
                     shape: BoxShape.circle, color: Colors.blueAccent),
               ),
-              SizedBox(width: CorynSize.contextDefaultHorizontal),
+              SizedBox(width: CorynSize.contextHorizontal),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     "비트코인",
-                    style: CorynTextStyle.contextBoldTextStyle,
+                    style: CorynTextStyle.largeBoldTextStyle,
                   ),
                   Text(
                     "56,124,558",
-                    style: CorynTextStyle.contextDefaultTextStyle,
+                    style: CorynTextStyle.smallTextStyle,
                   )
                 ],
               ),

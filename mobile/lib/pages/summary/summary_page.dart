@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mobile/models/summary_model.dart';
-import 'package:mobile/pages/summary/coin_list.dart';
-import 'package:mobile/pages/summary/coin_list_helper.dart';
 import 'package:mobile/pages/ad_banner.dart';
 import 'package:mobile/utils/coryn_size.dart';
+import 'coin_list_helper.dart';
+import 'coin_list.dart';
 
 // import 'package:mobile/models/summary.dart';
 // import 'package:http/http.dart' as http;
@@ -27,9 +27,11 @@ class _SummaryPageState extends State<SummaryPage> {
         // backgroundColor: const Color(0xfff2f2f6),
         backgroundColor: const Color(0000000),
         body: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: CorynSize.pageDefaultVertical,
-            horizontal: CorynSize.pageDefaultHorizontal,
+          padding: const EdgeInsets.fromLTRB(
+            CorynSize.pageHorizontal,
+            CorynSize.pageVertical,
+            CorynSize.pageHorizontal,
+            0.0,
           ),
           child: Column(
             children: [
