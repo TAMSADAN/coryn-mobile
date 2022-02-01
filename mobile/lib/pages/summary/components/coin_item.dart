@@ -1,9 +1,12 @@
+import 'package:mobile/models/dto/coin.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/utils/coryn_text_style.dart';
 import 'package:mobile/utils/coryn_size.dart';
 
 class CoinItem extends StatelessWidget {
-  const CoinItem({Key? key}) : super(key: key);
+  final Coin coin;
+
+  const CoinItem({Key? key, required this.coin}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,21 +19,31 @@ class CoinItem extends StatelessWidget {
           Row(
             children: [
               Container(
-                width: 40,
-                height: 40,
                 decoration: BoxDecoration(
-                    shape: BoxShape.circle, color: Colors.blueAccent),
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  color: Colors.grey[50],
+                ),
+                child: Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    image: DecorationImage(
+                      image: NetworkImage(coin.logoUri),
+                    ),
+                  ),
+                ),
               ),
               SizedBox(width: CorynSize.contextHorizontal),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "비트코인",
+                    coin.koreanName,
                     style: CorynTextStyle.largeBoldTextStyle,
                   ),
                   Text(
-                    "56,124,558",
+                    coin.price.openingPrice.toString(),
                     style: CorynTextStyle.smallTextStyle,
                   )
                 ],
@@ -45,7 +58,8 @@ class CoinItem extends StatelessWidget {
               shape: BoxShape.rectangle,
             ),
             child: Center(
-              child: Text("+10.5%", style: CorynTextStyle.rateUpTextStyle),
+              child: Text(coin.price.changeRate.toString(),
+                  style: CorynTextStyle.rateUpTextStyle),
             ),
           )
         ],

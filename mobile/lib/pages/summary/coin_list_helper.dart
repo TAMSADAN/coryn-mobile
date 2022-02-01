@@ -27,7 +27,7 @@ class CoinListHelper extends StatelessWidget {
                       shape: BoxShape.circle, color: Colors.blueAccent),
                 ),
                 SizedBox(width: 10),
-                PlaformDropDownButton(),
+                PlatformDropDownButton()
               ],
             ),
             MarketDropDownButton(),
