@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mobile/models/calendar.dart';
+import 'package:mobile/pages/calendar/controllers/calendar_controller.dart';
 import 'package:mobile/utils/coryn_size.dart';
 import 'package:mobile/utils/coryn_text_style.dart';
 import 'package:mobile/utils/coryn_colors.dart';
@@ -8,26 +11,26 @@ class CoinCalendarModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DraggableScrollableSheet(
-        initialChildSize: 0.3,
-        minChildSize: 0,
-        maxChildSize: 0.7,
-        builder: (BuildContext context, ScrollController scrollController) {
-          return Material(
-            color: Colors.grey[100],
-            borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
-            child: ListView(
-              padding: EdgeInsets.zero,
-              controller: scrollController,
-              children: [
-                _itemList(),
-              ],
-            ),
-          );
-        });
+    return GetBuilder<CorynCalendarController>(
+        builder: (_) => DraggableScrollableSheet(
+            minChildSize: 0.3,
+            maxChildSize: 0.7,
+            builder: (BuildContext context, ScrollController scrollController) {
+              return Material(
+                color: Colors.grey[100],
+                borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+                child: ListView(
+                  padding: EdgeInsets.zero,
+                  controller: scrollController,
+                  children: [
+                    _itemList(_.todayCalendarList),
+                  ],
+                ),
+              );
+            }));
   }
 
-  Widget _itemList() {
+  Widget _itemList(List<Calendar> calendarList) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: CorynSize.pageHorizontal),
       child: Column(

@@ -1,4 +1,3 @@
-import 'package:mobile/models/dto/coin.dart';
 import 'package:mobile/models/dto/news.dart';
 
 class Calendar {
