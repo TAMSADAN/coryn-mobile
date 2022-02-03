@@ -1,13 +1,15 @@
 import 'package:get/get.dart';
 import 'package:mobile/models/calendar.dart';
+import 'package:mobile/models/calendar_modal.dart';
+import 'package:mobile/models/dto/coin.dart';
 import 'package:mobile/models/dto/news.dart';
 import 'package:mobile/service/news_service.dart';
+import 'package:mobile/service/coin_service.dart';
 
 class CorynCalendarController extends GetxController {
   final _newsService = NewsService();
 
   List<Calendar> calendarList = [];
-  List<Calendar> todayCalendarList = [];
   bool isLoading = false;
 
   @override
@@ -34,21 +36,6 @@ class CorynCalendarController extends GetxController {
     _updateIsLoading(false);
   }
 
-  void updateTodayCalendarList(List<String> marketList) {
-    List<Calendar> _calendarList = [...calendarList];
-    todayCalendarList.clear();
-
-    for (var market in marketList) {
-      for (var _calendar in _calendarList) {
-        if (market == _calendar.market &&
-            !todayCalendarList.contains(_calendar)) {
-          todayCalendarList.add(_calendar);
-        }
-      }
-    }
-    update();
-  }
-
   void _updateIsLoading(bool currentStatus) {
     isLoading = currentStatus;
     update();
@@ -56,5 +43,30 @@ class CorynCalendarController extends GetxController {
 }
 
 class CorynCalendarModalController extends GetxController {
-  final _corynCalendarController = Get.find<CorynCalendarController>();
+  final _coinService = CoinService();
+  final _corynCalendarcontroller = Get.find<CorynCalendarController>();
+
+  List<CalendarModal> calendarModalList = [];
+  bool isLoading = false;
+
+  void updateCalendarModalList(List<String> marketList) async {
+    List<Calendar> _calendarList = [..._corynCalendarcontroller.calendarList];
+    _updateIsLoading(true);
+    calendarModalList.clear();
+    for (var market in marketList) {
+      Coin _coin = await _coinService.fetchCoin(market);
+      List<News> _newsList = [];
+      for (var _calendar in _calendarList) {
+        if (market == _calendar.market) _newsList.add(_calendar.news);
+      }
+      calendarModalList.add(CalendarModal(coin: _coin, newsList: _newsList));
+    }
+    update();
+    _updateIsLoading(false);
+  }
+
+  void _updateIsLoading(bool currentStatus) {
+    isLoading = currentStatus;
+    update();
+  }
 }
