@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:mobile/pages/detail/detail_page.dart';
 import 'package:mobile/pages/summary/summary_page.dart';
 import 'package:mobile/pages/calendar/calendar_page.dart';
 import 'package:mobile/pages/information/info_page.dart';
@@ -44,9 +45,10 @@ class MainPageController extends GetxController {
   final List<Widget> widgetList = [
     SummaryPage(),
     CalendarPage(),
-    InformationPage(),
+    // InformationPage(),
+    DetailPage(market: "BTC-NEAR"),
   ];
-  int currentIndex = 0;
+  int currentIndex = 2;
 
   void onChanged(value) {
     currentIndex = value;

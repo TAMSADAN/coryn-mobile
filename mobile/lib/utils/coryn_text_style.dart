@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'coryn_colors.dart';
 
 class CorynTextStyle {
+  static const TextStyle xLargeBoldTextStyle = TextStyle(
+    color: CorynColors.boldColor,
+    fontWeight: FontWeight.bold,
+    fontSize: 25,
+  );
+
   static const TextStyle largeBoldTextStyle = TextStyle(
     color: CorynColors.boldColor,
     fontWeight: FontWeight.bold,
