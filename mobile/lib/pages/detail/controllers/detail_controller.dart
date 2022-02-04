@@ -14,16 +14,19 @@ class DetailController extends GetxController {
   late Coin coin;
   List<News> normalNewsList = [];
   List<News> goodNewsList = [];
-  bool isLoading = false;
+  bool isLoading = true;
 
   @override
   void onInit() {
     super.onInit();
   }
 
-  void fetchInit(String market) {
+  void fetchInit(String market) async {
+    _updateIsLoading(true);
     updateCoin(market);
     updateNewsList(market);
+    update();
+    _updateIsLoading(false);
   }
 
   void updateCoin(String market) async {

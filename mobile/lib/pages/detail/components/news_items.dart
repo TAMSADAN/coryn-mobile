@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:mobile/models/dto/news.dart';
+import 'package:mobile/pages/detail/controllers/detail_controller.dart';
 import 'package:mobile/utils/coryn_size.dart';
 import 'package:mobile/utils/coryn_text_style.dart';
 
@@ -8,16 +11,16 @@ class NewsItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        NewsItem(),
-        NewsItem(),
-        NewsItem(),
-      ],
+    return GetBuilder<DetailController>(
+      builder: (_) => Column(
+        children: _.normalNewsList.map((normalNews) {
+          return NewsItem(normalNews);
+        }).toList(),
+      ),
     );
   }
 
-  Widget NewsItem() {
+  Widget NewsItem(News news) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: CorynSize.contextVertical),
       child: Center(
@@ -56,7 +59,7 @@ class NewsItems extends StatelessWidget {
                             SizedBox(
                               width: 260,
                               child: Text(
-                                "테스트 타이틀",
+                                truncate(news.title),
                                 style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
@@ -64,7 +67,7 @@ class NewsItems extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "생성일 : 테스트",
+                              "생성일 : ${news.postedDate != null ? news.getStringFromDatetime(news.postedDate!) : ""} ${news.targetingDate != null ? "타겟일 :" + news.getStringFromDatetime(news.targetingDate!) : ""}",
                               style: TextStyle(
                                 fontSize: 10,
                                 fontWeight: FontWeight.bold,
@@ -72,7 +75,7 @@ class NewsItems extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "출처 : 테스트입니다.",
+                              "출처 : ${news.source}",
                               style: TextStyle(
                                 fontSize: 10,
                                 fontWeight: FontWeight.bold,
@@ -93,5 +96,12 @@ class NewsItems extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String truncate(String text, {length: 23, omission: '...'}) {
+    if (length >= text.length) {
+      return text;
+    }
+    return text.replaceRange(length, text.length, omission);
   }
 }

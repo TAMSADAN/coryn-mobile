@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/pages/detail/components/coin_info.dart';
 import 'package:mobile/pages/detail/components/news_cards.dart';
@@ -14,50 +15,52 @@ class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _detailController = Get.put(DetailController());
-    _detailController.fetchInit(market);
-
+    _detailController.updateCoin(market);
+    _detailController.updateNewsList(market);
     return GetBuilder<DetailController>(
-      builder: (_) => Scaffold(
-        backgroundColor: Colors.white,
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(
-              CorynSize.pageHorizontal,
-              CorynSize.pageVertical,
-              CorynSize.pageHorizontal,
-              0.0,
+      builder: (_) => _.isLoading
+          ? CupertinoActivityIndicator()
+          : Scaffold(
+              backgroundColor: Colors.white,
+              body: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(
+                    CorynSize.pageHorizontal,
+                    CorynSize.pageVertical,
+                    CorynSize.pageHorizontal,
+                    0.0,
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CoinInfo(),
+                      Row(
+                        children: [
+                          Text(
+                            _.coin.price.tradePrice.toString(),
+                            style: CorynTextStyle.largeBoldTextStyle,
+                          ),
+                        ],
+                      ),
+                      Text(
+                        "일정",
+                        style: CorynTextStyle.xLargeBoldTextStyle,
+                      ),
+                      SizedBox(
+                        height: 170,
+                        child: NewsCards(),
+                      ),
+                      Text(
+                        "뉴스",
+                        style: CorynTextStyle.xLargeBoldTextStyle,
+                      ),
+                      NewsItems(),
+                    ],
+                  ),
+                ),
+              ),
             ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CoinInfo(),
-                Row(
-                  children: [
-                    Text(
-                      "445,290원",
-                      style: CorynTextStyle.largeBoldTextStyle,
-                    ),
-                  ],
-                ),
-                Text(
-                  "일정",
-                  style: CorynTextStyle.xLargeBoldTextStyle,
-                ),
-                SizedBox(
-                  height: 170,
-                  child: NewsCards(),
-                ),
-                Text(
-                  "뉴스",
-                  style: CorynTextStyle.xLargeBoldTextStyle,
-                ),
-                NewsItems(),
-              ],
-            ),
-          ),
-        ),
-      ),
     );
   }
 }
