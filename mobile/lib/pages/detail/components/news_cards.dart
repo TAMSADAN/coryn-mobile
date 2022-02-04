@@ -65,12 +65,7 @@ class NewsCards extends StatelessWidget {
                 style: CorynTextStyle.smallBoldTextStyle,
               ),
               SizedBox(height: CorynSize.componentVertical),
-              Text(
-                  "D-" +
-                      DateTime.now()
-                          .difference(news.targetingDate!)
-                          .inDays
-                          .toString(),
+              Text(dday(news.targetingDate!),
                   style: CorynTextStyle.xLargeBoldTextStyle),
             ],
           ),
@@ -79,7 +74,18 @@ class NewsCards extends StatelessWidget {
     );
   }
 
-  String truncate(String text, {length: 13, omission: '...'}) {
+  String dday(DateTime date) {
+    int day = DateTime.now().difference(date).inDays;
+    String np = "-";
+
+    if (day > 0) {
+      np = "+";
+    }
+
+    return "D" + np + day.toString();
+  }
+
+  String truncate(String text, {length: 12, omission: '...'}) {
     if (length >= text.length) {
       return text;
     }

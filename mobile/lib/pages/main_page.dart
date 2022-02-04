@@ -45,10 +45,9 @@ class MainPageController extends GetxController {
   final List<Widget> widgetList = [
     SummaryPage(),
     CalendarPage(),
-    // InformationPage(),
-    DetailPage(market: "BTC-NEAR"),
+    InformationPage(),
   ];
-  int currentIndex = 2;
+  int currentIndex = 1;
 
   void onChanged(value) {
     currentIndex = value;

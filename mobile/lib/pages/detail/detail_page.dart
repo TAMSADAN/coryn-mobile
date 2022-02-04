@@ -19,8 +19,23 @@ class DetailPage extends StatelessWidget {
 
     return GetBuilder<DetailController>(
       builder: (_) => _.isLoading != 0
-          ? CupertinoActivityIndicator()
+          ? Scaffold(
+              body: Center(child: CupertinoActivityIndicator()),
+            )
           : Scaffold(
+              appBar: AppBar(
+                elevation: 0,
+                toolbarHeight: 30,
+                backgroundColor: Colors.white,
+                leading: IconButton(
+                  icon: Icon(Icons.arrow_back, color: Colors.black),
+                  onPressed: () {
+                    Get.delete<DetailController>();
+                    Navigator.pop(context);
+                  },
+                ),
+                centerTitle: true,
+              ),
               backgroundColor: Colors.white,
               body: SingleChildScrollView(
                 child: Padding(
