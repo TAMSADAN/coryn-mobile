@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile/models/calendar.dart';
 import 'package:mobile/models/calendar_modal.dart';
@@ -47,6 +48,7 @@ class CorynCalendarModalController extends GetxController {
   final _corynCalendarcontroller = Get.find<CorynCalendarController>();
 
   List<CalendarModal> calendarModalList = [];
+  DateTime today = DateTime.now();
   bool isLoading = false;
 
   void updateCalendarModalList(List<String> marketList) async {
@@ -63,6 +65,11 @@ class CorynCalendarModalController extends GetxController {
     }
     update();
     _updateIsLoading(false);
+  }
+
+  void updateToday(DateTime date) {
+    today = date;
+    update();
   }
 
   void _updateIsLoading(bool currentStatus) {

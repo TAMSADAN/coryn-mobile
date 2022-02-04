@@ -34,11 +34,12 @@ class CoinCalendar extends StatelessWidget {
   }
 
   void calendarTapped(CalendarTapDetails details) {
-    final _ = CorynCalendarModalController();
+    final _ = Get.find<CorynCalendarModalController>();
     List<String> marketList = [];
     for (var appoinment in details.appointments!) {
       marketList.add(appoinment.id);
     }
+    _.updateToday(details.date!);
     _.updateCalendarModalList(marketList);
   }
 

@@ -2,7 +2,7 @@ import 'package:mobile/models/dto/coin.dart';
 import 'package:mobile/models/dto/news.dart';
 
 class CalendarModal {
-  final Coin coin;
+  late final Coin coin;
   final List<News> newsList;
 
   CalendarModal({

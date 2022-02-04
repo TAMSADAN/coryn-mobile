@@ -15,7 +15,8 @@ class CalendarPage extends StatefulWidget {
 }
 
 class _CalendarPageState extends State<CalendarPage> {
-  final _corynController = Get.put(CorynCalendarController());
+  final _corynCalendarController = Get.put(CorynCalendarController());
+  final _corynCalendarModalController = Get.put(CorynCalendarModalController());
 
   bool selected = false;
 
