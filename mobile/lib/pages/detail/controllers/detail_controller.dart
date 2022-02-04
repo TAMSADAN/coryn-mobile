@@ -1,45 +1,41 @@
 import 'package:get/get.dart';
-import 'package:mobile/models/calendar.dart';
-import 'package:mobile/models/calendar_modal.dart';
+import 'package:mobile/models/chart.dart';
 import 'package:mobile/models/dto/coin.dart';
-import 'package:mobile/models/dto/news.dart';
 import 'package:mobile/models/dto/news.dart';
 import 'package:mobile/service/news_service.dart';
 import 'package:mobile/service/coin_service.dart';
+import 'package:mobile/models/detail_model.dart';
 
 class DetailController extends GetxController {
+  String market;
+
   final _coinService = CoinService();
   final _newsService = NewsService();
+  final _detailService = DetailModel();
 
   late Coin coin;
   List<News> normalNewsList = [];
   List<News> goodNewsList = [];
-  bool isLoading = true;
+  List<Chart> chartList = [];
+  int isLoading = 3;
 
   @override
   void onInit() {
     super.onInit();
+    fetchCoin(market);
+    fetchNewsList(market);
+    fetchChartList(market);
   }
 
-  void fetchInit(String market) async {
-    _updateIsLoading(true);
-    updateCoin(market);
-    updateNewsList(market);
-    update();
-    _updateIsLoading(false);
-  }
-
-  void updateCoin(String market) async {
-    _updateIsLoading(true);
+  void fetchCoin(String market) async {
     coin = await _coinService.fetchCoin(market);
     update();
-    _updateIsLoading(false);
+    _updateIsLoading();
   }
 
-  void updateNewsList(String market) async {
+  void fetchNewsList(String market) async {
     List<News> _newsList;
 
-    _updateIsLoading(true);
     goodNewsList.clear();
     normalNewsList.clear();
     _newsList = await _newsService.fetchMarketNews(market);
@@ -48,11 +44,20 @@ class DetailController extends GetxController {
       if (_news.newsType == "normal") normalNewsList.add(_news);
     }
     update();
-    _updateIsLoading(false);
+    _updateIsLoading();
   }
 
-  void _updateIsLoading(bool currentStatus) {
-    isLoading = currentStatus;
+  void fetchChartList(market) async {
+    chartList.clear();
+    chartList = await _detailService.fetchChartList(market);
+    update();
+    _updateIsLoading();
+  }
+
+  void _updateIsLoading() {
+    isLoading--;
     update();
   }
+
+  DetailController({required this.market});
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/pages/detail/components/coin_info.dart';
+import 'package:mobile/pages/detail/components/detail_chart.dart';
 import 'package:mobile/pages/detail/components/news_cards.dart';
 import 'package:mobile/pages/detail/components/news_items.dart';
 import 'package:mobile/pages/detail/controllers/detail_controller.dart';
@@ -14,11 +15,10 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _detailController = Get.put(DetailController());
-    _detailController.updateCoin(market);
-    _detailController.updateNewsList(market);
+    final _detailController = Get.put(DetailController(market: market));
+
     return GetBuilder<DetailController>(
-      builder: (_) => _.isLoading
+      builder: (_) => _.isLoading != 0
           ? CupertinoActivityIndicator()
           : Scaffold(
               backgroundColor: Colors.white,
@@ -37,12 +37,16 @@ class DetailPage extends StatelessWidget {
                       CoinInfo(),
                       Row(
                         children: [
-                          Text(
-                            _.coin.price.tradePrice.toString(),
-                            style: CorynTextStyle.largeBoldTextStyle,
+                          Padding(
+                            padding: const EdgeInsets.only(left: 50),
+                            child: Text(
+                              _.coin.price.tradePrice.toString(),
+                              style: CorynTextStyle.largeBoldTextStyle,
+                            ),
                           ),
                         ],
                       ),
+                      DetailChart(chartList: _.chartList),
                       Text(
                         "일정",
                         style: CorynTextStyle.xLargeBoldTextStyle,
