@@ -24,13 +24,25 @@ class AdHelper {
     }
   }
 
-  static String get interstitialAdUnitId {
-    if (Platform.isAndroid) {
-      return "ca-app-pub-3940256099942544/1033173712";
-    } else if (Platform.isIOS) {
-      return "ca-app-pub-3940256099942544/4411468910";
-    } else {
-      throw new UnsupportedError("Unsupported platform");
+  static String get openningAdUnitId {
+    if (kReleaseMode) {
+      if (Platform.isAndroid) {
+        return "ca-app-pub-2392187154020666/1043492230";
+      } else if (Platform.isIOS) {
+        return "ca-app-pub-2392187154020666/6879844368";
+      } else {
+        throw new UnsupportedError("Unsupported platform");
+      }
+    }
+    // 테스트
+    else {
+      if (Platform.isAndroid) {
+        return "ca-app-pub-3940256099942544/3419835294";
+      } else if (Platform.isIOS) {
+        return "ca-app-pub-3940256099942544/5662855259";
+      } else {
+        throw new UnsupportedError("Unsupported platform");
+      }
     }
   }
 

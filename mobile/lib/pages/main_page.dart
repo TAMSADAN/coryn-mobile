@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:mobile/pages/detail/detail_page.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:mobile/pages/summary/summary_page.dart';
 import 'package:mobile/pages/calendar/calendar_page.dart';
-import 'package:mobile/pages/information/info_page.dart';
+import 'package:mobile/utils/ad_manager.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -23,17 +23,17 @@ class MainPage extends StatelessWidget {
           onTap: (value) => _.onChanged(value),
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.home),
-              label: '홈',
-            ),
-            BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.calendar),
               label: '캘린더',
             ),
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.info),
-              label: '정보',
+              icon: Icon(CupertinoIcons.bitcoin_circle),
+              label: '리스트',
             ),
+            // BottomNavigationBarItem(
+            //   icon: Icon(CupertinoIcons.info),
+            //   label: '정보',
+            // ),
           ],
         ),
       ),
@@ -41,16 +41,46 @@ class MainPage extends StatelessWidget {
   }
 }
 
-class MainPageController extends GetxController {
+class MainPageController extends SuperController {
+  late AppOpenAdManager appOpenAdManager;
   final List<Widget> widgetList = [
-    SummaryPage(),
     CalendarPage(),
-    InformationPage(),
+    SummaryPage(),
+    // InformationPage(),
   ];
-  int currentIndex = 1;
+  int currentIndex = 0;
+
+  @override
+  void onInit() {
+    super.onInit();
+    appOpenAdManager = AppOpenAdManager()..loadAd();
+    WidgetsBinding.instance!
+        .addObserver(AppLifecycleReactor(appOpenAdManager: appOpenAdManager));
+  }
 
   void onChanged(value) {
     currentIndex = value;
     update();
+  }
+
+  @override
+  void onDetached() {
+    print("onDetached");
+  }
+
+  @override
+  void onInactive() {
+    print("onInactive");
+  }
+
+  @override
+  void onPaused() {
+    print("opPaused");
+  }
+
+  @override
+  void onResumed() {
+    print("onResumed");
+    appOpenAdManager.showAdIfAvailable();
   }
 }
