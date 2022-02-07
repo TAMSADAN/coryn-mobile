@@ -39,6 +39,7 @@ class CoinCalendar extends StatelessWidget {
     for (var appoinment in details.appointments!) {
       marketList.add(appoinment.id);
     }
+    _.updateClick();
     _.updateToday(details.date!);
     _.updateCalendarModalList(marketList);
   }

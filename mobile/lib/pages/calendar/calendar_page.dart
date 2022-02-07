@@ -23,29 +23,40 @@ class _CalendarPageState extends State<CalendarPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Stack(
-        children: [
-          Column(
+        backgroundColor: Colors.white,
+        body: GetBuilder<CorynCalendarModalController>(
+          builder: (_) => Stack(
             children: [
-              // 캘린더
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(
-                    CorynSize.calendarPageHorizontal,
-                    CorynSize.pageVertical,
-                    CorynSize.calendarPageHorizontal,
-                    0.0,
+              Column(
+                children: [
+                  // 캘린더
+                  Container(
+                    child: Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(
+                          CorynSize.calendarPageHorizontal,
+                          CorynSize.pageVertical,
+                          CorynSize.calendarPageHorizontal,
+                          0.0,
+                        ),
+                        child: CoinCalendar(),
+                      ),
+                    ),
                   ),
-                  child: CoinCalendar(),
-                ),
+                ],
               ),
-              AdBanner(),
+              if (_.isClick)
+                GestureDetector(
+                  onTap: () => _.updateClick(),
+                  child: Container(
+                    width: double.infinity,
+                    height: double.infinity,
+                    color: Color(0x40000000),
+                  ),
+                ),
+              if (_.isClick) CoinCalendarModal(),
             ],
           ),
-          CoinCalendarModal()
-        ],
-      ),
-    );
+        ));
   }
 }

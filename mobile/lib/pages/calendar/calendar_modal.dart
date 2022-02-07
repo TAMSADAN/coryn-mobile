@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:mobile/models/calendar_modal.dart';
 import 'package:mobile/pages/calendar/controllers/calendar_controller.dart';
+import 'package:mobile/pages/detail/detail_page.dart';
 import 'package:mobile/utils/coryn_size.dart';
 import 'package:mobile/utils/coryn_text_style.dart';
 import 'package:mobile/utils/coryn_colors.dart';
@@ -15,9 +16,9 @@ class CoinCalendarModal extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<CorynCalendarModalController>(
         builder: (_) => DraggableScrollableSheet(
-            initialChildSize: 0.2,
-            minChildSize: 0.1,
-            maxChildSize: 0.4,
+            initialChildSize: 0.4,
+            minChildSize: 0.2,
+            maxChildSize: 0.6,
             builder: (BuildContext context, ScrollController scrollController) {
               return Container(
                 width: double.infinity,
@@ -42,14 +43,15 @@ class CoinCalendarModal extends StatelessWidget {
                   children: [
                     _.isLoading
                         ? CupertinoActivityIndicator()
-                        : _itemList(_.today, _.calendarModalList),
+                        : _itemList(_.today, _.calendarModalList, context)
                   ],
                 ),
               );
             }));
   }
 
-  Widget _itemList(DateTime today, List<CalendarModal> calendarModalList) {
+  Widget _itemList(DateTime today, List<CalendarModal> calendarModalList,
+      BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: CorynSize.pageHorizontal),
       child: Column(
@@ -77,46 +79,54 @@ class CoinCalendarModal extends StatelessWidget {
             height: CorynSize.componentVertical * 2.0,
           ),
           ...calendarModalList.map((_calendarModal) {
-            return _item(_calendarModal);
+            return _item(_calendarModal, context);
           }).toList(),
         ],
       ),
     );
   }
 
-  Widget _item(CalendarModal calendarModal) {
+  Widget _item(CalendarModal calendarModal, BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.all(Radius.circular(15)),
-                color: Colors.grey[50],
-              ),
-              child: Container(
-                padding: const EdgeInsets.all(15),
+        GestureDetector(
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    DetailPage(market: calendarModal.coin.market)),
+          ),
+          child: Row(
+            children: [
+              Container(
                 decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
-                  image: DecorationImage(
-                    image: NetworkImage(calendarModal.coin.logoUri),
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  color: Colors.grey[50],
+                ),
+                child: Container(
+                  padding: const EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    image: DecorationImage(
+                      image: NetworkImage(calendarModal.coin.logoUri),
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              width: CorynSize.contextHorizontal,
-            ),
-            Text(
-              calendarModal.coin.koreanName +
-                  "(" +
-                  calendarModal.coin.market.split("-")[1] +
-                  ")",
-              style: CorynTextStyle.largeBoldTextStyle,
-            ),
-          ],
+              SizedBox(
+                width: CorynSize.contextHorizontal,
+              ),
+              Text(
+                calendarModal.coin.koreanName +
+                    "(" +
+                    calendarModal.coin.market.split("-")[1] +
+                    ")",
+                style: CorynTextStyle.largeBoldTextStyle,
+              ),
+            ],
+          ),
         ),
         Padding(
           padding: const EdgeInsets.only(left: 40),

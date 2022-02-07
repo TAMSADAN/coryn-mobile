@@ -50,6 +50,7 @@ class CorynCalendarModalController extends GetxController {
   List<CalendarModal> calendarModalList = [];
   DateTime today = DateTime.now();
   bool isLoading = false;
+  bool isClick = false;
 
   void updateCalendarModalList(List<String> marketList) async {
     List<Calendar> _calendarList = [..._corynCalendarcontroller.calendarList];
@@ -69,6 +70,11 @@ class CorynCalendarModalController extends GetxController {
 
   void updateToday(DateTime date) {
     today = date;
+    update();
+  }
+
+  void updateClick() {
+    isClick = !isClick;
     update();
   }
 
