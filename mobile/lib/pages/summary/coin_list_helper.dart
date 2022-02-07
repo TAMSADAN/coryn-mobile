@@ -13,7 +13,7 @@ class CoinListHelper extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // CoinSearchBar(),
+        CoinSearchBar(),
         SizedBox(height: CorynSize.componentVertical),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
