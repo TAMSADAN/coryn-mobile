@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile/pages/detail/detail_page.dart';
 import 'package:mobile/utils/coryn_text_style.dart';
 import 'package:mobile/utils/coryn_size.dart';
+import 'package:intl/intl.dart';
 
 class CoinItem extends StatelessWidget {
   final Coin coin;
@@ -13,7 +14,6 @@ class CoinItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print(coin.market);
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -53,7 +53,7 @@ class CoinItem extends StatelessWidget {
                       style: CorynTextStyle.largeBoldTextStyle,
                     ),
                     Text(
-                      coin.price.openingPrice.toString(),
+                      coin.getCoinPrice(),
                       style: CorynTextStyle.smallTextStyle,
                     )
                   ],

@@ -55,7 +55,7 @@ class DetailPage extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(left: 50),
                             child: Text(
-                              _.coin.price.tradePrice.toString(),
+                              _.coin.getCoinPrice(),
                               style: CorynTextStyle.largeBoldTextStyle,
                             ),
                           ),

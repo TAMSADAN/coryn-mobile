@@ -78,6 +78,12 @@ class CoinCalendarModal extends StatelessWidget {
           SizedBox(
             height: CorynSize.componentVertical * 2.0,
           ),
+          if (calendarModalList.length == 0)
+            Center(
+                child: Text(
+              "일정이 없습니다.",
+              style: CorynTextStyle.largeTextStyle,
+            )),
           ...calendarModalList.map((_calendarModal) {
             return _item(_calendarModal, context);
           }).toList(),
