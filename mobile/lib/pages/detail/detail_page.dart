@@ -18,68 +18,53 @@ class DetailPage extends StatelessWidget {
     final _detailController = Get.put(DetailController(market: market));
 
     return GetBuilder<DetailController>(
-      builder: (_) => _.isLoading != 0
-          ? Scaffold(
-              body: Center(child: CupertinoActivityIndicator()),
-            )
-          : Scaffold(
-              appBar: AppBar(
-                elevation: 0,
-                toolbarHeight: 30,
-                backgroundColor: Colors.white,
-                leading: IconButton(
-                  icon: Icon(Icons.arrow_back, color: Colors.black),
-                  onPressed: () {
-                    Get.delete<DetailController>();
-                    Navigator.pop(context);
-                  },
-                ),
-                centerTitle: true,
-              ),
-              backgroundColor: Colors.white,
-              body: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(
-                    CorynSize.pageHorizontal,
-                    CorynSize.pageVertical,
-                    CorynSize.pageHorizontal,
-                    0.0,
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CoinInfo(),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 50),
-                            child: Text(
-                              _.coin.getCoinPrice(),
-                              style: CorynTextStyle.largeBoldTextStyle,
-                            ),
-                          ),
-                        ],
-                      ),
-                      DetailChart(chartList: _.chartList),
-                      Text(
-                        "일정",
-                        style: CorynTextStyle.xLargeBoldTextStyle,
-                      ),
-                      SizedBox(
-                        height: 170,
-                        child: NewsCards(),
-                      ),
-                      Text(
-                        "뉴스",
-                        style: CorynTextStyle.xLargeBoldTextStyle,
-                      ),
-                      NewsItems(),
-                    ],
-                  ),
-                ),
-              ),
+      builder: (_) => Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          toolbarHeight: 30,
+          backgroundColor: Colors.white,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: () {
+              Get.delete<DetailController>();
+              Navigator.pop(context);
+            },
+          ),
+          centerTitle: true,
+        ),
+        backgroundColor: Colors.white,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(
+              CorynSize.pageHorizontal,
+              CorynSize.pageVertical,
+              CorynSize.pageHorizontal,
+              0.0,
             ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CoinInfo(),
+                DetailChart(),
+                Text(
+                  "일정",
+                  style: CorynTextStyle.xLargeBoldTextStyle,
+                ),
+                SizedBox(
+                  height: 170,
+                  child: NewsCards(),
+                ),
+                Text(
+                  "뉴스",
+                  style: CorynTextStyle.xLargeBoldTextStyle,
+                ),
+                NewsItems(),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

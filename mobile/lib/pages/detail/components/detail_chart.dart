@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:mobile/pages/detail/controllers/detail_controller.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 import 'package:mobile/models/dto/price.dart';
@@ -22,61 +25,39 @@ import 'package:mobile/models/chart.dart';
 */
 
 class DetailChart extends StatelessWidget {
-  final List<Chart> chartList;
-
-  DetailChart({Key? key, required this.chartList}) : super(key: key);
+  DetailChart({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    late List<Chart> _chartList = _normalizeChartList(chartList);
-
-    return SfCartesianChart(
-        primaryXAxis: CategoryAxis(
-          majorGridLines: const MajorGridLines(width: 0),
-        ),
-        primaryYAxis: CategoryAxis(
-          majorGridLines: const MajorGridLines(width: 0),
-          isVisible: false,
-        ),
-        plotAreaBorderWidth: 0,
-        legend: Legend(isVisible: false),
-        // Enable tooltip
-        tooltipBehavior: TooltipBehavior(enable: true),
-        series: <ChartSeries<Chart, String>>[
-          SplineSeries<Chart, String>(
-            dataLabelSettings: DataLabelSettings(isVisible: false),
-            dataSource: _chartList,
-            color: Colors.black38,
-            isVisible: true,
-            isVisibleInLegend: false,
-            enableTooltip: true,
-            xValueMapper: (Chart chart, _) => chart.date,
-            yValueMapper: (Chart chart, _) => chart.price,
-            name: 'Price',
-          )
-        ]);
-  }
-
-  List<Chart> _normalizeChartList(List<Chart> chartList) {
-    List<Chart> _normalizedChartList = [];
-    List<double> _priceList;
-    double _normalizedPrice;
-    double _maxPrice;
-    double _minPrice;
-
-    _priceList =
-        List.generate(chartList.length, (index) => chartList[index].price);
-    _priceList.sort();
-    _minPrice = _priceList.first;
-    _maxPrice = _priceList.last;
-
-    for (var chart in chartList) {
-      _normalizedPrice = (chart.price - _minPrice) / (_maxPrice - _minPrice);
-      _normalizedPrice = _normalizedPrice * 100 + 10;
-      _normalizedChartList
-          .add(Chart(date: chart.date, price: _normalizedPrice));
-    }
-
-    return _normalizedChartList;
+    return GetBuilder<DetailController>(
+        builder: (_) => _.fetchingChart
+            ? Center(
+                child: CupertinoActivityIndicator(),
+              )
+            : SfCartesianChart(
+                primaryXAxis: CategoryAxis(
+                  majorGridLines: const MajorGridLines(width: 0),
+                ),
+                primaryYAxis: CategoryAxis(
+                  majorGridLines: const MajorGridLines(width: 0),
+                  isVisible: false,
+                ),
+                plotAreaBorderWidth: 0,
+                legend: Legend(isVisible: false),
+                // Enable tooltip
+                tooltipBehavior: TooltipBehavior(enable: true),
+                series: <ChartSeries<Chart, String>>[
+                    SplineSeries<Chart, String>(
+                      dataLabelSettings: DataLabelSettings(isVisible: false),
+                      dataSource: _.normalizeChartList(_.chartList),
+                      color: Colors.black38,
+                      isVisible: true,
+                      isVisibleInLegend: false,
+                      enableTooltip: true,
+                      xValueMapper: (Chart chart, _) => chart.date,
+                      yValueMapper: (Chart chart, _) => chart.price,
+                      name: 'Price',
+                    )
+                  ]));
   }
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:mobile/models/dto/news.dart';
@@ -12,17 +13,19 @@ class NewsCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<DetailController>(
-      builder: (_) => _.goodNewsList.length == 0
-          ? Center(
-              child:
-                  Text("등록된 일정이 없습니다.", style: CorynTextStyle.largeTextStyle))
-          : ListView(
-              scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.zero,
-              children: _.goodNewsList.map((goodNews) {
-                return NewsCard(goodNews);
-              }).toList(),
-            ),
+      builder: (_) => _.fetchingNews
+          ? Center(child: CupertinoActivityIndicator())
+          : _.goodNewsList.length == 0
+              ? Center(
+                  child: Text("등록된 일정이 없습니다.",
+                      style: CorynTextStyle.largeTextStyle))
+              : ListView(
+                  scrollDirection: Axis.horizontal,
+                  padding: EdgeInsets.zero,
+                  children: _.goodNewsList.map((goodNews) {
+                    return NewsCard(goodNews);
+                  }).toList(),
+                ),
     );
   }
 

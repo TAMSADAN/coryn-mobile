@@ -13,11 +13,17 @@ class NewsItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<DetailController>(
-      builder: (_) => Column(
-        children: _.normalNewsList.map((normalNews) {
-          return NewsItem(normalNews);
-        }).toList(),
-      ),
+      builder: (_) => _.fetchingNews
+          ? Center(child: CupertinoActivityIndicator())
+          : _.normalNewsList.length == 0
+              ? Center(
+                  child: Text("등록된 일정이 없습니다.",
+                      style: CorynTextStyle.largeTextStyle))
+              : Column(
+                  children: _.normalNewsList.map((normalNews) {
+                    return NewsItem(normalNews);
+                  }).toList(),
+                ),
     );
   }
 
