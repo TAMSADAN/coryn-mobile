@@ -2,7 +2,7 @@
 <img width="860" alt="tmp" src="https://user-images.githubusercontent.com/77970826/153161377-e22befe9-d977-4a66-8813-24a6f0965e30.png">
 </p>
 
-# CORYN
+## CORYN
 코린은 호재 일정과 코인 뉴스 및 정보를 제공하는 서비스 입니다.
 다운로드는 아래에서 하실 수 있습니다.
 
@@ -13,7 +13,7 @@
 <a href="https://apps.apple.com/us/app/%EC%BD%94%EB%A6%B0/id1602890591?itsct=apps_box_badge&amp;itscg=30200" style="display: inline-block; overflow: hidden; border-radius: 13px; width: 250px; height: 83px;"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1641254400&h=ddfff0c3bd61d9f88f53494b401881d3" alt="Download on the App Store" style="border-radius: 13px; width: 250px; height: 83px;"></a>
 </p>
 
-# Index
+## Index
 
 - [UI](#ui)
   * [Calendar](#calendar)
@@ -24,7 +24,7 @@
     + [yjyoon.dev](https://github.com/yjyoon-dev)
 - [VERSION](#version)
 
-# UI
+## UI
 <p align="left">
 <img width="22%" src="https://user-images.githubusercontent.com/77970826/153333954-9213d6e8-3412-4bb7-a15d-c7810b4963ba.png">
 <img width="22%" src="https://user-images.githubusercontent.com/77970826/153333965-104de04c-eef3-45e4-8177-56a24f6d9758.png">
@@ -32,8 +32,18 @@
 <img width="22%" src="https://user-images.githubusercontent.com/77970826/153333971-39743d29-7389-4fb2-b2a8-cdab193dec34.png">
 </p>
 
-# VERSION
-|version name|release date|description|
+## Feature
+|분류|기능|설명|
+|---|---|---|
+|calendar|캘린더 뷰|코인 일정 캘린더|
+|calendar|캘린더 모달|코인 일정 바텀 스크롤뷰 모달|
+|summary|서머리 뷰|코인 시세 리스트|
+|detail|디테일 뷰|코인 상세 정보|
+|detail|차트|코인 시세 차트|
+|detail|뉴스 리스트|코인 일반 뉴스 리스트| 
+
+## Version
+|버전명|릴리즈 날짜|설명|
 |---|---|---|
 |1.7.3|22.02.08|차트 오류 수정, 페이지 전환 오류 수정, 분산 렌더링|
 |1.7.2|22.02.07|검색 수정, 바텀 스크롤 뷰 수정, 오프닝 광고 재개|
