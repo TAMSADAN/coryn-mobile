@@ -4,7 +4,6 @@
 
 # CORYN
 코린은 호재 일정과 코인 뉴스 및 정보를 제공하는 서비스 입니다.
-
 다운로드는 아래에서 하실 수 있습니다.
 
 <p align="center">
@@ -13,6 +12,17 @@
 <p align="center">
 <a href="https://apps.apple.com/us/app/%EC%BD%94%EB%A6%B0/id1602890591?itsct=apps_box_badge&amp;itscg=30200" style="display: inline-block; overflow: hidden; border-radius: 13px; width: 250px; height: 83px;"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1641254400&h=ddfff0c3bd61d9f88f53494b401881d3" alt="Download on the App Store" style="border-radius: 13px; width: 250px; height: 83px;"></a>
 </p>
+
+# Index
+
+- [CORYN](#coryn)
+- [UI](#ui)
+  * [Calendar](#calendar)
+  * [List](#list)
+  * [Detail](#detail)
+- [TEAM](#team)
+    + [[mooyoung2309](https://github.com/mooyoung2309)](#-mooyoung2309--https---githubcom-mooyoung2309-)
+    + [[yjyoon.dev](https://github.com/yjyoon-dev)](#-yjyoondev--https---githubcom-yjyoon-dev-)
 
 # UI
 ## Calendar
