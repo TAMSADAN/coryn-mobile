@@ -43,7 +43,10 @@
 # TEAM
 
 ### [mooyoung2309](https://github.com/mooyoung2309)
--  `flutter`, `mobile`
+- `Front-end(Flutter)`
 
 ### [yjyoon.dev](https://github.com/yjyoon-dev)
-- `spring`, `server`
+- `Back-end(Spring)`
+
+### [y-joo](https://github.com/Y-Joo)
+- `~~Back-end(Django)~~`
