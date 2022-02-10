@@ -19,10 +19,13 @@
   * [Calendar](#calendar)
   * [List](#list)
   * [Detail](#detail)
-- [TEAM](#team)
+- [Library](#library)
+- [Feature](#feature)
+- [Version](#version)
+- [Team](#team)
     + [mooyoung2309](https://github.com/mooyoung2309)
     + [yjyoon.dev](https://github.com/yjyoon-dev)
-- [VERSION](#version)
+
 
 ## UI
 <p align="left">
@@ -31,6 +34,17 @@
 <img width="22%" src="https://user-images.githubusercontent.com/77970826/153333969-6bd5f6aa-b140-497a-909d-25f4f3e8cddf.png">
 <img width="22%" src="https://user-images.githubusercontent.com/77970826/153333971-39743d29-7389-4fb2-b2a8-cdab193dec34.png">
 </p>
+
+## Library
+|라이브러리명|버전명|목적|
+|---|---|---|
+|syncfusion_flutter_calendar|19.3.56|캘린더 뷰|
+|syncfusion_flutter_charts|19.3.56|차트 뷰|
+|get|4.6.1|상태 관리|
+|url_launcher|6.0.17|url 이동|
+|http|0.13.4|url 이동|
+|dropdown_button2|1.1.1|드롭다운 버튼 아래로 정렬|
+|google_mobile_ads|1.0.1|admob 광고 개재|
 
 ## Feature
 |분류|기능|설명|
@@ -56,7 +70,7 @@
 |1.1.0|21.04.26|앱 아이콘 수정|
 |1.0.0|21.04.09|코호 출시 완료|
 
-# TEAM
+# Team
 ### [mooyoung2309](https://github.com/mooyoung2309)
 - `Front-end(Flutter)`
 

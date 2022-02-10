@@ -36,14 +36,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   syncfusion_flutter_charts: ^19.3.56
   syncfusion_flutter_calendar: ^19.3.56
-  flutter_search_bar: ^2.1.0
-  cupertino_radio_choice: ^1.0.2
   url_launcher: ^6.0.17
   google_mobile_ads: ^1.0.1
   http: ^0.13.4
-  provider: ^6.0.2
   dropdown_button2: ^1.1.1
-  sliding_up_panel: ^2.0.0+1
   get: ^4.6.1
 
 dev_dependencies:
