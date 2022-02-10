@@ -49,4 +49,4 @@
 - `Back-end(Spring)`
 
 ### [y-joo](https://github.com/Y-Joo)
-- `~~Back-end(Django)~~`
+- ~~`Back-end(Django)`~~
