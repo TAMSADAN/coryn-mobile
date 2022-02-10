@@ -17,18 +17,18 @@
 # UI
 ## Calendar
 <p align="left">
-<img width="30%" src="https://user-images.githubusercontent.com/77970826/153333954-9213d6e8-3412-4bb7-a15d-c7810b4963ba.png">
-<img width="30%" src="https://user-images.githubusercontent.com/77970826/153333965-104de04c-eef3-45e4-8177-56a24f6d9758.png">
+<img width="22%" src="https://user-images.githubusercontent.com/77970826/153333954-9213d6e8-3412-4bb7-a15d-c7810b4963ba.png">
+<img width="22%" src="https://user-images.githubusercontent.com/77970826/153333965-104de04c-eef3-45e4-8177-56a24f6d9758.png">
 </p>
 
 ## List
 <p align="left">
-<img width="30%" src="https://user-images.githubusercontent.com/77970826/153333969-6bd5f6aa-b140-497a-909d-25f4f3e8cddf.png">
+<img width="22%" src="https://user-images.githubusercontent.com/77970826/153333969-6bd5f6aa-b140-497a-909d-25f4f3e8cddf.png">
 </p>
 
 ## Detail
 <p align="left">
-<img width="30%" src="https://user-images.githubusercontent.com/77970826/153333971-39743d29-7389-4fb2-b2a8-cdab193dec34.png">
+<img width="22%" src="https://user-images.githubusercontent.com/77970826/153333971-39743d29-7389-4fb2-b2a8-cdab193dec34.png">
 </p>
 
 # TEAM
