@@ -23,14 +23,14 @@
     + [mooyoung2309](https://github.com/mooyoung2309)
     + [yjyoon.dev](https://github.com/yjyoon-dev)
 - [VERSION](#version)
-      - [v 1.7](#v-17)
-      - [v 1.6](#v-16)
-      - [v 1.5](#v-15)
-      - [v 1.4](#v-14)
-      - [v 1.3](#v-13)
-      - [v 1.2](#v-12)
-      - [v 1.1](#v-11)
-      - [v 1.0](#v-10)
+    - [v 1.7](#v-17)
+    - [v 1.6](#v-16)
+    - [v 1.5](#v-15)
+    - [v 1.4](#v-14)
+    - [v 1.3](#v-13)
+    - [v 1.2](#v-12)
+    - [v 1.1](#v-11)
+    - [v 1.0](#v-10)
 # UI
 <p align="left">
 <img width="22%" src="https://user-images.githubusercontent.com/77970826/153333954-9213d6e8-3412-4bb7-a15d-c7810b4963ba.png">
