@@ -15,14 +15,13 @@
 
 # Index
 
-- [CORYN](#coryn)
 - [UI](#ui)
   * [Calendar](#calendar)
   * [List](#list)
   * [Detail](#detail)
 - [TEAM](#team)
-    + [[mooyoung2309](https://github.com/mooyoung2309)](#-mooyoung2309--https---githubcom-mooyoung2309-)
-    + [[yjyoon.dev](https://github.com/yjyoon-dev)](#-yjyoondev--https---githubcom-yjyoon-dev-)
+    + [mooyoung2309](https://github.com/mooyoung2309)
+    + [yjyoon.dev](https://github.com/yjyoon-dev)
 
 # UI
 ## Calendar
