@@ -24,40 +24,31 @@
     + [yjyoon.dev](https://github.com/yjyoon-dev)
 
 # UI
-## Calendar
 <p align="left">
 <img width="22%" src="https://user-images.githubusercontent.com/77970826/153333954-9213d6e8-3412-4bb7-a15d-c7810b4963ba.png">
 <img width="22%" src="https://user-images.githubusercontent.com/77970826/153333965-104de04c-eef3-45e4-8177-56a24f6d9758.png">
-</p>
-
-## List
-<p align="left">
 <img width="22%" src="https://user-images.githubusercontent.com/77970826/153333969-6bd5f6aa-b140-497a-909d-25f4f3e8cddf.png">
-</p>
-
-## Detail
-<p align="left">
 <img width="22%" src="https://user-images.githubusercontent.com/77970826/153333971-39743d29-7389-4fb2-b2a8-cdab193dec34.png">
 </p>
 
 # VERSION
-- v 1.7 
+### v 1.7 
     - `1.7.1 (22.02.04) 전체적인 디자인 수정`
     - `1.7.2 (22.02.07) 검색 수정, 바텀 스크롤 뷰 수정, 오프닝 광고 재개`
     - `1.7.3 (22.02.08) 차트 오류 수정, 페이지 전환 오류 수정, 분산 렌더링`
-- v 1.6
+### v 1.6
     - `1.6.1 (22.01.12) 차트 오류 및 광고 오류 수정`
-- v 1.5
+### v 1.5
     - `1.5.0 (22.01.02) ios 출시 완료`
-- v 1.4
+### v 1.4
     - `1.4.0 (21.07.10) 내부 테스트 (출시 안함)`
-- v 1.3
+### v 1.3
     - `1.3.0 (21.05.30) 긴급 오류 수정 및 앱 안정성`
-- v 1.2
+### v 1.2
     - `1.2.0 (21.05.30) 디자인 수정, 오프닝 광고 추가`
-- v 1.1
+### v 1.1
     - `1.1.0 (21.04.26) 앱 아이콘 수정`
-- v 1.0
+### v 1.0
     - `1.0.0 (21.04.09) 코호 출시 완료`
 
 # TEAM
