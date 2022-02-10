@@ -32,17 +32,6 @@
 <img width="22%" src="https://user-images.githubusercontent.com/77970826/153333971-39743d29-7389-4fb2-b2a8-cdab193dec34.png">
 </p>
 
-# TEAM
-
-### [mooyoung2309](https://github.com/mooyoung2309)
-- `Front-end(Flutter)`
-
-### [yjyoon.dev](https://github.com/yjyoon-dev)
-- `Back-end(Spring)`
-
-### [y-joo](https://github.com/Y-Joo)
-- ~~`Back-end(Django)`~~
-
 # VERSION
 |version name|release date|description|
 |---|---|---|
@@ -56,3 +45,13 @@
 |1.2.0|21.05.30|디자인 수정, 오프닝 광고 추가|
 |1.1.0|21.04.26|앱 아이콘 수정|
 |1.0.0|21.04.09|코호 출시 완료|
+
+# TEAM
+### [mooyoung2309](https://github.com/mooyoung2309)
+- `Front-end(Flutter)`
+
+### [yjyoon.dev](https://github.com/yjyoon-dev)
+- `Back-end(Spring)`
+
+### [y-joo](https://github.com/Y-Joo)
+- ~~`Back-end(Django)`~~
