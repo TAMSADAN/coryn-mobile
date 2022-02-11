@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/utils/coryn_text_style.dart';
+import 'package:mobile/styles/custom_text_styles.dart';
 
 class CoinUpdateText extends StatelessWidget {
   const CoinUpdateText({Key? key}) : super(key: key);
@@ -8,7 +8,7 @@ class CoinUpdateText extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Text(
       "업데이트 24시간 전",
-      style: CorynTextStyle.smallTextStyle,
+      style: CustomTextStyles.small,
     );
   }
 }

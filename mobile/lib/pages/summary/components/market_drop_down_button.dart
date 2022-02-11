@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:mobile/pages/summary/controllers/coin_list_controller.dart';
 import 'package:mobile/pages/summary/controllers/market_drop_down_button_controller.dart';
-import 'package:get/get.dart';
+import 'package:mobile/styles/custom_text_styles.dart';
 
 class MarketDropDownButton extends StatelessWidget {
   const MarketDropDownButton({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class MarketDropDownButton extends StatelessWidget {
               value: _value,
               child: Text(
                 _value,
-                style: const TextStyle(fontSize: 14),
+                style: CustomTextStyles.small,
               ));
         }).toList(),
         onChanged: (value) {

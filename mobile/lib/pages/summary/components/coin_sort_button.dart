@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/pages/summary/controllers/coin_list_controller.dart';
-import 'package:mobile/utils/coryn_size.dart';
 import 'package:get/get.dart';
 import 'package:mobile/pages/summary/controllers/coin_sort_button_controller.dart';
+import 'package:mobile/pages/summary/controllers/coin_list_controller.dart';
+import 'package:mobile/utils/coryn_size.dart';
+import 'package:mobile/styles/custom_text_styles.dart';
 
 class CoinSortButton extends StatelessWidget {
   const CoinSortButton({Key? key}) : super(key: key);
@@ -12,7 +13,6 @@ class CoinSortButton extends StatelessWidget {
     final ButtonStyle _buttonStyle = TextButton.styleFrom(
         backgroundColor: Colors.grey[200],
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)));
-    final TextStyle _textStyle = TextStyle(color: Colors.grey[600]);
     final _coinListController = Get.find<CoinListController>();
 
     return GetBuilder<CoinSortButtonController>(
@@ -27,7 +27,7 @@ class CoinSortButton extends StatelessWidget {
                 },
                 child: Text(
                   _.coinSortList[index],
-                  style: _textStyle,
+                  style: CustomTextStyles.middle,
                 ),
                 style: _buttonStyle,
               ),

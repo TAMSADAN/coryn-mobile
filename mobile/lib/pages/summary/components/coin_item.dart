@@ -1,8 +1,8 @@
 import 'package:mobile/models/dto/coin.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/pages/detail/detail_page.dart';
-import 'package:mobile/utils/coryn_text_style.dart';
 import 'package:mobile/utils/coryn_size.dart';
+import 'package:mobile/styles/custom_text_styles.dart';
 
 class CoinItem extends StatelessWidget {
   final Coin coin;
@@ -30,11 +30,11 @@ class CoinItem extends StatelessWidget {
                 Container(
                   decoration: BoxDecoration(
                     shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                    borderRadius: const BorderRadius.all(Radius.circular(15)),
                     color: Colors.grey[50],
                   ),
                   child: Container(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(15),
                     decoration: BoxDecoration(
                       shape: BoxShape.rectangle,
                       image: DecorationImage(
@@ -49,11 +49,11 @@ class CoinItem extends StatelessWidget {
                   children: [
                     Text(
                       coin.koreanName,
-                      style: CorynTextStyle.largeBoldTextStyle,
+                      style: CustomTextStyles.middleBold,
                     ),
                     Text(
                       coin.getCoinPrice(),
-                      style: CorynTextStyle.smallTextStyle,
+                      style: CustomTextStyles.small,
                     )
                   ],
                 ),
@@ -65,7 +65,7 @@ class CoinItem extends StatelessWidget {
                 child: Center(
                   child: Text(
                       (coin.price.changeRate * 100).toStringAsFixed(2) + '%',
-                      style: CorynTextStyle.rateUpTextStyle),
+                      style: CustomTextStyles.rateUp),
                 ),
               )
             else
@@ -75,7 +75,7 @@ class CoinItem extends StatelessWidget {
                   child: Text(
                       (coin.price.changeRate.abs() * 100).toStringAsFixed(2) +
                           '%',
-                      style: CorynTextStyle.rateDownTextStyle),
+                      style: CustomTextStyles.rateDown),
                 ),
               )
           ],
