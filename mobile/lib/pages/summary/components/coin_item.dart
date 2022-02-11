@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:mobile/pages/detail/detail_page.dart';
 import 'package:mobile/utils/coryn_text_style.dart';
 import 'package:mobile/utils/coryn_size.dart';
-import 'package:intl/intl.dart';
 
 class CoinItem extends StatelessWidget {
   final Coin coin;
@@ -44,7 +43,7 @@ class CoinItem extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(width: CorynSize.contextHorizontal),
+                const SizedBox(width: CorynSize.contextHorizontal),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

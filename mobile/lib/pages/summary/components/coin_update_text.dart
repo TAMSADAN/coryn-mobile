@@ -6,7 +6,7 @@ class CoinUpdateText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return const Text(
       "업데이트 24시간 전",
       style: CorynTextStyle.smallTextStyle,
     );

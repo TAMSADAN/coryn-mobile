@@ -3,25 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:mobile/models/dto/news.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-/*
-  [component] DetailNewsItem
-
-  info
-  코인 뉴스 정보를 담은 컴포넌트 입니다.
-  사용자는 해당 컴포넌트에서 뉴스 정보를 확인합니다.
-  
-  contents
-  - 뉴스 제목
-  - 생성일 - 타겟일(null 허용)
-  - 출처
-
-  events
-  - 클릭시 해당 뉴스 URL로 이동
-
-  etc
-  - 
-*/
-
 class DetailNewsItem extends StatelessWidget {
   final News news;
 

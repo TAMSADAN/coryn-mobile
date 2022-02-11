@@ -24,7 +24,7 @@ class CoinListController extends GetxController {
   void sort() {
     String _sort = _sortCon.sort;
     String _market = _marketCon.market;
-    String _platform = _platformCon.platform;
+    // String _platform = _platformCon.platform;
     String _search = _searchCon.search;
 
     coinList = [...orignCoinList];

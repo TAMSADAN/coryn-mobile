@@ -32,7 +32,7 @@ class CoinSortButton extends StatelessWidget {
                 style: _buttonStyle,
               ),
               if (index != _.coinSortList.length - 1)
-                SizedBox(width: CorynSize.contextHorizontal)
+                const SizedBox(width: CorynSize.contextHorizontal)
             ],
           );
         }),

@@ -16,14 +16,14 @@ class PlatformDropDownButton extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.all(Radius.circular(15)),
+              borderRadius: const BorderRadius.all(Radius.circular(15)),
               color: Colors.grey[50],
             ),
             child: Container(
               padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                 shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.all(Radius.circular(15)),
+                borderRadius: const BorderRadius.all(Radius.circular(15)),
                 image: DecorationImage(
                   image: AssetImage(_.platformImagePathList[
                       _.platformList.indexOf(_.platform)]),
@@ -31,7 +31,7 @@ class PlatformDropDownButton extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(width: CorynSize.contextHorizontal),
+          const SizedBox(width: CorynSize.contextHorizontal),
           DropdownButton2(
             value: _.platform,
             items: _.platformList.map((_value) {

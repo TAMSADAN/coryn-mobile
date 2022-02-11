@@ -3,8 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:mobile/pages/ad_banner.dart';
 import 'package:mobile/pages/summary/summary_binding.dart';
 import 'package:mobile/utils/coryn_size.dart';
-import 'package:mobile/pages/summary/coin_list_helper.dart';
 import 'package:mobile/pages/summary/coin_list.dart';
+import 'components/coin_search_bar.dart';
+import 'components/coin_sort_button.dart';
+import 'components/coin_update_text.dart';
+import 'components/market_drop_down_button.dart';
+import 'components/platform_drop_down_button.dart';
 
 class SummaryPage extends StatelessWidget {
   const SummaryPage({Key? key}) : super(key: key);
@@ -23,10 +27,22 @@ class SummaryPage extends StatelessWidget {
         ),
         child: Column(
           children: [
-            CoinListHelper(),
-            Expanded(
-              child: CoinList(),
+            const CoinSearchBar(),
+            const SizedBox(height: CorynSize.componentVertical),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                PlatformDropDownButton(),
+                MarketDropDownButton(),
+              ],
             ),
+            const SizedBox(height: CorynSize.componentVertical),
+            const CoinSortButton(),
+            Container(
+              alignment: Alignment.centerRight,
+              child: const CoinUpdateText(),
+            ),
+            const Expanded(child: CoinList()),
             const AdBanner(),
           ],
         ),
