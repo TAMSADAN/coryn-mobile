@@ -5,7 +5,8 @@ import 'package:mobile/models/calendar_modal.dart';
 import 'package:mobile/pages/calendar/controllers/calendar_controller.dart';
 import 'package:mobile/pages/detail/detail_page.dart';
 import 'package:mobile/utils/coryn_size.dart';
-import 'package:mobile/utils/coryn_text_style.dart';
+import 'package:mobile/styles/custom_text_styles.dart';
+
 import 'package:mobile/utils/coryn_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -24,7 +25,7 @@ class CoinCalendarModal extends StatelessWidget {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(30),
                     topRight: Radius.circular(30),
                   ),
@@ -56,7 +57,7 @@ class CoinCalendarModal extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: CorynSize.pageHorizontal),
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: CorynSize.componentVertical * 2.0,
           ),
           Container(
@@ -64,7 +65,7 @@ class CoinCalendarModal extends StatelessWidget {
             height: 2,
             color: CorynColors.defaultColor,
           ),
-          SizedBox(
+          const SizedBox(
             height: CorynSize.componentVertical * 2.0,
           ),
           Text(
@@ -73,16 +74,16 @@ class CoinCalendarModal extends StatelessWidget {
                 today.month.toString().padLeft(2, '0') +
                 "." +
                 today.day.toString().padLeft(2, '0'),
-            style: CorynTextStyle.largeBoldTextStyle,
+            style: CustomTextStyles.largeBold,
           ),
-          SizedBox(
+          const SizedBox(
             height: CorynSize.componentVertical * 2.0,
           ),
-          if (calendarModalList.length == 0)
-            Center(
+          if (calendarModalList.isEmpty)
+            const Center(
                 child: Text(
               "일정이 없습니다.",
-              style: CorynTextStyle.largeTextStyle,
+              style: CustomTextStyles.large,
             )),
           ...calendarModalList.map((_calendarModal) {
             return _item(_calendarModal, context);
@@ -108,7 +109,7 @@ class CoinCalendarModal extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  borderRadius: const BorderRadius.all(Radius.circular(15)),
                   color: Colors.grey[50],
                 ),
                 child: Container(
@@ -121,7 +122,7 @@ class CoinCalendarModal extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: CorynSize.contextHorizontal,
               ),
               Text(
@@ -129,7 +130,7 @@ class CoinCalendarModal extends StatelessWidget {
                     "(" +
                     calendarModal.coin.market.split("-")[1] +
                     ")",
-                style: CorynTextStyle.largeBoldTextStyle,
+                style: CustomTextStyles.largeBold,
               ),
             ],
           ),
@@ -150,14 +151,14 @@ class CoinCalendarModal extends StatelessWidget {
                         news.targetingDate!.day.toString().padLeft(2, '0') +
                         " " +
                         news.title,
-                    style: CorynTextStyle.middleTextStyle,
+                    style: CustomTextStyles.middle,
                   ),
                 ),
               );
             }).toList(),
           ),
         ),
-        SizedBox(height: CorynSize.contextVertical * 2.0),
+        const SizedBox(height: CorynSize.contextVertical * 2.0),
       ],
     );
   }

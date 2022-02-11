@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:mobile/pages/summary/controllers/platform_drop_down_button_controller.dart';
 import 'package:mobile/utils/coryn_size.dart';
+import 'package:mobile/styles/custom_text_styles.dart';
 
 class PlatformDropDownButton extends StatelessWidget {
   const PlatformDropDownButton({Key? key}) : super(key: key);
@@ -38,7 +39,7 @@ class PlatformDropDownButton extends StatelessWidget {
                   value: _value,
                   child: Text(
                     _value,
-                    style: const TextStyle(fontSize: 14),
+                    style: CustomTextStyles.small,
                   ));
             }).toList(),
             onChanged: (value) => _.onchanged(value),

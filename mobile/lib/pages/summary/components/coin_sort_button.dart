@@ -27,7 +27,7 @@ class CoinSortButton extends StatelessWidget {
                 },
                 child: Text(
                   _.coinSortList[index],
-                  style: CustomTextStyles.middle,
+                  style: CustomTextStyles.small,
                 ),
                 style: _buttonStyle,
               ),

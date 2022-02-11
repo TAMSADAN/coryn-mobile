@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:get/get.dart';
-import 'package:mobile/pages/detail/detail_page.dart';
-import 'package:mobile/models/dto/news.dart';
-import 'package:mobile/models/dto/coin.dart';
-import 'package:mobile/models/calendar.dart';
-import 'package:mobile/utils/coryn_text_style.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:mobile/pages/calendar/controllers/calendar_controller.dart';
+import 'package:mobile/styles/custom_text_styles.dart';
 
 class CoinCalendar extends StatelessWidget {
   const CoinCalendar({Key? key}) : super(key: key);
@@ -16,12 +12,12 @@ class CoinCalendar extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<CorynCalendarController>(
         builder: (_) => _.isLoading
-            ? CupertinoActivityIndicator()
+            ? const CupertinoActivityIndicator()
             : SfCalendar(
                 view: CalendarView.month,
                 headerDateFormat: 'yy.MM',
-                headerStyle: CalendarHeaderStyle(
-                    textStyle: CorynTextStyle.largeBoldTextStyle),
+                headerStyle: const CalendarHeaderStyle(
+                    textStyle: CustomTextStyles.largeBold),
                 dataSource: getCalendarDataSource(_.calendarList),
                 monthViewSettings: const MonthViewSettings(
                   appointmentDisplayCount: 3,
