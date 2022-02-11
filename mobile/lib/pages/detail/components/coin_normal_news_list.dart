@@ -7,8 +7,8 @@ import 'package:mobile/utils/coryn_size.dart';
 import 'package:mobile/utils/coryn_text_style.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class NewsItems extends StatelessWidget {
-  const NewsItems({Key? key}) : super(key: key);
+class CoinNormalNewsList extends StatelessWidget {
+  const CoinNormalNewsList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

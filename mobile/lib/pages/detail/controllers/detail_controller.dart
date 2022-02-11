@@ -60,11 +60,6 @@ class DetailController extends GetxController {
     _updateFetchingChart(false);
   }
 
-  // void _updateIsLoading() {
-  //   isLoading--;
-  //   update();
-  // }
-
   void _updateFetchingCoin(bool currentStatus) {
     fetchingCoin = currentStatus;
     update();

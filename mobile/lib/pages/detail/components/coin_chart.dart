@@ -5,8 +5,8 @@ import 'package:mobile/pages/detail/controllers/detail_controller.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:mobile/models/chart.dart';
 
-class DetailChart extends StatelessWidget {
-  DetailChart({Key? key}) : super(key: key);
+class CoinChart extends StatelessWidget {
+  const CoinChart({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
