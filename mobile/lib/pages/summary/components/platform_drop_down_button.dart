@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
-import 'package:mobile/pages/summary/controllers/platform_drop_down_button_controller.dart';
 import 'package:get/get.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:mobile/pages/summary/controllers/platform_drop_down_button_controller.dart';
 import 'package:mobile/utils/coryn_size.dart';
 
 class PlatformDropDownButton extends StatelessWidget {

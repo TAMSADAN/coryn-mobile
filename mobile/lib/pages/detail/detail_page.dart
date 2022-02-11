@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/pages/detail/components/coin_info.dart';
-import 'package:mobile/pages/detail/components/detail_chart.dart';
-import 'package:mobile/pages/detail/components/news_cards.dart';
-import 'package:mobile/pages/detail/components/news_items.dart';
+import 'package:mobile/pages/detail/components/coin_chart.dart';
+import 'package:mobile/pages/detail/components/coin_good_news_list.dart';
+import 'package:mobile/pages/detail/components/coin_normal_news_list.dart';
 import 'package:mobile/pages/detail/controllers/detail_controller.dart';
 import 'package:mobile/utils/coryn_size.dart';
 import 'package:mobile/utils/coryn_text_style.dart';

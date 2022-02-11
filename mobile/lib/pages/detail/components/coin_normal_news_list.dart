@@ -14,15 +14,18 @@ class NewsItems extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<DetailController>(
       builder: (_) => _.fetchingNews
-          ? Center(child: CupertinoActivityIndicator())
-          : _.normalNewsList.length == 0
-              ? Center(
+          ? const Center(child: CupertinoActivityIndicator())
+          : _.normalNewsList.isEmpty
+              ? const Center(
                   child: Text("등록된 일정이 없습니다.",
-                      style: CorynTextStyle.largeTextStyle))
+                      style: CorynTextStyle.largeTextStyle),
+                )
               : Column(
-                  children: _.normalNewsList.map((normalNews) {
-                    return NewsItem(normalNews);
-                  }).toList(),
+                  children: _.normalNewsList.map(
+                    (normalNews) {
+                      return NewsItem(normalNews);
+                    },
+                  ).toList(),
                 ),
     );
   }
@@ -38,19 +41,19 @@ class NewsItems extends StatelessWidget {
             width: double.infinity,
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(15)),
+              borderRadius: const BorderRadius.all(Radius.circular(15)),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.5),
                   spreadRadius: 1,
                   blurRadius: 2,
-                  offset: Offset(0, 3), // changes position of shadow
+                  offset: const Offset(0, 3), // changes position of shadow
                 ),
               ],
             ),
             child: Container(
                 padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                   color: Colors.white,
@@ -70,7 +73,7 @@ class NewsItems extends StatelessWidget {
                                 width: 260,
                                 child: Text(
                                   truncate(news.title),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -78,7 +81,7 @@ class NewsItems extends StatelessWidget {
                               ),
                               Text(
                                 "생성일 : ${news.postedDate != null ? news.getStringFromDatetime(news.postedDate!) : ""} ${news.targetingDate != null ? "타겟일 :" + news.getStringFromDatetime(news.targetingDate!) : ""}",
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 10,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black54,
@@ -86,7 +89,7 @@ class NewsItems extends StatelessWidget {
                               ),
                               Text(
                                 "출처 : ${news.source}",
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 10,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black54,
@@ -97,8 +100,8 @@ class NewsItems extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 0),
+                    const Padding(
+                      padding: EdgeInsets.only(right: 0),
                       child: Icon(CupertinoIcons.forward),
                     ),
                   ],

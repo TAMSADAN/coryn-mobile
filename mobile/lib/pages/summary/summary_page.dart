@@ -3,12 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:mobile/pages/ad_banner.dart';
 import 'package:mobile/pages/summary/summary_binding.dart';
 import 'package:mobile/utils/coryn_size.dart';
-import 'package:mobile/pages/summary/coin_list.dart';
-import 'components/coin_search_bar.dart';
-import 'components/coin_sort_button.dart';
-import 'components/coin_update_text.dart';
-import 'components/market_drop_down_button.dart';
-import 'components/platform_drop_down_button.dart';
+import 'package:mobile/pages/summary/components/coin_list.dart';
+import 'package:mobile/pages/summary/components/coin_search_bar.dart';
+import 'package:mobile/pages/summary/components/coin_sort_button.dart';
+import 'package:mobile/pages/summary/components/coin_update_text.dart';
+import 'package:mobile/pages/summary/components/market_drop_down_button.dart';
+import 'package:mobile/pages/summary/components/platform_drop_down_button.dart';
 
 class SummaryPage extends StatelessWidget {
   const SummaryPage({Key? key}) : super(key: key);
