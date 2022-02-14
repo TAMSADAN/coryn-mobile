@@ -121,14 +121,14 @@ class CoinItem extends StatelessWidget {
         FittedBox(
           fit: BoxFit.fitWidth,
           child: Text(
-            _getFormattedRate(rate),
+            _getFormattedRate(rate) + "%",
             style: rateTextStyle,
           ),
         ),
         FittedBox(
           fit: BoxFit.fitWidth,
           child: Text(
-            _getFromattedPrice(price),
+            _getFormattedRatePrice(price),
             style: CustomTextStyles.greyNormal,
           ),
         )
@@ -166,5 +166,20 @@ class CoinItem extends StatelessWidget {
         double.parse(rate.toStringAsFixed(2)).toString();
 
     return doubleRate;
+  }
+
+  String _getFormattedRatePrice(double ratePrice) {
+    String formattedPrice = "";
+    var f = NumberFormat('###,###,###,###');
+
+    if (ratePrice > 0) {
+      formattedPrice += '+';
+    }
+    if (ratePrice < 100) {
+      formattedPrice += double.parse(ratePrice.toStringAsFixed(2)).toString();
+    } else {
+      formattedPrice += f.format(ratePrice.round()).toString();
+    }
+    return formattedPrice;
   }
 }
