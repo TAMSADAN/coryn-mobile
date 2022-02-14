@@ -10,7 +10,6 @@ class UpbitService {
         upbitCoinMarketList ?? await fetchUpbitCoinMarketList();
     String _markets = _upbitCoinMarketList.map((e) => e.market).join(',');
 
-    print(_markets);
     final response = await http
         .get(Uri.parse("https://api.upbit.com/v1/ticker?markets=$_markets"));
 
@@ -24,7 +23,6 @@ class UpbitService {
             marketData: _upbitCoinMarket, priceData: _upbitCoinPrice));
       }
     }
-    print(upbitCoinList);
 
     return upbitCoinList;
   }

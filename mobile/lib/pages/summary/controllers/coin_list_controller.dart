@@ -80,7 +80,7 @@ class CoinListController extends GetxController {
   }
 
   List<Coin> _remainKRW(List<Coin> coinList) {
-    // coinList.removeWhere((coin) => !coin.market.contains("KRW"));
+    coinList.removeWhere((coin) => coin.quoteSymbol != 'KRW');
     return coinList;
   }
 

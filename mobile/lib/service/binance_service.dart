@@ -1,5 +1,4 @@
 import 'package:mobile/models/binance_coin.dart';
-import 'package:mobile/models/upbit_coin.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -16,12 +15,14 @@ class BinanceService {
     if (response.statusCode == 200) {
       for (var _json in json.decode(utf8.decode(response.bodyBytes))) {
         var _binanceCoinPrice = BinanceCoinPrice.fromJson(_json);
+        // print(_binanceCoinPrice.symbol +
+        //     ':' +
+        //     _binanceCoinPrice.price.toString());
         var _binanceCoinMarket = _binanceCoinMarketList
             .firstWhere((_item) => _item.symbol == _binanceCoinPrice.symbol);
 
         var _binanceCoin = BinanceCoin(
             marketData: _binanceCoinMarket, priceData: _binanceCoinPrice);
-
         binanceCoinList.add(_binanceCoin);
       }
     }

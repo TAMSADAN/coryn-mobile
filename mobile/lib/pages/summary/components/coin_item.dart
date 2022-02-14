@@ -36,7 +36,7 @@ class CoinItem extends StatelessWidget {
                   width: ScreenUtil().screenWidth / 5,
                   child: _twoLineText(
                     coin.koreanName,
-                    "BTC",
+                    coin.baseSymbol + '/' + coin.quoteSymbol,
                     CrossAxisAlignment.start,
                   ),
                 ),
@@ -46,8 +46,8 @@ class CoinItem extends StatelessWidget {
                 SizedBox(
                   width: ScreenUtil().screenWidth / 5,
                   child: _twoLineText(
-                    coin.upbitPrice.toString(),
-                    coin.binancePrice.toString(),
+                    coin.getFromattedPrice(coin.upbitPrice),
+                    coin.getFromattedPrice(coin.binancePrice),
                     CrossAxisAlignment.end,
                   ),
                 ),
@@ -57,8 +57,8 @@ class CoinItem extends StatelessWidget {
                 SizedBox(
                   width: ScreenUtil().screenWidth / 5,
                   child: _twoLineText(
-                    "2.06%",
-                    "975,478",
+                    coin.getScaledRate((coin.changeRate * 100)).toString(),
+                    coin.getFromattedPrice(coin.changePrice),
                     CrossAxisAlignment.end,
                   ),
                 ),
@@ -68,8 +68,8 @@ class CoinItem extends StatelessWidget {
                 SizedBox(
                   width: ScreenUtil().screenWidth / 5,
                   child: _twoLineText(
-                    "2.06%",
-                    "975,478",
+                    coin.getScaledRate(coin.kimpRate).toString(),
+                    coin.getFromattedPrice(coin.kimpPrice),
                     CrossAxisAlignment.end,
                   ),
                 ),
