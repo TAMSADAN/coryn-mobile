@@ -10,7 +10,11 @@ class KimpService {
         "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD"));
 
     if (response.statusCode == 200) {
-      usd = json.decode(utf8.decode(response.bodyBytes))[0]['basePrice'];
+      try {
+        usd = json.decode(utf8.decode(response.bodyBytes))[0]['basePrice'];
+      } catch (e) {
+        print("kimpService json parsing error");
+      }
     }
     return usd;
   }

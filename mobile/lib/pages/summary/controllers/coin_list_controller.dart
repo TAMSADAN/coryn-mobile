@@ -27,9 +27,10 @@ class CoinListController extends GetxController {
     coinList = [...orignCoinList];
     coinList = _remainKRW(coinList);
     updateTime = DateTime.now();
-    fetchCoinList();
     sort();
     update();
+
+    await Future.delayed(Duration(seconds: 1), () => fetchCoinList());
   }
 
   void updateSortType(String type) {

@@ -24,14 +24,26 @@ class CoinService {
   Future<List<Coin>?> fetchCoinList() async {
     try {
       List<Coin> coinList = [];
-      final List<UpbitCoin> _upbitCoinList =
+      final List<UpbitCoin>? _upbitCoinList =
           await UpbitService().fetchUpbitCoin(null);
-      final List<BinanceCoin> _binanceCoinList =
+      if (_upbitCoinList == null || _upbitCoinList.isEmpty) {
+        print("CoinService fetchCoinList _upbitCoinList is null or is empty");
+        return null;
+      }
+      final List<BinanceCoin>? _binanceCoinList =
           await BinanceService().fetchBinanceCoin(null);
+      if (_binanceCoinList == null || _binanceCoinList.isEmpty) {
+        print("CoinService fetchCoinList _binanceCoinList is null or is empty");
+        return null;
+      }
       final double _usdPrice = await KimpService().fetchUSD();
       final BinanceCoin? _binanceBitcoin = _binanceCoinList
           .firstWhereOrNull((_item) => _item.marketData.symbol == 'BTCUSDT');
-      final double _bitcoinPrice = _binanceBitcoin!.priceData.price;
+      if (_binanceBitcoin == null) {
+        print("CoinService fetchCoinList _binanceBitcoin is null");
+        return null;
+      }
+      final double _bitcoinPrice = _binanceBitcoin.priceData.price;
 
       UpbitCoin _upbitBitCoin = _upbitCoinList
           .firstWhere((_item) => _item.marketData.market == "KRW-BTC");
