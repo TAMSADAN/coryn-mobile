@@ -1,5 +1,5 @@
+import 'package:mobile/models/upbit_price.dart';
 import 'package:mobile/models/dto/price.dart';
-
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -18,5 +18,20 @@ class PriceService {
     } else {
       return Future.error("fetch price list failed");
     }
+  }
+
+  Future<List<UpbitPrice>> fetchUpbitPriceList() async {
+    List<UpbitPrice> upbitPriceList = [];
+
+    final response = await http.get(
+        Uri.parse("https://api.upbit.com/v1/ticker?markets=KRW-BTC,BTC-ETH"));
+
+    if (response.statusCode == 200) {
+      for (var _ in json.decode(utf8.decode(response.bodyBytes))) {
+        upbitPriceList.add(UpbitPrice.fromJson(_));
+      }
+    }
+    print(upbitPriceList);
+    return upbitPriceList;
   }
 }

@@ -2,6 +2,30 @@ import 'package:flutter/material.dart';
 import 'custom_colors.dart';
 
 class CustomTextStyles {
+  static const TextStyle blackBold = TextStyle(
+    color: CustomColors.boldColor,
+    fontFamily: 'NotoSansKR',
+    fontWeight: FontWeight.bold,
+  );
+
+  static const TextStyle greyBold = TextStyle(
+    color: CustomColors.defaultColor,
+    fontFamily: 'NotoSansKR',
+    fontWeight: FontWeight.bold,
+  );
+
+  static const TextStyle blackNormal = TextStyle(
+    color: CustomColors.boldColor,
+    fontFamily: 'NotoSansKR',
+    fontWeight: FontWeight.normal,
+  );
+
+  static const TextStyle greyNormal = TextStyle(
+    color: CustomColors.defaultColor,
+    fontFamily: 'NotoSansKR',
+    fontWeight: FontWeight.normal,
+  );
+
   static const TextStyle xLargeBold = TextStyle(
     color: CustomColors.boldColor,
     fontSize: 25,

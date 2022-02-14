@@ -1,10 +1,13 @@
 import 'package:get/get.dart';
 import 'package:mobile/models/dto/coin.dart';
+import 'package:mobile/models/upbit_price.dart';
 import 'package:mobile/pages/summary/controllers/coin_search_bar_controller.dart';
 import 'package:mobile/pages/summary/controllers/coin_sort_button_controller.dart';
 import 'package:mobile/pages/summary/controllers/market_drop_down_button_controller.dart';
 import 'package:mobile/pages/summary/controllers/platform_drop_down_button_controller.dart';
 import 'package:mobile/service/coin_service.dart';
+import 'package:mobile/service/price_service.dart';
+import 'package:mobile/service/upbit_service.dart';
 
 class CoinListController extends GetxController {
   final _sortCon = Get.find<CoinSortButtonController>();
@@ -12,12 +15,15 @@ class CoinListController extends GetxController {
   final _platformCon = Get.find<PlatformDropDownButtonController>();
   final _searchCon = Get.find<CoinSearchBarController>();
 
+  List<String> _upbitMarketList = [];
   List<Coin> orignCoinList = [];
   List<Coin> coinList = [];
 
   @override
   void onInit() {
     fetchCoinList();
+    fetchUpbitCoinPrice();
+    _fetchUpbitMarketList();
     super.onInit();
   }
 
@@ -95,5 +101,17 @@ class CoinListController extends GetxController {
     coinList = _remainKRW(coinList);
     coinList = _sortByTradeVolume(coinList);
     update();
+  }
+
+  void fetchUpbitCoinPrice() async {
+    List<UpbitPrice> tmp;
+
+    tmp = await UpbitService().fetchUpbitPriceList();
+  }
+
+  void _fetchUpbitMarketList() async {
+    List<String> tmp;
+
+    tmp = await UpbitService().fetchUpbitMarketList();
   }
 }

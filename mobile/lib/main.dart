@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile/pages/main_page.dart';
 import 'package:get/get.dart';
 // import 'package:flutter/foundation.dart';
@@ -17,9 +18,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final _mainPageController = Get.put(MainPageController());
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: MainPage(),
+    return ScreenUtilInit(
+      designSize: Size(360, 780),
+      builder: () => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: MainPage(),
+      ),
     );
   }
 }

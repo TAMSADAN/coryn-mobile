@@ -48,7 +48,7 @@ class MainPageController extends SuperController {
     SummaryPage(),
     // InformationPage(),
   ];
-  int currentIndex = 0;
+  int currentIndex = 1;
 
   @override
   void onInit() {

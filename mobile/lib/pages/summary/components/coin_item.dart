@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile/models/dto/coin.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/pages/detail/detail_page.dart';
@@ -23,64 +24,93 @@ class CoinItem extends StatelessWidget {
         padding:
             const EdgeInsets.symmetric(vertical: CorynSize.contextHorizontal),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    borderRadius: const BorderRadius.all(Radius.circular(15)),
-                    color: Colors.grey[50],
-                  ),
-                  child: Container(
-                    padding: const EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      image: DecorationImage(
-                        image: NetworkImage(coin.logoUri),
-                      ),
-                    ),
+                // _image(coin.logoUri),
+                // SizedBox(
+                //   width: CorynSize.contextHorizontal.w,
+                // ),
+                SizedBox(
+                  width: ScreenUtil().screenWidth / 5,
+                  child: _twoLineText(
+                    coin.koreanName,
+                    "BTC",
+                    CrossAxisAlignment.start,
                   ),
                 ),
-                const SizedBox(width: CorynSize.contextHorizontal),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      coin.koreanName,
-                      style: CustomTextStyles.middleBold,
-                    ),
-                    Text(
-                      coin.getCoinPrice(),
-                      style: CustomTextStyles.small,
-                    )
-                  ],
+                SizedBox(
+                  width: CorynSize.contextHorizontal.w,
+                ),
+                SizedBox(
+                  width: ScreenUtil().screenWidth / 5,
+                  child: _twoLineText(
+                    coin.getCoinPrice(),
+                    coin.getCoinPrice(),
+                    CrossAxisAlignment.end,
+                  ),
+                ),
+                SizedBox(
+                  width: CorynSize.contextHorizontal.w,
+                ),
+                SizedBox(
+                  width: ScreenUtil().screenWidth / 5,
+                  child: _twoLineText(
+                    "2.06%",
+                    "975,478",
+                    CrossAxisAlignment.end,
+                  ),
+                ),
+                SizedBox(
+                  width: CorynSize.contextHorizontal.w,
+                ),
+                SizedBox(
+                  width: ScreenUtil().screenWidth / 5,
+                  child: _twoLineText(
+                    "2.06%",
+                    "975,478",
+                    CrossAxisAlignment.end,
+                  ),
                 ),
               ],
             ),
-            if (coin.price.changeRate > 0)
-              Container(
-                padding: const EdgeInsets.all(6.0),
-                child: Center(
-                  child: Text(
-                      (coin.price.changeRate * 100).toStringAsFixed(2) + '%',
-                      style: CustomTextStyles.rateUp),
-                ),
-              )
-            else
-              Container(
-                padding: const EdgeInsets.all(6.0),
-                child: Center(
-                  child: Text(
-                      (coin.price.changeRate.abs() * 100).toStringAsFixed(2) +
-                          '%',
-                      style: CustomTextStyles.rateDown),
-                ),
-              )
           ],
         ),
       ),
+    );
+  }
+
+  Widget _image(String uri) {
+    return Container(
+      padding: const EdgeInsets.all(15),
+      decoration: BoxDecoration(
+        shape: BoxShape.rectangle,
+        image: DecorationImage(
+          image: NetworkImage(uri),
+        ),
+      ),
+    );
+  }
+
+  Widget _twoLineText(String title, String subTitle, CrossAxisAlignment cross) {
+    return Column(
+      crossAxisAlignment: cross,
+      children: [
+        FittedBox(
+          fit: BoxFit.fitWidth,
+          child: Text(
+            title,
+            style: CustomTextStyles.blackNormal,
+          ),
+        ),
+        FittedBox(
+          fit: BoxFit.fitWidth,
+          child: Text(
+            subTitle,
+            style: CustomTextStyles.greyNormal,
+          ),
+        )
+      ],
     );
   }
 }
