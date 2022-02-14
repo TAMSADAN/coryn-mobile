@@ -11,9 +11,9 @@ class DetailModel {
   final _priceService = PriceService();
   final _newsService = NewsService();
 
-  Future<Coin> fetchCoin(String market) {
-    return _coinService.fetchCoin(market);
-  }
+  // Future<Coin> fetchCoin(String market) {
+  //   return _coinService.fetchCoin(market);
+  // }
 
   Future<List<Chart>> fetchChartList(String market) async {
     List<Price> _priceList;

@@ -17,7 +17,8 @@ class CoinItem extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => DetailPage(market: coin.market)),
+              builder: (context) =>
+                  DetailPage(market: coin.baseSymbol + '-' + coin.quoteSymbol)),
         );
       },
       child: Padding(
@@ -45,8 +46,8 @@ class CoinItem extends StatelessWidget {
                 SizedBox(
                   width: ScreenUtil().screenWidth / 5,
                   child: _twoLineText(
-                    coin.getCoinPrice(),
-                    coin.getCoinPrice(),
+                    coin.upbitPrice.toString(),
+                    coin.binancePrice.toString(),
                     CrossAxisAlignment.end,
                   ),
                 ),

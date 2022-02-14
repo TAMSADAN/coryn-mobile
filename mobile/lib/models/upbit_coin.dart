@@ -24,9 +24,9 @@ class UpbitCoinMarket {
   factory UpbitCoinMarket.fromJson(Map<String, dynamic> json) {
     return UpbitCoinMarket(
       market: json['market'],
-      koreanName: json['koean_name'],
+      koreanName: json['korean_name'],
       englishName: json['english_name'],
-      marketWarning: json['market_warning'],
+      marketWarning: json['market_warning'] ?? "",
     );
   }
 }

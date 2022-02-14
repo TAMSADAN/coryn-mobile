@@ -35,7 +35,8 @@ class BinanceService {
         .get(Uri.parse("https://api.binance.com/api/v3/exchangeInfo"));
 
     if (response.statusCode == 200) {
-      for (var _json in json.decode(utf8.decode(response.bodyBytes))) {
+      for (var _json
+          in json.decode(utf8.decode(response.bodyBytes))['symbols']) {
         var _binanceCoinMarket = BinanceCoinMarket.fromJson(_json);
 
         binanceCoinMarketList.add(_binanceCoinMarket);

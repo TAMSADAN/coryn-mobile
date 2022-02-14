@@ -21,9 +21,9 @@ class BinanceCoinMarket {
 
   factory BinanceCoinMarket.fromJson(Map<String, dynamic> json) {
     return BinanceCoinMarket(
-      symbol: json['symbols'][0]['symbol'],
-      baseAsset: json['symbols'][0]['baseAsset'],
-      quoteAsset: json['symbols'][0]['quoteAsset'],
+      symbol: json['symbol'],
+      baseAsset: json['baseAsset'],
+      quoteAsset: json['quoteAsset'],
     );
   }
 }

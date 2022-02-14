@@ -32,7 +32,7 @@ class DetailController extends GetxController {
 
   void fetchCoin(String market) async {
     _updateFetchingCoin(true);
-    coin = await _coinService.fetchCoin(market);
+    // coin = await _coinService.fetchCoin(market);
     update();
     _updateFetchingCoin(false);
   }

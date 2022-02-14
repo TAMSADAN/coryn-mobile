@@ -37,7 +37,7 @@ class CoinCalendar extends StatelessWidget {
     }
     _.updateClick();
     _.updateToday(details.date!);
-    _.updateCalendarModalList(marketList);
+    // _.updateCalendarModalList(marketList);
   }
 
   _DataSource getCalendarDataSource(calendarList) {

@@ -1,6 +1,4 @@
 import 'package:get/get.dart';
-import 'package:mobile/models/dto/coin.dart';
-import 'package:mobile/models/upbit_price.dart';
 import 'package:mobile/pages/summary/controllers/coin_search_bar_controller.dart';
 import 'package:mobile/pages/summary/controllers/coin_sort_button_controller.dart';
 import 'package:mobile/pages/summary/controllers/market_drop_down_button_controller.dart';
@@ -8,6 +6,8 @@ import 'package:mobile/pages/summary/controllers/platform_drop_down_button_contr
 import 'package:mobile/service/coin_service.dart';
 import 'package:mobile/service/price_service.dart';
 import 'package:mobile/service/upbit_service.dart';
+import 'package:mobile/models/upbit_coin.dart';
+import 'package:mobile/models/coin.dart';
 
 class CoinListController extends GetxController {
   final _sortCon = Get.find<CoinSortButtonController>();
@@ -22,8 +22,6 @@ class CoinListController extends GetxController {
   @override
   void onInit() {
     fetchCoinList();
-    fetchUpbitCoinPrice();
-    _fetchUpbitMarketList();
     super.onInit();
   }
 
@@ -54,13 +52,10 @@ class CoinListController extends GetxController {
     List<Coin> _coinList = [];
 
     for (var coin in coinList) {
-      if (coin.englishName.toUpperCase().contains(search.toUpperCase())) {
-        // print(coin.englishName.toUpperCase() + "  VS  " + search.toUpperCase());
-        _coinList.add(coin);
-      } else if (coin.koreanName.contains(search)) {
+      if (coin.koreanName.contains(search)) {
         // print(coin.koreanName + "  VS  " + search);
         _coinList.add(coin);
-      } else if (coin.market.split("-")[1].contains(search.toUpperCase())) {
+      } else if (coin.baseSymbol.contains(search.toUpperCase())) {
         // print(coin.market.split("-")[1] + " VS " + search.toUpperCase());
         _coinList.add(coin);
       }
@@ -70,28 +65,28 @@ class CoinListController extends GetxController {
   }
 
   List<Coin> _sortByTradeVolume(List<Coin> coinList) {
-    coinList.sort((a, b) => a.price.tradeVolume.compareTo(b.price.tradeVolume));
+    // coinList.sort((a, b) => a.price.tradeVolume.compareTo(b.price.tradeVolume));
     return coinList;
   }
 
   List<Coin> _sortBychangeRate(List<Coin> coinList) {
-    coinList.sort((b, a) => a.price.changeRate.compareTo(b.price.changeRate));
+    // coinList.sort((b, a) => a.price.changeRate.compareTo(b.price.changeRate));
     return coinList;
   }
 
   List<Coin> _sortByTradePrice(List<Coin> coinList) {
-    coinList.sort((b, a) => a.price.tradePrice.compareTo(b.price.tradePrice));
+    // coinList.sort((b, a) => a.price.tradePrice.compareTo(b.price.tradePrice));
     return coinList;
   }
 
   List<Coin> _remainKRW(List<Coin> coinList) {
-    coinList.removeWhere((coin) => !coin.market.contains("KRW"));
+    // coinList.removeWhere((coin) => !coin.market.contains("KRW"));
     return coinList;
   }
 
   List<Coin> _remainBTC(List<Coin> coinList) {
-    coinList.removeWhere(
-        (coin) => !coin.market.contains("BTC") || coin.market.contains("KRW"));
+    // coinList.removeWhere(
+    // (coin) => !coin.market.contains("BTC") || coin.market.contains("KRW"));
     return coinList;
   }
 
@@ -101,17 +96,5 @@ class CoinListController extends GetxController {
     coinList = _remainKRW(coinList);
     coinList = _sortByTradeVolume(coinList);
     update();
-  }
-
-  void fetchUpbitCoinPrice() async {
-    List<UpbitPrice> tmp;
-
-    tmp = await UpbitService().fetchUpbitPriceList();
-  }
-
-  void _fetchUpbitMarketList() async {
-    List<String> tmp;
-
-    tmp = await UpbitService().fetchUpbitMarketList();
   }
 }
