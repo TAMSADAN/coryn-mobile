@@ -2,6 +2,17 @@ import 'package:flutter/material.dart';
 import 'custom_colors.dart';
 
 class CustomTextStyles {
+  static const TextStyle rateUp = TextStyle(
+    color: CustomColors.rateUpColor,
+    fontFamily: 'NotoSansKR',
+    fontWeight: FontWeight.normal,
+  );
+
+  static const TextStyle rateDown = TextStyle(
+      color: CustomColors.rateDownColor,
+      fontFamily: 'NotoSansKR',
+      fontWeight: FontWeight.normal);
+
   static const TextStyle blackBold = TextStyle(
     color: CustomColors.boldColor,
     fontFamily: 'NotoSansKR',
@@ -80,18 +91,5 @@ class CustomTextStyles {
     fontSize: 14,
     fontFamily: 'NotoSansKR',
     fontWeight: FontWeight.normal,
-  );
-
-  static const TextStyle rateUp = TextStyle(
-    color: Colors.redAccent,
-    fontSize: 14,
-    fontFamily: 'NotoSansKR',
-    fontWeight: FontWeight.bold,
-  );
-  static const TextStyle rateDown = TextStyle(
-    color: Colors.blueAccent,
-    fontSize: 14,
-    fontFamily: 'NotoSansKR',
-    fontWeight: FontWeight.bold,
   );
 }

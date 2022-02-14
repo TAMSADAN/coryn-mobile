@@ -1,5 +1,3 @@
-import 'package:intl/intl.dart';
-
 class Coin {
   final String baseSymbol;
   final String quoteSymbol;
@@ -20,25 +18,4 @@ class Coin {
     required this.changeRate,
     required this.changePrice,
   });
-
-  String getFromattedPrice(double price) {
-    String formattedPrice;
-    var f = NumberFormat('###,###,###,###');
-
-    if (price < 100) {
-      formattedPrice = double.parse(price.toStringAsFixed(2)).toString();
-    } else {
-      formattedPrice = f.format(price.round()).toString();
-    }
-
-    return formattedPrice;
-  }
-
-  double getScaledRate(double rate) {
-    double doubleRate;
-
-    doubleRate = double.parse(rate.toStringAsFixed(2));
-
-    return doubleRate;
-  }
 }

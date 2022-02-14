@@ -2,8 +2,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/models/coin.dart';
 import 'package:mobile/pages/detail/detail_page.dart';
+import 'package:mobile/styles/custom_colors.dart';
 import 'package:mobile/utils/coryn_size.dart';
 import 'package:mobile/styles/custom_text_styles.dart';
+import 'package:intl/intl.dart';
 
 class CoinItem extends StatelessWidget {
   final Coin coin;
@@ -46,8 +48,8 @@ class CoinItem extends StatelessWidget {
                 SizedBox(
                   width: ScreenUtil().screenWidth / 5,
                   child: _twoLineText(
-                    coin.getFromattedPrice(coin.upbitPrice),
-                    coin.getFromattedPrice(coin.binancePrice),
+                    _getFromattedPrice(coin.upbitPrice),
+                    _getFromattedPrice(coin.binancePrice),
                     CrossAxisAlignment.end,
                   ),
                 ),
@@ -56,10 +58,9 @@ class CoinItem extends StatelessWidget {
                 ),
                 SizedBox(
                   width: ScreenUtil().screenWidth / 5,
-                  child: _twoLineText(
-                    coin.getScaledRate((coin.changeRate * 100)).toString(),
-                    coin.getFromattedPrice(coin.changePrice),
-                    CrossAxisAlignment.end,
+                  child: _textRateAndPrice(
+                    coin.changeRate * 100,
+                    coin.changePrice,
                   ),
                 ),
                 SizedBox(
@@ -67,10 +68,9 @@ class CoinItem extends StatelessWidget {
                 ),
                 SizedBox(
                   width: ScreenUtil().screenWidth / 5,
-                  child: _twoLineText(
-                    coin.getScaledRate(coin.kimpRate).toString(),
-                    coin.getFromattedPrice(coin.kimpPrice),
-                    CrossAxisAlignment.end,
+                  child: _textRateAndPrice(
+                    coin.kimpRate,
+                    coin.kimpPrice,
                   ),
                 ),
               ],
@@ -113,5 +113,62 @@ class CoinItem extends StatelessWidget {
         )
       ],
     );
+  }
+
+  Widget _textRateAndPrice(double rate, double price) {
+    final TextStyle rateTextStyle =
+        rate > 0 ? CustomTextStyles.rateUp : CustomTextStyles.rateDown;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        FittedBox(
+          fit: BoxFit.fitWidth,
+          child: Text(
+            _getFormattedRate(rate),
+            style: rateTextStyle,
+          ),
+        ),
+        FittedBox(
+          fit: BoxFit.fitWidth,
+          child: Text(
+            _getFromattedPrice(price),
+            style: CustomTextStyles.greyNormal,
+          ),
+        )
+      ],
+    );
+  }
+
+  String _getFromattedPrice(double price) {
+    String formattedPrice;
+    var f = NumberFormat('###,###,###,###');
+
+    if (price < 100) {
+      formattedPrice = double.parse(price.toStringAsFixed(2)).toString();
+    } else {
+      formattedPrice = f.format(price.round()).toString();
+    }
+
+    return formattedPrice;
+  }
+
+  double _getScaledPrice(double price) {
+    double scaledPrice = price;
+
+    if (price < 100) {
+      scaledPrice = double.parse(price.toStringAsFixed(2));
+    }
+
+    return scaledPrice;
+  }
+
+  String _getFormattedRate(double rate) {
+    String doubleRate;
+
+    doubleRate = (rate > 0 ? "+" : "") +
+        double.parse(rate.toStringAsFixed(2)).toString();
+
+    return doubleRate;
   }
 }

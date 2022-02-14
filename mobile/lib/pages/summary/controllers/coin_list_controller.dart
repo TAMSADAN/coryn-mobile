@@ -94,7 +94,7 @@ class CoinListController extends GetxController {
     orignCoinList = await CoinService().fetchCoinList();
     coinList = [...orignCoinList];
     coinList = _remainKRW(coinList);
-    coinList = _sortByTradeVolume(coinList);
+    fetchCoinList();
     update();
   }
 }
