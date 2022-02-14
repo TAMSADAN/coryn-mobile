@@ -1,95 +1,96 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/styles/custom_fonts.dart';
 import 'custom_colors.dart';
 
 class CustomTextStyles {
   static const TextStyle rateUp = TextStyle(
-    color: CustomColors.rateUpColor,
-    fontFamily: 'NotoSansKR',
+    color: CustomColors.rateUp,
+    fontFamily: CustomFonts.context,
     fontWeight: FontWeight.normal,
   );
 
   static const TextStyle rateDown = TextStyle(
-      color: CustomColors.rateDownColor,
-      fontFamily: 'NotoSansKR',
+      color: CustomColors.rateDown,
+      fontFamily: CustomFonts.context,
       fontWeight: FontWeight.normal);
 
   static const TextStyle blackBold = TextStyle(
-    color: CustomColors.boldColor,
-    fontFamily: 'NotoSansKR',
+    color: CustomColors.black,
+    fontFamily: CustomFonts.context,
     fontWeight: FontWeight.bold,
   );
 
   static const TextStyle greyBold = TextStyle(
-    color: CustomColors.defaultColor,
-    fontFamily: 'NotoSansKR',
+    color: CustomColors.grey,
+    fontFamily: CustomFonts.context,
     fontWeight: FontWeight.bold,
   );
 
   static const TextStyle blackNormal = TextStyle(
-    color: CustomColors.boldColor,
-    fontFamily: 'NotoSansKR',
+    color: CustomColors.black,
+    fontFamily: CustomFonts.context,
     fontWeight: FontWeight.normal,
   );
 
   static const TextStyle greyNormal = TextStyle(
-    color: CustomColors.defaultColor,
-    fontFamily: 'NotoSansKR',
+    color: CustomColors.grey,
+    fontFamily: CustomFonts.context,
     fontWeight: FontWeight.normal,
   );
 
   static const TextStyle xLargeBold = TextStyle(
-    color: CustomColors.boldColor,
+    color: CustomColors.black,
     fontSize: 25,
-    fontFamily: 'NotoSansKR',
+    fontFamily: CustomFonts.context,
     fontWeight: FontWeight.bold,
   );
 
   static const TextStyle xLarge = TextStyle(
-    color: CustomColors.boldColor,
+    color: CustomColors.black,
     fontSize: 25,
-    fontFamily: 'NotoSansKR',
+    fontFamily: CustomFonts.context,
     fontWeight: FontWeight.normal,
   );
 
   static const TextStyle largeBold = TextStyle(
-    color: CustomColors.boldColor,
+    color: CustomColors.grey,
     fontSize: 18,
-    fontFamily: 'NotoSansKR',
+    fontFamily: CustomFonts.context,
     fontWeight: FontWeight.bold,
   );
 
   static const TextStyle large = TextStyle(
-    color: CustomColors.defaultColor,
+    color: CustomColors.grey,
     fontSize: 18,
-    fontFamily: 'NotoSansKR',
+    fontFamily: CustomFonts.context,
     fontWeight: FontWeight.normal,
   );
 
   static const TextStyle middleBold = TextStyle(
-    color: CustomColors.boldColor,
+    color: CustomColors.grey,
     fontSize: 15,
-    fontFamily: 'NotoSansKR',
+    fontFamily: CustomFonts.context,
     fontWeight: FontWeight.bold,
   );
 
   static const TextStyle middle = TextStyle(
-    color: CustomColors.defaultColor,
+    color: CustomColors.grey,
     fontSize: 15,
-    fontFamily: 'NotoSansKR',
+    fontFamily: CustomFonts.context,
     fontWeight: FontWeight.normal,
   );
 
   static const TextStyle smallBold = TextStyle(
-    color: CustomColors.boldColor,
+    color: CustomColors.grey,
     fontSize: 14,
-    fontFamily: 'NotoSansKR',
+    fontFamily: CustomFonts.context,
     fontWeight: FontWeight.bold,
   );
 
   static const TextStyle small = TextStyle(
-    color: CustomColors.defaultColor,
+    color: CustomColors.grey,
     fontSize: 14,
-    fontFamily: 'NotoSansKR',
+    fontFamily: CustomFonts.context,
     fontWeight: FontWeight.normal,
   );
 }

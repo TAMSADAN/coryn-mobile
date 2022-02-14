@@ -1,6 +1,11 @@
+import 'dart:ffi';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mobile/styles/custom_text_styles.dart';
+import 'package:mobile/styles/custom_colors.dart';
+import 'package:mobile/styles/custom_fonts.dart';
+import 'package:mobile/styles/custom_sizes.dart';
 import 'package:mobile/utils/coryn_size.dart';
 
 class CoinListHeader extends StatelessWidget {
@@ -15,28 +20,28 @@ class CoinListHeader extends StatelessWidget {
           children: [
             SizedBox(
               width: ScreenUtil().screenWidth / 5,
-              child: _text("이름", CrossAxisAlignment.start),
+              child: _text("이름", MainAxisAlignment.start),
             ),
             SizedBox(
               width: CorynSize.contextHorizontal.w,
             ),
             SizedBox(
               width: ScreenUtil().screenWidth / 5,
-              child: _text("현재가", CrossAxisAlignment.end),
+              child: _text("현재가", MainAxisAlignment.end),
             ),
             SizedBox(
               width: CorynSize.contextHorizontal.w,
             ),
             SizedBox(
               width: ScreenUtil().screenWidth / 5,
-              child: _text("전일대비", CrossAxisAlignment.end),
+              child: _text("전일대비", MainAxisAlignment.end),
             ),
             SizedBox(
               width: CorynSize.contextHorizontal.w,
             ),
             SizedBox(
               width: ScreenUtil().screenWidth / 5,
-              child: _text("김프", CrossAxisAlignment.end),
+              child: _text("김프", MainAxisAlignment.end),
             ),
           ],
         ),
@@ -44,13 +49,17 @@ class CoinListHeader extends StatelessWidget {
     );
   }
 
-  Widget _text(String text, CrossAxisAlignment cross) {
-    return Column(
-      crossAxisAlignment: cross,
+  Widget _text(String text, MainAxisAlignment mainAxis) {
+    return Row(
+      mainAxisAlignment: mainAxis,
       children: [
         Text(
           text,
-          style: CustomTextStyles.blackNormal,
+          style: TextStyle(
+            color: CustomColors.black,
+            fontFamily: CustomFonts.context,
+            fontSize: CustomFontSize.subTitle.sp,
+          ),
         ),
       ],
     );
