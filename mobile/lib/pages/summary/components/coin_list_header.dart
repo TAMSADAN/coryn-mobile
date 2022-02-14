@@ -1,8 +1,8 @@
-import 'dart:ffi';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:mobile/pages/summary/controllers/coin_list_controller.dart';
 import 'package:mobile/styles/custom_colors.dart';
 import 'package:mobile/styles/custom_fonts.dart';
 import 'package:mobile/styles/custom_sizes.dart';
@@ -50,18 +50,22 @@ class CoinListHeader extends StatelessWidget {
   }
 
   Widget _text(String text, MainAxisAlignment mainAxis) {
-    return Row(
-      mainAxisAlignment: mainAxis,
-      children: [
-        Text(
-          text,
-          style: TextStyle(
-            color: CustomColors.black,
-            fontFamily: CustomFonts.context,
-            fontSize: CustomFontSize.subTitle.sp,
+    final _coinListController = Get.find<CoinListController>();
+    return GestureDetector(
+      onTap: () => _coinListController.updateSortType(text),
+      child: Row(
+        mainAxisAlignment: mainAxis,
+        children: [
+          Text(
+            text,
+            style: TextStyle(
+              color: CustomColors.black,
+              fontFamily: CustomFonts.context,
+              fontSize: CustomFontSize.subTitle.sp,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

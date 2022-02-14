@@ -1,20 +1,20 @@
 import 'package:get/get.dart';
 import 'package:mobile/pages/summary/controllers/coin_search_bar_controller.dart';
-import 'package:mobile/pages/summary/controllers/coin_sort_button_controller.dart';
-import 'package:mobile/pages/summary/controllers/market_drop_down_button_controller.dart';
-import 'package:mobile/pages/summary/controllers/platform_drop_down_button_controller.dart';
 import 'package:mobile/service/coin_service.dart';
 import 'package:mobile/models/coin.dart';
 
 class CoinListController extends GetxController {
-  final _sortCon = Get.find<CoinSortButtonController>();
-  final _marketCon = Get.find<MarketDropDownButtonController>();
-  final _platformCon = Get.find<PlatformDropDownButtonController>();
   final _searchCon = Get.find<CoinSearchBarController>();
 
-  List<String> _upbitMarketList = [];
   List<Coin> orignCoinList = [];
   List<Coin> coinList = [];
+
+  int sortName = 0;
+  int sortPrice = 0;
+  int sortRate = 0;
+  int sortKimp = 0;
+
+  DateTime updateTime = DateTime.now();
 
   @override
   void onInit() {
@@ -22,26 +22,60 @@ class CoinListController extends GetxController {
     super.onInit();
   }
 
+  void fetchCoinList() async {
+    orignCoinList = await CoinService().fetchCoinList() ?? orignCoinList;
+    coinList = [...orignCoinList];
+    coinList = _remainKRW(coinList);
+    updateTime = DateTime.now();
+    fetchCoinList();
+    sort();
+    update();
+  }
+
+  void updateSortType(String type) {
+    if (type == "이름") {
+      sortName++;
+      sortPrice = 0;
+      sortRate = 0;
+      sortKimp = 0;
+    } else if (type == "현재가") {
+      sortName = 0;
+      sortPrice++;
+      sortRate = 0;
+      sortKimp = 0;
+    } else if (type == "전일대비") {
+      sortName = 0;
+      sortPrice = 0;
+      sortRate++;
+      sortKimp = 0;
+    } else if (type == "김프") {
+      sortName = 0;
+      sortPrice = 0;
+      sortRate = 0;
+      sortKimp++;
+    }
+    update();
+    sort();
+  }
+
   void sort() {
-    String _sort = _sortCon.sort;
-    String _market = _marketCon.market;
-    // String _platform = _platformCon.platform;
     String _search = _searchCon.search;
 
     coinList = [...orignCoinList];
-    if (_sort == "거래량") {
-      coinList = _sortByTradeVolume(coinList);
-    } else if (_sort == "등락률") {
-      coinList = _sortBychangeRate(coinList);
-    } else if (_sort == "현재가") {
-      coinList = _sortByTradePrice(coinList);
-    }
-    if (_market == "KRW") {
-      coinList = _remainKRW(coinList);
-    } else if (_market == "BTC") {
-      coinList = _remainBTC(coinList);
-    }
     coinList = _remainSearch(coinList, _search);
+    coinList = _remainKRW(coinList);
+    if (sortName != 0) {
+      coinList = _sortByName(coinList);
+    }
+    if (sortPrice != 0) {
+      coinList = _sortByPrice(coinList);
+    }
+    if (sortRate != 0) {
+      coinList = _sortByRate(coinList);
+    }
+    if (sortKimp != 0) {
+      coinList = _sortByKimp(coinList);
+    }
     update();
   }
 
@@ -50,48 +84,48 @@ class CoinListController extends GetxController {
 
     for (var coin in coinList) {
       if (coin.koreanName.contains(search)) {
-        // print(coin.koreanName + "  VS  " + search);
         _coinList.add(coin);
       } else if (coin.baseSymbol.contains(search.toUpperCase())) {
-        // print(coin.market.split("-")[1] + " VS " + search.toUpperCase());
         _coinList.add(coin);
       }
     }
-    // print(_coinList.length);
     return _coinList;
   }
 
-  List<Coin> _sortByTradeVolume(List<Coin> coinList) {
-    // coinList.sort((a, b) => a.price.tradeVolume.compareTo(b.price.tradeVolume));
+  List<Coin> _sortByKimp(List<Coin> coinList) {
+    coinList.sort((b, a) => a.kimpRate.compareTo(b.kimpRate));
+    if (sortKimp % 2 == 0) {
+      coinList = coinList.reversed.toList();
+    }
     return coinList;
   }
 
-  List<Coin> _sortBychangeRate(List<Coin> coinList) {
-    // coinList.sort((b, a) => a.price.changeRate.compareTo(b.price.changeRate));
+  List<Coin> _sortByRate(List<Coin> coinList) {
+    coinList.sort((b, a) => a.changeRate.compareTo(b.changeRate));
+    if (sortRate % 2 == 0) {
+      coinList = coinList.reversed.toList();
+    }
     return coinList;
   }
 
-  List<Coin> _sortByTradePrice(List<Coin> coinList) {
-    // coinList.sort((b, a) => a.price.tradePrice.compareTo(b.price.tradePrice));
+  List<Coin> _sortByName(List<Coin> coinList) {
+    coinList.sort((a, b) => a.koreanName.compareTo(b.koreanName));
+    if (sortName % 2 == 0) {
+      coinList = coinList.reversed.toList();
+    }
+    return coinList;
+  }
+
+  List<Coin> _sortByPrice(List<Coin> coinList) {
+    coinList.sort((b, a) => a.upbitPrice.compareTo(b.upbitPrice));
+    if (sortPrice % 2 == 0) {
+      coinList = coinList.reversed.toList();
+    }
     return coinList;
   }
 
   List<Coin> _remainKRW(List<Coin> coinList) {
     coinList.removeWhere((coin) => coin.quoteSymbol != 'KRW');
     return coinList;
-  }
-
-  List<Coin> _remainBTC(List<Coin> coinList) {
-    // coinList.removeWhere(
-    // (coin) => !coin.market.contains("BTC") || coin.market.contains("KRW"));
-    return coinList;
-  }
-
-  void fetchCoinList() async {
-    orignCoinList = await CoinService().fetchCoinList();
-    coinList = [...orignCoinList];
-    coinList = _remainKRW(coinList);
-    fetchCoinList();
-    update();
   }
 }
