@@ -4,9 +4,6 @@ import 'package:mobile/pages/summary/controllers/coin_sort_button_controller.dar
 import 'package:mobile/pages/summary/controllers/market_drop_down_button_controller.dart';
 import 'package:mobile/pages/summary/controllers/platform_drop_down_button_controller.dart';
 import 'package:mobile/service/coin_service.dart';
-import 'package:mobile/service/price_service.dart';
-import 'package:mobile/service/upbit_service.dart';
-import 'package:mobile/models/upbit_coin.dart';
 import 'package:mobile/models/coin.dart';
 
 class CoinListController extends GetxController {

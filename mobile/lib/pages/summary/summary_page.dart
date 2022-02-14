@@ -10,6 +10,8 @@ import 'package:mobile/pages/summary/components/coin_update_text.dart';
 import 'package:mobile/pages/summary/components/market_drop_down_button.dart';
 import 'package:mobile/pages/summary/components/platform_drop_down_button.dart';
 
+import 'components/coin_list_header.dart';
+
 class SummaryPage extends StatelessWidget {
   const SummaryPage({Key? key}) : super(key: key);
 
@@ -28,20 +30,21 @@ class SummaryPage extends StatelessWidget {
         child: Column(
           children: [
             const CoinSearchBar(),
-            const SizedBox(height: CorynSize.componentVertical),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                PlatformDropDownButton(),
-                MarketDropDownButton(),
-              ],
-            ),
-            const SizedBox(height: CorynSize.componentVertical),
-            const CoinSortButton(),
+            // const SizedBox(height: CorynSize.componentVertical),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: const [
+            //     PlatformDropDownButton(),
+            //     MarketDropDownButton(),
+            //   ],
+            // ),
+            // const SizedBox(height: CorynSize.componentVertical),
+            // const CoinSortButton(),
             Container(
               alignment: Alignment.centerRight,
               child: const CoinUpdateText(),
             ),
+            CoinListHeader(),
             const Expanded(child: CoinList()),
             const AdBanner(),
           ],

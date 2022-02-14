@@ -30,10 +30,6 @@ class CoinItem extends StatelessWidget {
           children: [
             Row(
               children: [
-                // _image(coin.logoUri),
-                // SizedBox(
-                //   width: CorynSize.contextHorizontal.w,
-                // ),
                 SizedBox(
                   width: ScreenUtil().screenWidth / 5,
                   child: _twoLineText(
