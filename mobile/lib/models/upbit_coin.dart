@@ -1,4 +1,37 @@
-class UpbitPrice {
+class UpbitCoin {
+  final UpbitCoinMarket marketData;
+  final UpbitCoinPrice priceData;
+
+  UpbitCoin({
+    required this.marketData,
+    required this.priceData,
+  });
+}
+
+class UpbitCoinMarket {
+  final String market;
+  final String koreanName;
+  final String englishName;
+  final String marketWarning;
+
+  UpbitCoinMarket({
+    required this.market,
+    required this.koreanName,
+    required this.englishName,
+    required this.marketWarning,
+  });
+
+  factory UpbitCoinMarket.fromJson(Map<String, dynamic> json) {
+    return UpbitCoinMarket(
+      market: json['market'],
+      koreanName: json['koean_name'],
+      englishName: json['english_name'],
+      marketWarning: json['market_warning'],
+    );
+  }
+}
+
+class UpbitCoinPrice {
   final String market;
   final String tradeDate;
   final String tradeTime;
@@ -26,7 +59,7 @@ class UpbitPrice {
   final double highest52WeekPrice;
   final double lowest52WeekPrice;
 
-  UpbitPrice({
+  UpbitCoinPrice({
     required this.market,
     required this.tradeDate,
     required this.tradeTime,
@@ -55,8 +88,8 @@ class UpbitPrice {
     required this.lowest52WeekPrice,
   });
 
-  factory UpbitPrice.fromJson(Map<String, dynamic> json) {
-    return UpbitPrice(
+  factory UpbitCoinPrice.fromJson(Map<String, dynamic> json) {
+    return UpbitCoinPrice(
       market: json['market'],
       tradeDate: json['trade_date'],
       tradeTime: json['trade_time'],

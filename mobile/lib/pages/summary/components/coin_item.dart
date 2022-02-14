@@ -1,6 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mobile/models/dto/coin.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile/models/coin.dart';
 import 'package:mobile/pages/detail/detail_page.dart';
 import 'package:mobile/utils/coryn_size.dart';
 import 'package:mobile/styles/custom_text_styles.dart';
