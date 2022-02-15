@@ -27,49 +27,47 @@ class CoinItem extends StatelessWidget {
             const EdgeInsets.symmetric(vertical: CorynSize.contextHorizontal),
         child: Row(
           children: [
-            Row(
-              children: [
-                SizedBox(
-                  width: ScreenUtil().screenWidth / 5,
-                  child: _twoLineText(
-                    coin.baseSymbol + '/' + coin.quoteSymbol,
-                    coin.koreanName ?? coin.baseSymbol,
-                    CrossAxisAlignment.start,
-                  ),
-                ),
-                SizedBox(
-                  width: CorynSize.contextHorizontal.w,
-                ),
-                SizedBox(
-                  width: ScreenUtil().screenWidth / 5,
-                  child: _twoLineText(
-                    _getFromattedPrice(coin.tradePrice),
-                    _getFromattedPrice(coin.volume),
-                    CrossAxisAlignment.end,
-                  ),
-                ),
-                SizedBox(
-                  width: CorynSize.contextHorizontal.w,
-                ),
-                SizedBox(
-                  width: ScreenUtil().screenWidth / 5,
-                  child: _textRateAndPrice(
-                    coin.changeRate * 100,
-                    coin.changePrice,
-                  ),
-                ),
-                SizedBox(
-                  width: CorynSize.contextHorizontal.w,
-                ),
-                SizedBox(
-                  width: ScreenUtil().screenWidth / 5,
-                  child: _textRateAndPrice(
-                    0,
-                    0,
-                  ),
-                ),
-              ],
+            SizedBox(
+              width: ScreenUtil().screenWidth / 5,
+              child: _twoLineText(
+                coin.baseSymbol + '/' + coin.quoteSymbol,
+                coin.koreanName ?? coin.baseSymbol,
+                CrossAxisAlignment.start,
+              ),
             ),
+            // SizedBox(
+            //   width: CorynSize.contextHorizontal.w,
+            // ),
+            Spacer(),
+            SizedBox(
+              width: ScreenUtil().screenWidth / 5,
+              child: _twoLineText(
+                _getFromattedPrice(coin.tradePrice),
+                _getFromattedPrice(coin.volume),
+                CrossAxisAlignment.end,
+              ),
+            ),
+            SizedBox(
+              width: CorynSize.contextHorizontal.w,
+            ),
+            SizedBox(
+              width: ScreenUtil().screenWidth / 5,
+              child: _textRateAndPrice(
+                coin.changeRate * 100,
+                coin.changePrice,
+              ),
+            ),
+
+            // SizedBox(
+            //   width: CorynSize.contextHorizontal.w,
+            // ),
+            // SizedBox(
+            //   width: ScreenUtil().screenWidth / 5,
+            //   child: _textRateAndPrice(
+            //     0,
+            //     0,
+            //   ),
+            // ),
           ],
         ),
       ),
@@ -140,7 +138,7 @@ class CoinItem extends StatelessWidget {
     var f = NumberFormat('###,###,###,###');
 
     if (price < 100) {
-      formattedPrice = double.parse(price.toStringAsFixed(2)).toString();
+      formattedPrice = price.toString();
     } else {
       formattedPrice = f.format(price.round()).toString();
     }

@@ -17,6 +17,7 @@ class BinanceService {
     final response =
         await http.get(Uri.parse("https://api.binance.com/api/v3/ticker/24hr"));
 
+    // print(utf8.decode(response.bodyBytes));
     if (response.statusCode == 200) {
       try {
         for (var _json in json.decode(utf8.decode(response.bodyBytes))) {

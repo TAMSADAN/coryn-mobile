@@ -37,7 +37,7 @@ class CoinListController extends GetxController {
     sort();
     update();
 
-    await Future.delayed(Duration(seconds: 1), () => fetchCoinList());
+    await Future.delayed(Duration(seconds: 3), () => fetchCoinList());
   }
 
   void _updateMarketList(List<Coin> coinList) {
@@ -54,11 +54,13 @@ class CoinListController extends GetxController {
 
   void updateSelectedPlatform(String value) {
     selectedPlaform = value;
+    sort();
     update();
   }
 
   void updateSelectedMarket(String value) {
     selectedMarket = value;
+    sort();
     update();
   }
 
@@ -113,7 +115,7 @@ class CoinListController extends GetxController {
     List<Coin> _coinList = [];
 
     for (var coin in coinList) {
-      if (coin.koreanName!.contains(search)) {
+      if (coin.koreanName != null && coin.koreanName!.contains(search)) {
         _coinList.add(coin);
       } else if (coin.baseSymbol.contains(search.toUpperCase())) {
         _coinList.add(coin);
