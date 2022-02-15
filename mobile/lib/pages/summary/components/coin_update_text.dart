@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile/pages/summary/controllers/coin_list_controller.dart';
 import 'package:mobile/styles/custom_colors.dart';
+import 'package:mobile/styles/custom_font_sizes.dart';
 import 'package:mobile/styles/custom_fonts.dart';
-import 'package:mobile/styles/custom_sizes.dart';
-import 'package:mobile/styles/custom_text_styles.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -19,7 +18,7 @@ class CoinUpdateText extends StatelessWidget {
           style: TextStyle(
             color: CustomColors.grey,
             fontFamily: CustomFonts.context,
-            fontSize: CustomFontSize.subContext.sp,
+            fontSize: CustomFontSizes.subContext.sp,
           )),
     );
   }

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import 'package:mobile/pages/ad_banner.dart';
 import 'package:mobile/pages/summary/components/market_drop_down_button.dart';
 import 'package:mobile/pages/summary/components/platform_drop_down_button.dart';
-import 'package:mobile/pages/summary/summary_binding.dart';
-import 'package:mobile/styles/custom_sizes.dart';
+import 'package:mobile/pages/summary/controllers/coin_list_controller.dart';
+import 'package:mobile/styles/custom_screen_sizes.dart';
 import 'package:mobile/utils/coryn_size.dart';
 import 'package:mobile/pages/summary/components/coin_list.dart';
 import 'package:mobile/pages/summary/components/coin_search_bar.dart';
@@ -17,7 +18,8 @@ class SummaryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SummaryBinding().dependencies();
+    final CoinListController _coinListController =
+        Get.put(CoinListController());
 
     return Scaffold(
       body: Padding(
@@ -31,7 +33,7 @@ class SummaryPage extends StatelessWidget {
           children: [
             const CoinSearchBar(),
             SizedBox(
-              height: CustomScreenSize.componentVertical.h,
+              height: CustomScreenSizes.componentVertical.h,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -46,7 +48,7 @@ class SummaryPage extends StatelessWidget {
               child: const CoinUpdateText(),
             ),
             SizedBox(
-              height: CustomScreenSize.contextVertical.h,
+              height: CustomScreenSizes.contextVertical.h,
             ),
             CoinListHeader(),
             const Expanded(child: CoinList()),

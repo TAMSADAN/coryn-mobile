@@ -5,4 +5,5 @@ class CustomColors {
   static const Color black = Color(0xff212121);
   static const Color rateUp = Colors.redAccent;
   static const Color rateDown = Colors.blueAccent;
+  static const Color leading = Colors.blueAccent;
 }

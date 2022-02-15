@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:mobile/pages/summary/controllers/coin_list_controller.dart';
-import 'package:mobile/styles/custom_sizes.dart';
+import 'package:mobile/styles/custom_screen_sizes.dart';
 import 'package:mobile/styles/custom_text_styles.dart';
 
 class MarketDropDownButton extends StatelessWidget {
@@ -25,8 +25,8 @@ class MarketDropDownButton extends StatelessWidget {
         onChanged: (value) {
           _.updateSelectedMarket(value.toString());
         },
-        buttonWidth: CustomScreenSize.dropDownButtonWidth.w,
-        dropdownMaxHeight: CustomScreenSize.dropDownButtonMaxHeight.h,
+        buttonWidth: CustomScreenSizes.dropDownButtonWidth.w,
+        dropdownMaxHeight: CustomScreenSizes.dropDownButtonMaxHeight.h,
       ),
     );
   }

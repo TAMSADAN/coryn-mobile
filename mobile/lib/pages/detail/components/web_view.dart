@@ -17,12 +17,7 @@ class HelpScreenState extends State<HelpScreen> {
       Completer<WebViewController>();
   late WebViewController _con;
 
-  /*
-  *
-  * Webview
-  * */
-
-  String setHTML(String email, String phone, String name) {
+  String setHTML() {
     return ('''
 <!-- TradingView Widget BEGIN -->
 <div class="tradingview-widget-container">
@@ -52,13 +47,9 @@ class HelpScreenState extends State<HelpScreen> {
     ''');
   }
 
-  _printz() => print("Hello");
-
   _loadHTML() async {
-    _con.loadUrl(Uri.dataFromString(
-            setHTML("connelblaze@gmil.com", "+2347034857296", "Connel Asikong"),
-            mimeType: 'text/html',
-            encoding: Encoding.getByName('utf-8'))
+    _con.loadUrl(Uri.dataFromString(setHTML(),
+            mimeType: 'text/html', encoding: Encoding.getByName('utf-8'))
         .toString());
   }
 
@@ -78,17 +69,17 @@ class HelpScreenState extends State<HelpScreen> {
       },
       navigationDelegate: (NavigationRequest request) {
         if (request.url.startsWith('https://www.youtube.com/')) {
-          print('blocking navigation to $request}');
+          print('blocking navigation}');
           return NavigationDecision.prevent;
         }
-        print('allowing navigation to $request');
+        print('allowing navigation to');
         return NavigationDecision.navigate;
       },
       onPageStarted: (String url) {
-        print('Page started loading: $url');
+        print('Page started loading');
       },
       onPageFinished: (String url) {
-        print('Page finished loading: $url');
+        print('Page finished loading');
       },
       gestureNavigationEnabled: true,
     );

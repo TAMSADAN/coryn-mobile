@@ -1,7 +1,9 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mobile/models/coin.dart';
 import 'package:mobile/pages/detail/detail_page.dart';
+import 'package:mobile/pages/summary/controllers/coin_list_controller.dart';
 import 'package:mobile/utils/coryn_size.dart';
 import 'package:mobile/styles/custom_text_styles.dart';
 import 'package:intl/intl.dart';
@@ -15,6 +17,7 @@ class CoinItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        Get.delete<CoinListController>();
         Navigator.push(
           context,
           MaterialPageRoute(

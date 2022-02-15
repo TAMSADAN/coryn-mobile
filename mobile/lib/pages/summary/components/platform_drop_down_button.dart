@@ -3,8 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:mobile/pages/summary/controllers/coin_list_controller.dart';
-import 'package:mobile/pages/summary/controllers/platform_drop_down_button_controller.dart';
-import 'package:mobile/styles/custom_sizes.dart';
+import 'package:mobile/styles/custom_screen_sizes.dart';
 import 'package:mobile/utils/coryn_size.dart';
 import 'package:mobile/styles/custom_text_styles.dart';
 
@@ -46,7 +45,7 @@ class PlatformDropDownButton extends StatelessWidget {
                   ));
             }).toList(),
             onChanged: (value) => _.updateSelectedPlatform(value.toString()),
-            buttonWidth: CustomScreenSize.dropDownButtonWidth.w,
+            buttonWidth: CustomScreenSizes.dropDownButtonWidth.w,
           ),
         ],
       ),

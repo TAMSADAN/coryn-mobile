@@ -1,4 +1,4 @@
-class CustomScreenSize {
+class CustomScreenSizes {
   static const double pageVertical = 50;
   static const double pageHorizontal = 20;
   static const double componentVertical = 8;
@@ -10,11 +10,7 @@ class CustomScreenSize {
   static const double small = 1;
   static const double dropDownButtonWidth = 80;
   static const double dropDownButtonMaxHeight = 200;
-}
-
-class CustomFontSize {
-  static const double title = 15;
-  static const double subTitle = 14;
-  static const double context = 13;
-  static const double subContext = 11;
+  static const double appBarHeight = 50;
+  static const double appBarLeadingWidth = 100;
+  static const double tradigViewHeight = 400;
 }

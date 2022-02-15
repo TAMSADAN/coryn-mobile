@@ -4,8 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mobile/pages/summary/controllers/coin_list_controller.dart';
 import 'package:mobile/styles/custom_colors.dart';
+import 'package:mobile/styles/custom_font_sizes.dart';
 import 'package:mobile/styles/custom_fonts.dart';
-import 'package:mobile/styles/custom_sizes.dart';
+import 'package:mobile/styles/custom_screen_sizes.dart';
 import 'package:mobile/utils/coryn_size.dart';
 
 class CoinListHeader extends StatelessWidget {
@@ -57,7 +58,7 @@ class CoinListHeader extends StatelessWidget {
             style: TextStyle(
               color: CustomColors.black,
               fontFamily: CustomFonts.context,
-              fontSize: CustomFontSize.subTitle.sp,
+              fontSize: CustomFontSizes.subTitle.sp,
             ),
           ),
         ],
