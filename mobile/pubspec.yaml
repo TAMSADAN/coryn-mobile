@@ -42,6 +42,7 @@ dependencies:
   dropdown_button2: ^1.1.1
   get: ^4.6.1
   flutter_screenutil: ^5.2.0
+  webview_flutter: ^3.0.0
 
 dev_dependencies:
   flutter_test:

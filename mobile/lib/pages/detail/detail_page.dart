@@ -4,10 +4,12 @@ import 'package:mobile/pages/detail/components/coin_info.dart';
 import 'package:mobile/pages/detail/components/coin_chart.dart';
 import 'package:mobile/pages/detail/components/coin_good_news_list.dart';
 import 'package:mobile/pages/detail/components/coin_normal_news_list.dart';
+import 'package:mobile/pages/detail/components/web_view.dart';
 import 'package:mobile/pages/detail/controllers/detail_controller.dart';
 import 'package:mobile/utils/coryn_size.dart';
 import 'package:mobile/utils/coryn_text_style.dart';
 import 'package:get/get.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class DetailPage extends StatelessWidget {
   final String market;
@@ -16,8 +18,26 @@ class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _detailController = Get.put(DetailController(market: market));
+    WebViewController _controller;
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        toolbarHeight: 30,
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Get.delete<DetailController>();
+            Navigator.pop(context);
+          },
+        ),
+        centerTitle: true,
+      ),
+      backgroundColor: Colors.white,
+      body: HelpScreen(),
+    );
 
-    return GetBuilder<DetailController>(
+    GetBuilder<DetailController>(
       builder: (_) => Scaffold(
         appBar: AppBar(
           elevation: 0,

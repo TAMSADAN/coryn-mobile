@@ -25,7 +25,8 @@ class MarketDropDownButton extends StatelessWidget {
         onChanged: (value) {
           _.updateSelectedMarket(value.toString());
         },
-        buttonWidth: CustomScreenSize.platformDropDownButton.w,
+        buttonWidth: CustomScreenSize.dropDownButtonWidth.w,
+        dropdownMaxHeight: CustomScreenSize.dropDownButtonMaxHeight.h,
       ),
     );
   }
