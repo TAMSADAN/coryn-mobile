@@ -32,8 +32,8 @@ class CoinItem extends StatelessWidget {
                 SizedBox(
                   width: ScreenUtil().screenWidth / 5,
                   child: _twoLineText(
+                    coin.baseSymbol + '/' + coin.quoteSymbol,
                     coin.koreanName ?? coin.baseSymbol,
-                    coin.platform,
                     CrossAxisAlignment.start,
                   ),
                 ),

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:mobile/pages/summary/controllers/coin_list_controller.dart';
-import 'package:mobile/pages/summary/controllers/market_drop_down_button_controller.dart';
+import 'package:mobile/styles/custom_sizes.dart';
 import 'package:mobile/styles/custom_text_styles.dart';
 
 class MarketDropDownButton extends StatelessWidget {
@@ -10,11 +11,9 @@ class MarketDropDownButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _coinListController = Get.find<CoinListController>();
-
-    return GetBuilder<MarketDropDownButtonController>(
+    return GetBuilder<CoinListController>(
       builder: (_) => DropdownButton2(
-        value: _.market,
+        value: _.selectedMarket,
         items: _.marketList.map((_value) {
           return DropdownMenuItem(
               value: _value,
@@ -24,10 +23,9 @@ class MarketDropDownButton extends StatelessWidget {
               ));
         }).toList(),
         onChanged: (value) {
-          _.onchanged(value);
-          _coinListController.sort();
+          _.updateSelectedMarket(value.toString());
         },
-        buttonWidth: 70,
+        buttonWidth: CustomScreenSize.platformDropDownButton.w,
       ),
     );
   }

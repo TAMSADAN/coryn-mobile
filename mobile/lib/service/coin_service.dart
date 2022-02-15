@@ -7,18 +7,19 @@ import 'package:mobile/service/upbit_service.dart';
 class CoinService {
   Future<List<Coin>?> fetchCoinList(String platform) async {
     List<Coin>? coinList;
-    if (platform == "upbit") {
-      coinList = await fetchCoinListFromUpbit();
-    } else if (platform == "binance") {
-      coinList = await fetchCoinListFromBinance();
+    if (platform == "업비트") {
+      coinList = await _fetchCoinListFromUpbit();
+    } else if (platform == "바이낸스") {
+      coinList = await _fetchCoinListFromBinance();
     } else {
       print("CoinService fetchCoinList ${platform} 존재하지 않습니다.");
       return null;
     }
+
     return coinList;
   }
 
-  Future<List<Coin>?> fetchCoinListFromUpbit() async {
+  Future<List<Coin>?> _fetchCoinListFromUpbit() async {
     final UpbitService _upbitService = UpbitService();
     final List<UpbitCoin>? _upbitCoinList =
         await _upbitService.fetchUpbitCoin();
@@ -32,7 +33,7 @@ class CoinService {
     return coinList;
   }
 
-  Future<List<Coin>?> fetchCoinListFromBinance() async {
+  Future<List<Coin>?> _fetchCoinListFromBinance() async {
     final BinanceService _binanceService = BinanceService();
     List<BinanceCoin>? _binanceCoinList =
         await _binanceService.fetchBinanceCoin();

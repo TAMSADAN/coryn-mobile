@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mobile/pages/ad_banner.dart';
+import 'package:mobile/pages/summary/components/market_drop_down_button.dart';
 import 'package:mobile/pages/summary/components/platform_drop_down_button.dart';
 import 'package:mobile/pages/summary/summary_binding.dart';
 import 'package:mobile/styles/custom_sizes.dart';
@@ -32,7 +33,14 @@ class SummaryPage extends StatelessWidget {
             SizedBox(
               height: CustomScreenSize.componentVertical.h,
             ),
-            PlatformDropDownButton(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                PlatformDropDownButton(),
+                MarketDropDownButton(),
+              ],
+            ),
             Container(
               alignment: Alignment.centerRight,
               child: const CoinUpdateText(),

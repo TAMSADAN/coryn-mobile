@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:mobile/pages/summary/controllers/coin_search_bar_controller.dart';
 import 'package:mobile/service/coin_service.dart';
 import 'package:mobile/models/coin.dart';
+import 'package:mobile/utils/coryn_static.dart';
 
 class CoinListController extends GetxController {
   final _searchCon = Get.find<CoinSearchBarController>();
@@ -9,7 +10,10 @@ class CoinListController extends GetxController {
   List<Coin> orignCoinList = [];
   List<Coin> coinList = [];
 
-  String plaform = 'upbit';
+  String selectedPlaform = '업비트';
+  String selectedMarket = '';
+  List<String> platformList = CorynStatic.platformKoreanNameList;
+  List<String> marketList = [''];
 
   int sortName = 0;
   int sortPrice = 0;
@@ -25,9 +29,10 @@ class CoinListController extends GetxController {
   }
 
   void fetchCoinList() async {
-    orignCoinList = await CoinService().fetchCoinList(plaform) ?? orignCoinList;
+    orignCoinList =
+        await CoinService().fetchCoinList(selectedPlaform) ?? orignCoinList;
     coinList = [...orignCoinList];
-    coinList = _remainKRW(coinList);
+    _updateMarketList(orignCoinList);
     updateTime = DateTime.now();
     sort();
     update();
@@ -35,8 +40,25 @@ class CoinListController extends GetxController {
     await Future.delayed(Duration(seconds: 1), () => fetchCoinList());
   }
 
-  void updatePlatform(String value) {
-    plaform = value;
+  void _updateMarketList(List<Coin> coinList) {
+    marketList = [];
+    for (Coin _coin in coinList) {
+      if (marketList.contains(_coin.quoteSymbol)) continue;
+      marketList.add(_coin.quoteSymbol);
+    }
+    if (marketList.contains(selectedMarket) == false) {
+      selectedMarket = marketList[0];
+    }
+    update();
+  }
+
+  void updateSelectedPlatform(String value) {
+    selectedPlaform = value;
+    update();
+  }
+
+  void updateSelectedMarket(String value) {
+    selectedMarket = value;
     update();
   }
 
@@ -67,11 +89,11 @@ class CoinListController extends GetxController {
   }
 
   void sort() {
-    // String _search = _searchCon.search;
+    String _search = _searchCon.search;
 
-    // coinList = [...orignCoinList];
-    // coinList = _remainSearch(coinList, _search);
-    // coinList = _remainKRW(coinList);
+    coinList = [...orignCoinList];
+    coinList = _remainSearch(coinList, _search);
+    coinList = _remainMarket(coinList);
     // if (sortName != 0) {
     //   coinList = _sortByName(coinList);
     // }
@@ -132,8 +154,8 @@ class CoinListController extends GetxController {
   //   return coinList;
   // }
 
-  List<Coin> _remainKRW(List<Coin> coinList) {
-    coinList.removeWhere((coin) => coin.quoteSymbol != 'KRW');
+  List<Coin> _remainMarket(List<Coin> coinList) {
+    coinList.removeWhere((coin) => coin.quoteSymbol != selectedMarket);
     return coinList;
   }
 }

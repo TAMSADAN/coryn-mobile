@@ -14,8 +14,8 @@ class BinanceService {
           "BinanceService fetchBinanceCoin _binanceCoinMarketList is null or empty");
       return null;
     }
-    final response = await http
-        .get(Uri.parse("https://api.binance.com/api/v3/ticker/price"));
+    final response =
+        await http.get(Uri.parse("https://api.binance.com/api/v3/ticker/24hr"));
 
     if (response.statusCode == 200) {
       try {
@@ -42,7 +42,7 @@ class BinanceService {
     try {
       for (var _binanceCoin in binanceCoinList) {
         Coin _coin = Coin(
-            platform: "binance",
+            platform: "바이낸스",
             baseSymbol: _binanceCoin.marketData.baseAsset,
             quoteSymbol: _binanceCoin.marketData.quoteAsset,
             koreanName: null,
