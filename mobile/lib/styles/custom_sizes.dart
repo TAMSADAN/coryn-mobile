@@ -8,6 +8,7 @@ class CustomScreenSize {
 
   static const double calendarPageHorizontal = 3;
   static const double small = 1;
+  static const double platformDropDownButton = 80;
 }
 
 class CustomFontSize {

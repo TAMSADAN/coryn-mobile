@@ -2,45 +2,81 @@ import 'package:mobile/models/binance_coin.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class BinanceService {
-  Future<List<BinanceCoin>> fetchBinanceCoin(
-      List<BinanceCoinMarket>? binanceCoinMarketList) async {
-    List<BinanceCoin> binanceCoinList = [];
-    List<BinanceCoinMarket> _binanceCoinMarketList =
-        binanceCoinMarketList ?? await fetchBinanceCoinMarketList();
+import 'package:mobile/models/coin.dart';
 
+class BinanceService {
+  Future<List<BinanceCoin>?> fetchBinanceCoin() async {
+    List<BinanceCoin> binanceCoinList = [];
+    List<BinanceCoinMarket>? _binanceCoinMarketList =
+        await _fetchBinanceCoinMarketList();
+    if (_binanceCoinMarketList == null || _binanceCoinMarketList.isEmpty) {
+      print(
+          "BinanceService fetchBinanceCoin _binanceCoinMarketList is null or empty");
+      return null;
+    }
     final response = await http
         .get(Uri.parse("https://api.binance.com/api/v3/ticker/price"));
 
     if (response.statusCode == 200) {
-      for (var _json in json.decode(utf8.decode(response.bodyBytes))) {
-        var _binanceCoinPrice = BinanceCoinPrice.fromJson(_json);
-        var _binanceCoinMarket = _binanceCoinMarketList
-            .firstWhere((_item) => _item.symbol == _binanceCoinPrice.symbol);
-        var _binanceCoin = BinanceCoin(
-            marketData: _binanceCoinMarket, priceData: _binanceCoinPrice);
+      try {
+        for (var _json in json.decode(utf8.decode(response.bodyBytes))) {
+          BinanceCoinPrice _binanceCoinPrice = BinanceCoinPrice.fromJson(_json);
+          BinanceCoinMarket _binanceCoinMarket = _binanceCoinMarketList
+              .firstWhere((_item) => _item.symbol == _binanceCoinPrice.symbol);
+          BinanceCoin _binanceCoin = BinanceCoin(
+              marketData: _binanceCoinMarket, priceData: _binanceCoinPrice);
 
-        binanceCoinList.add(_binanceCoin);
+          binanceCoinList.add(_binanceCoin);
+        }
+      } catch (e) {
+        print("BinanceService fetchBinanceCoin json parsing error");
+        return null;
       }
     }
     return binanceCoinList;
   }
 
-  Future<List<BinanceCoinMarket>> fetchBinanceCoinMarketList() async {
+  List<Coin>? parseCoinList(List<BinanceCoin> binanceCoinList) {
+    List<Coin> coinList = [];
+
+    try {
+      for (var _binanceCoin in binanceCoinList) {
+        Coin _coin = Coin(
+            platform: "binance",
+            baseSymbol: _binanceCoin.marketData.baseAsset,
+            quoteSymbol: _binanceCoin.marketData.quoteAsset,
+            koreanName: null,
+            englishName: null,
+            tradePrice: double.parse(_binanceCoin.priceData.openPrice),
+            changeRate: double.parse(_binanceCoin.priceData.priceChangePercent),
+            changePrice: double.parse(_binanceCoin.priceData.priceChange),
+            volume: double.parse(_binanceCoin.priceData.volume));
+        coinList.add(_coin);
+      }
+    } catch (e) {
+      print("BinanceService parseCoinList parse error");
+      return null;
+    }
+    return coinList;
+  }
+
+  Future<List<BinanceCoinMarket>?> _fetchBinanceCoinMarketList() async {
     List<BinanceCoinMarket> binanceCoinMarketList = [];
 
     final response = await http
         .get(Uri.parse("https://api.binance.com/api/v3/exchangeInfo"));
+    try {
+      if (response.statusCode == 200) {
+        for (var _json
+            in json.decode(utf8.decode(response.bodyBytes))['symbols']) {
+          var _binanceCoinMarket = BinanceCoinMarket.fromJson(_json);
 
-    if (response.statusCode == 200) {
-      for (var _json
-          in json.decode(utf8.decode(response.bodyBytes))['symbols']) {
-        var _binanceCoinMarket = BinanceCoinMarket.fromJson(_json);
-
-        binanceCoinMarketList.add(_binanceCoinMarket);
+          binanceCoinMarketList.add(_binanceCoinMarket);
+        }
       }
+    } catch (e) {
+      return null;
     }
-
     return binanceCoinMarketList;
   }
 }

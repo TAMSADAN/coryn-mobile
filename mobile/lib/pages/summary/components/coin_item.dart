@@ -2,7 +2,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/models/coin.dart';
 import 'package:mobile/pages/detail/detail_page.dart';
-import 'package:mobile/styles/custom_colors.dart';
 import 'package:mobile/utils/coryn_size.dart';
 import 'package:mobile/styles/custom_text_styles.dart';
 import 'package:intl/intl.dart';
@@ -33,8 +32,8 @@ class CoinItem extends StatelessWidget {
                 SizedBox(
                   width: ScreenUtil().screenWidth / 5,
                   child: _twoLineText(
-                    coin.koreanName,
-                    coin.baseSymbol + '/' + coin.quoteSymbol,
+                    coin.koreanName ?? coin.baseSymbol,
+                    coin.platform,
                     CrossAxisAlignment.start,
                   ),
                 ),
@@ -44,8 +43,8 @@ class CoinItem extends StatelessWidget {
                 SizedBox(
                   width: ScreenUtil().screenWidth / 5,
                   child: _twoLineText(
-                    _getFromattedPrice(coin.upbitPrice),
-                    _getFromattedPrice(coin.binancePrice),
+                    _getFromattedPrice(coin.tradePrice),
+                    _getFromattedPrice(coin.volume),
                     CrossAxisAlignment.end,
                   ),
                 ),
@@ -65,8 +64,8 @@ class CoinItem extends StatelessWidget {
                 SizedBox(
                   width: ScreenUtil().screenWidth / 5,
                   child: _textRateAndPrice(
-                    coin.kimpRate,
-                    coin.kimpPrice,
+                    0,
+                    0,
                   ),
                 ),
               ],

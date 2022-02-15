@@ -9,6 +9,8 @@ class CoinListController extends GetxController {
   List<Coin> orignCoinList = [];
   List<Coin> coinList = [];
 
+  String plaform = 'upbit';
+
   int sortName = 0;
   int sortPrice = 0;
   int sortRate = 0;
@@ -23,7 +25,7 @@ class CoinListController extends GetxController {
   }
 
   void fetchCoinList() async {
-    orignCoinList = await CoinService().fetchCoinList() ?? orignCoinList;
+    orignCoinList = await CoinService().fetchCoinList(plaform) ?? orignCoinList;
     coinList = [...orignCoinList];
     coinList = _remainKRW(coinList);
     updateTime = DateTime.now();
@@ -31,6 +33,11 @@ class CoinListController extends GetxController {
     update();
 
     await Future.delayed(Duration(seconds: 1), () => fetchCoinList());
+  }
+
+  void updatePlatform(String value) {
+    plaform = value;
+    update();
   }
 
   void updateSortType(String type) {
@@ -60,23 +67,23 @@ class CoinListController extends GetxController {
   }
 
   void sort() {
-    String _search = _searchCon.search;
+    // String _search = _searchCon.search;
 
-    coinList = [...orignCoinList];
-    coinList = _remainSearch(coinList, _search);
-    coinList = _remainKRW(coinList);
-    if (sortName != 0) {
-      coinList = _sortByName(coinList);
-    }
-    if (sortPrice != 0) {
-      coinList = _sortByPrice(coinList);
-    }
-    if (sortRate != 0) {
-      coinList = _sortByRate(coinList);
-    }
-    if (sortKimp != 0) {
-      coinList = _sortByKimp(coinList);
-    }
+    // coinList = [...orignCoinList];
+    // coinList = _remainSearch(coinList, _search);
+    // coinList = _remainKRW(coinList);
+    // if (sortName != 0) {
+    //   coinList = _sortByName(coinList);
+    // }
+    // if (sortPrice != 0) {
+    //   coinList = _sortByPrice(coinList);
+    // }
+    // if (sortRate != 0) {
+    //   coinList = _sortByRate(coinList);
+    // }
+    // if (sortKimp != 0) {
+    //   coinList = _sortByKimp(coinList);
+    // }
     update();
   }
 
@@ -84,7 +91,7 @@ class CoinListController extends GetxController {
     List<Coin> _coinList = [];
 
     for (var coin in coinList) {
-      if (coin.koreanName.contains(search)) {
+      if (coin.koreanName!.contains(search)) {
         _coinList.add(coin);
       } else if (coin.baseSymbol.contains(search.toUpperCase())) {
         _coinList.add(coin);
@@ -93,37 +100,37 @@ class CoinListController extends GetxController {
     return _coinList;
   }
 
-  List<Coin> _sortByKimp(List<Coin> coinList) {
-    coinList.sort((b, a) => a.kimpRate.compareTo(b.kimpRate));
-    if (sortKimp % 2 == 0) {
-      coinList = coinList.reversed.toList();
-    }
-    return coinList;
-  }
+  // List<Coin> _sortByKimp(List<Coin> coinList) {
+  //   coinList.sort((b, a) => a.kimpRate.compareTo(b.kimpRate));
+  //   if (sortKimp % 2 == 0) {
+  //     coinList = coinList.reversed.toList();
+  //   }
+  //   return coinList;
+  // }
 
-  List<Coin> _sortByRate(List<Coin> coinList) {
-    coinList.sort((b, a) => a.changeRate.compareTo(b.changeRate));
-    if (sortRate % 2 == 0) {
-      coinList = coinList.reversed.toList();
-    }
-    return coinList;
-  }
+  // List<Coin> _sortByRate(List<Coin> coinList) {
+  //   coinList.sort((b, a) => a.changeRate.compareTo(b.changeRate));
+  //   if (sortRate % 2 == 0) {
+  //     coinList = coinList.reversed.toList();
+  //   }
+  //   return coinList;
+  // }
 
-  List<Coin> _sortByName(List<Coin> coinList) {
-    coinList.sort((a, b) => a.koreanName.compareTo(b.koreanName));
-    if (sortName % 2 == 0) {
-      coinList = coinList.reversed.toList();
-    }
-    return coinList;
-  }
+  // List<Coin> _sortByName(List<Coin> coinList) {
+  //   coinList.sort((a, b) => a.koreanName.compareTo(b.koreanName));
+  //   if (sortName % 2 == 0) {
+  //     coinList = coinList.reversed.toList();
+  //   }
+  //   return coinList;
+  // }
 
-  List<Coin> _sortByPrice(List<Coin> coinList) {
-    coinList.sort((b, a) => a.upbitPrice.compareTo(b.upbitPrice));
-    if (sortPrice % 2 == 0) {
-      coinList = coinList.reversed.toList();
-    }
-    return coinList;
-  }
+  // List<Coin> _sortByPrice(List<Coin> coinList) {
+  //   coinList.sort((b, a) => a.upbitPrice.compareTo(b.upbitPrice));
+  //   if (sortPrice % 2 == 0) {
+  //     coinList = coinList.reversed.toList();
+  //   }
+  //   return coinList;
+  // }
 
   List<Coin> _remainKRW(List<Coin> coinList) {
     coinList.removeWhere((coin) => coin.quoteSymbol != 'KRW');

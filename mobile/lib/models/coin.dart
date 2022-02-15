@@ -1,21 +1,23 @@
 class Coin {
+  final String platform;
   final String baseSymbol;
   final String quoteSymbol;
-  final String koreanName;
-  final double upbitPrice;
-  final double binancePrice;
-  final double changeRate;
+  final String? koreanName;
+  final String? englishName;
+  final double tradePrice;
   final double changePrice;
-  late double kimpRate;
-  late double kimpPrice;
+  final double changeRate;
+  final double volume;
 
   Coin({
+    required this.platform,
     required this.baseSymbol,
     required this.quoteSymbol,
     required this.koreanName,
-    required this.upbitPrice,
-    required this.binancePrice,
-    required this.changeRate,
+    required this.englishName,
+    required this.tradePrice,
     required this.changePrice,
+    required this.changeRate,
+    required this.volume,
   });
 }
