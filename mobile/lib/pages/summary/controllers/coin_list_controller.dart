@@ -1,9 +1,10 @@
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 import 'package:mobile/service/coin_service.dart';
 import 'package:mobile/models/coin.dart';
 import 'package:mobile/utils/coryn_static.dart';
 
-class CoinListController extends GetxController {
+class CoinListController extends SuperController {
   List<Coin> orignCoinList = [];
   List<Coin> coinList = [];
 
@@ -20,6 +21,8 @@ class CoinListController extends GetxController {
   int sortKimp = 0;
 
   DateTime updateTime = DateTime.now();
+  bool stop = false;
+  bool isFetching = false;
 
   @override
   void onInit() {
@@ -27,7 +30,13 @@ class CoinListController extends GetxController {
     super.onInit();
   }
 
+  void _updateIsFetching(bool value) {
+    isFetching = value;
+    update();
+  }
+
   void fetchCoinList() async {
+    _updateIsFetching(true);
     orignCoinList =
         await CoinService().fetchCoinList(selectedPlaform) ?? orignCoinList;
     coinList = [...orignCoinList];
@@ -36,7 +45,9 @@ class CoinListController extends GetxController {
     sort();
     update();
     print("CoinListController fetchCoinList ${updateTime}");
-    if (isClosed == false) {
+    _updateIsFetching(false);
+    if (stop == false) {
+      _updateIsFetching(true);
       await Future.delayed(Duration(seconds: 3), () => fetchCoinList());
     }
   }
@@ -164,5 +175,33 @@ class CoinListController extends GetxController {
   List<Coin> _remainMarket(List<Coin> coinList) {
     coinList.removeWhere((coin) => coin.quoteSymbol != selectedMarket);
     return coinList;
+  }
+
+  @override
+  void onDetached() {
+    print("onDetached");
+  }
+
+  @override
+  void onInactive() {
+    print("onInactive");
+  }
+
+  @override
+  void onPaused() {
+    stop = true;
+    update();
+    print("onPaused");
+    print(stop);
+  }
+
+  @override
+  void onResumed() {
+    stop = false;
+    update();
+    if (isFetching == false) {
+      fetchCoinList();
+    }
+    print("onResumed");
   }
 }

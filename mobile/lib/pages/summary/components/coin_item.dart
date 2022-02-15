@@ -17,7 +17,6 @@ class CoinItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.delete<CoinListController>();
         Navigator.push(
           context,
           MaterialPageRoute(

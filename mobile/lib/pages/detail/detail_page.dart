@@ -7,7 +7,6 @@ import 'package:mobile/pages/detail/components/coin_good_news_list.dart';
 import 'package:mobile/pages/detail/components/coin_normal_news_list.dart';
 import 'package:mobile/pages/detail/components/web_view.dart';
 import 'package:mobile/pages/detail/controllers/detail_controller.dart';
-import 'package:mobile/pages/summary/controllers/coin_list_controller.dart';
 import 'package:mobile/styles/custom_colors.dart';
 import 'package:mobile/styles/custom_font_sizes.dart';
 import 'package:mobile/styles/custom_screen_sizes.dart';
@@ -51,8 +50,7 @@ class DetailPage extends StatelessWidget {
               icon: const Icon(Icons.arrow_back, color: Colors.black),
               onPressed: () {
                 Get.delete<DetailController>();
-                Get.put(CoinListController());
-                Navigator.pop(context);
+                Navigator.pop(context, true);
               },
             ),
             Text(
