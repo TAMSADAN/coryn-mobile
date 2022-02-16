@@ -43,7 +43,7 @@ class BinanceService {
     try {
       for (var _binanceCoin in binanceCoinList) {
         Coin _coin = Coin(
-            platform: "바이낸스",
+            platform: "BINANCE",
             baseSymbol: _binanceCoin.marketData.baseAsset,
             quoteSymbol: _binanceCoin.marketData.quoteAsset,
             koreanName: null,

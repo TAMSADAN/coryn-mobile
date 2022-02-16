@@ -98,12 +98,12 @@ class CoinCalendarModal extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         GestureDetector(
-          onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    DetailPage(market: calendarModal.coin.market)),
-          ),
+          // onTap: () => Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //       builder: (context) =>
+          //           DetailPage(market: calendarModal.coin.market)),
+          // ),
           child: Row(
             children: [
               Container(

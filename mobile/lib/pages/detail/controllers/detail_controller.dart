@@ -1,19 +1,22 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:mobile/models/chart.dart';
-import 'package:mobile/models/dto/coin.dart';
+import 'package:mobile/models/coin.dart';
 import 'package:mobile/models/dto/news.dart';
 import 'package:mobile/service/news_service.dart';
 import 'package:mobile/service/coin_service.dart';
 import 'package:mobile/models/detail_model.dart';
+import 'package:mobile/service/trading_view_service.dart';
 
 class DetailController extends GetxController {
-  String market;
+  final Coin coin;
 
   final _coinService = CoinService();
   final _newsService = NewsService();
   final _detailService = DetailModel();
+  final _tradingViewService = TradingViewService();
 
-  late Coin coin;
   List<News> normalNewsList = [];
   List<News> goodNewsList = [];
   List<Chart> chartList = [];
@@ -25,9 +28,28 @@ class DetailController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    fetchCoin(market);
-    fetchNewsList(market);
-    fetchChartList(market);
+  }
+
+  Future<String?> fetchTradingViewUri() async {
+    String? html = await _tradingViewService.fetchTradingViewHTML(
+        coin.baseSymbol, coin.quoteSymbol, coin.platform);
+    if (html == null) {
+      print("DetailController fetchTradingViewUri: html is null");
+      return null;
+    }
+    String uri;
+    try {
+      uri = Uri.dataFromString(
+        html,
+        mimeType: 'text/html',
+        encoding: Encoding.getByName('utf-8'),
+      ).toString();
+    } catch (e) {
+      print("DetailController fetchTradingViewUri: uri parse error");
+      return null;
+    }
+    print(uri);
+    return uri;
   }
 
   void fetchCoin(String market) async {
@@ -98,5 +120,5 @@ class DetailController extends GetxController {
     return _normalizedChartList;
   }
 
-  DetailController({required this.market});
+  DetailController({required this.coin});
 }

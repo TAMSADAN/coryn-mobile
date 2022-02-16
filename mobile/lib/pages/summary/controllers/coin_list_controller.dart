@@ -37,8 +37,9 @@ class CoinListController extends SuperController {
 
   void fetchCoinList() async {
     _updateIsFetching(true);
-    orignCoinList =
-        await CoinService().fetchCoinList(selectedPlaform) ?? orignCoinList;
+    orignCoinList = await CoinService()
+            .fetchCoinList(CorynStatic.platformList[selectedPlaform]!) ??
+        orignCoinList;
     coinList = [...orignCoinList];
     _updateMarketList(orignCoinList);
     updateTime = DateTime.now();
@@ -48,7 +49,7 @@ class CoinListController extends SuperController {
     _updateIsFetching(false);
     if (stop == false) {
       _updateIsFetching(true);
-      await Future.delayed(Duration(seconds: 3), () => fetchCoinList());
+      await Future.delayed(Duration(seconds: 30), () => fetchCoinList());
     }
   }
 
@@ -58,7 +59,7 @@ class CoinListController extends SuperController {
       if (marketList.contains(_coin.quoteSymbol)) continue;
       marketList.add(_coin.quoteSymbol);
     }
-    if (marketList.contains(selectedMarket) == false) {
+    if (marketList.isNotEmpty && marketList.contains(selectedMarket) == false) {
       selectedMarket = marketList[0];
     }
     update();

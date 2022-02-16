@@ -1,36 +1,55 @@
-// import 'dart:convert';
+import 'dart:async';
+import 'dart:convert';
 
-// import 'package:flutter/material.dart';
-// import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mobile/pages/detail/controllers/detail_controller.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
-// class TradingView extends StatefulWidget {
-//   const TradingView({Key? key}) : super(key: key);
+class TradingView extends StatefulWidget {
+  @override
+  TradingViewState createState() {
+    return TradingViewState();
+  }
+}
 
-//   @override
-//   _TradingViewState createState() => _TradingViewState();
-// }
+class TradingViewState extends State<TradingView> {
+  late WebViewController _con;
+  final _detailController = Get.find<DetailController>();
 
-// class _TradingViewState extends State<TradingView> {
-//   List<WebViewController> _listController = [];
-//   List<double> _heights =
-//       List<double>.generate(htmlStrings.length, (int index) => 20.0);
+  _loadHTML() async {
+    _con.loadUrl(await _detailController.fetchTradingViewUri() ?? "");
+  }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return WebView(
-//       initialUrl:
-//           'data:text/html;base64,${base64Encode(const Utf8Encoder().convert(htmlStrings[index]))}',
-//       onPageFinished: (some) async {
-//         double height = double.parse(await _listController[index]
-//             .evaluateJavascript("document.documentElement.scrollHeight;"));
-//         setState(() {
-//           _heights[index] = height;
-//         });
-//       },
-//       javascriptMode: JavascriptMode.unrestricted,
-//       onWebViewCreated: (controller) async {
-//         _listController.add(controller);
-//       },
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<DetailController>(
+      builder: (_) => WebView(
+        initialUrl: '',
+        javascriptMode: JavascriptMode.unrestricted,
+        zoomEnabled: false,
+        onWebViewCreated: (WebViewController webViewController) {
+          _con = webViewController;
+          _loadHTML();
+        },
+        onProgress: (int progress) {
+          print("WebView is loading (progress : $progress%)");
+        },
+        navigationDelegate: (NavigationRequest request) {
+          if (request.url.startsWith('https://www.youtube.com/')) {
+            print('blocking navigation}');
+            return NavigationDecision.prevent;
+          }
+          print('allowing navigation to');
+          return NavigationDecision.navigate;
+        },
+        onPageStarted: (String url) {
+          print('Page started loading');
+        },
+        onPageFinished: (String url) {
+          print('Page finished loading');
+        },
+      ),
+    );
+  }
+}

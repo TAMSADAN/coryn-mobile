@@ -1,28 +1,30 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobile/models/coin.dart';
 import 'package:mobile/pages/detail/components/coin_info.dart';
 import 'package:mobile/pages/detail/components/coin_chart.dart';
 import 'package:mobile/pages/detail/components/coin_good_news_list.dart';
 import 'package:mobile/pages/detail/components/coin_normal_news_list.dart';
-import 'package:mobile/pages/detail/components/web_view.dart';
+import 'package:mobile/pages/detail/components/trading_view.dart';
 import 'package:mobile/pages/detail/controllers/detail_controller.dart';
 import 'package:mobile/styles/custom_colors.dart';
 import 'package:mobile/styles/custom_font_sizes.dart';
 import 'package:mobile/styles/custom_screen_sizes.dart';
 import 'package:mobile/styles/custom_text_styles.dart';
 import 'package:mobile/utils/coryn_size.dart';
+import 'package:mobile/utils/coryn_static.dart';
 import 'package:mobile/utils/coryn_text_style.dart';
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class DetailPage extends StatelessWidget {
-  final String market;
-  const DetailPage({Key? key, required this.market}) : super(key: key);
+  final Coin coin;
+  const DetailPage({Key? key, required this.coin}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final _detailController = Get.put(DetailController(market: market));
+    final _detailController = Get.put(DetailController(coin: coin));
     WebViewController _controller;
     return Scaffold(
       appBar: AppBar(
@@ -33,11 +35,14 @@ class DetailPage extends StatelessWidget {
         title: Column(
           children: [
             Text(
-              "LTC/KRW",
+              coin.baseSymbol + '/' + coin.quoteSymbol,
               style: CustomTextStyles.blackBold,
             ),
             Text(
-              "업비트 (Upbit)",
+              CorynStatic().parseToPlatformKoreanName(coin.platform) +
+                  ' (' +
+                  coin.platform +
+                  ')',
               style: CustomTextStyles.small,
             ),
           ],
@@ -65,13 +70,27 @@ class DetailPage extends StatelessWidget {
         centerTitle: true,
       ),
       backgroundColor: Colors.white,
-      body: ListView(
-        padding: EdgeInsets.zero,
+      body: Column(
         children: [
-          SizedBox(
-              width: double.infinity,
-              height: CustomScreenSizes.tradigViewHeight.h,
-              child: HelpScreen()),
+          GestureDetector(
+            onVerticalDragUpdate: (updateDetails) {},
+            child: SizedBox(
+                width: double.infinity,
+                height: CustomScreenSizes.tradigViewHeight.h,
+                child: TradingView()),
+          ),
+          Expanded(
+            child: ListView(
+              shrinkWrap: true,
+              padding: EdgeInsets.zero,
+              children: [
+                Text("data"),
+                Text("data"),
+                Text("data"),
+                Text("data"),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -104,7 +123,7 @@ class DetailPage extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
-                CoinInfo(),
+                // CoinInfo(),
                 CoinChart(),
                 Text(
                   "일정",

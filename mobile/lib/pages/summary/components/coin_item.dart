@@ -19,9 +19,7 @@ class CoinItem extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  DetailPage(market: coin.baseSymbol + '-' + coin.quoteSymbol)),
+          MaterialPageRoute(builder: (context) => DetailPage(coin: coin)),
         );
       },
       child: Padding(
