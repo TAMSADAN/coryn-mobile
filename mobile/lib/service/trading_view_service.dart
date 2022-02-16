@@ -7,17 +7,12 @@ import 'package:mobile/models/coin.dart';
 class TradingViewService {
   Future<String?> fetchTradingViewHTML(
       String baseSymbol, String quoteSymbol, String platform) async {
-    if (await _isOkTradingView(baseSymbol, quoteSymbol, platform) == false) {
-      print(
-          "TradingViewService: fetchingTradingViewHTML TradingView is not OK");
-      return null;
-    }
     String html = _parseToHTML(baseSymbol, quoteSymbol, platform);
 
     return html;
   }
 
-  Future<bool> _isOkTradingView(
+  Future<bool> isOkTradingView(
       String baseSymbol, String quoteSymbol, String platform) async {
     String _url = _parseToUrl(baseSymbol, quoteSymbol, platform);
 

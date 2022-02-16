@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile/models/coin.dart';
-import 'package:mobile/pages/detail/components/coin_info.dart';
 import 'package:mobile/pages/detail/components/coin_chart.dart';
 import 'package:mobile/pages/detail/components/coin_good_news_list.dart';
 import 'package:mobile/pages/detail/components/coin_normal_news_list.dart';
+import 'package:mobile/pages/detail/components/normal_news_item.dart';
 import 'package:mobile/pages/detail/components/trading_view.dart';
 import 'package:mobile/pages/detail/controllers/detail_controller.dart';
 import 'package:mobile/styles/custom_colors.dart';
@@ -72,77 +72,69 @@ class DetailPage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          GestureDetector(
-            onVerticalDragUpdate: (updateDetails) {},
-            child: SizedBox(
-                width: double.infinity,
-                height: CustomScreenSizes.tradigViewHeight.h,
-                child: TradingView()),
-          ),
+          TradingView(),
           Expanded(
             child: ListView(
               shrinkWrap: true,
               padding: EdgeInsets.zero,
               children: [
-                Text("data"),
-                Text("data"),
-                Text("data"),
-                Text("data"),
+                NormalNewsList(),
               ],
             ),
           ),
         ],
       ),
     );
-
-    GetBuilder<DetailController>(
-      builder: (_) => Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          toolbarHeight: 30,
-          backgroundColor: Colors.white,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.black),
-            onPressed: () {
-              Get.delete<DetailController>();
-              Navigator.pop(context);
-            },
-          ),
-          centerTitle: true,
-        ),
-        backgroundColor: Colors.white,
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(
-              CorynSize.pageHorizontal,
-              CorynSize.pageVertical,
-              CorynSize.pageHorizontal,
-              0.0,
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                // CoinInfo(),
-                CoinChart(),
-                Text(
-                  "일정",
-                  style: CorynTextStyle.xLargeBoldTextStyle,
-                ),
-                SizedBox(
-                  height: 170,
-                  child: CoinGoodNewsList(),
-                ),
-                Text(
-                  "뉴스",
-                  style: CorynTextStyle.xLargeBoldTextStyle,
-                ),
-                CoinNormalNewsList(),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
   }
 }
+
+
+    // GetBuilder<DetailController>(
+    //   builder: (_) => Scaffold(
+    //     appBar: AppBar(
+    //       elevation: 0,
+    //       toolbarHeight: 30,
+    //       backgroundColor: Colors.white,
+    //       leading: IconButton(
+    //         icon: const Icon(Icons.arrow_back, color: Colors.black),
+    //         onPressed: () {
+    //           Get.delete<DetailController>();
+    //           Navigator.pop(context);
+    //         },
+    //       ),
+    //       centerTitle: true,
+    //     ),
+    //     backgroundColor: Colors.white,
+    //     body: SingleChildScrollView(
+    //       child: Padding(
+    //         padding: const EdgeInsets.fromLTRB(
+    //           CorynSize.pageHorizontal,
+    //           CorynSize.pageVertical,
+    //           CorynSize.pageHorizontal,
+    //           0.0,
+    //         ),
+    //         child: Column(
+    //           mainAxisSize: MainAxisSize.min,
+    //           crossAxisAlignment: CrossAxisAlignment.start,
+    //           children: const [
+    //             // CoinInfo(),
+    //             CoinChart(),
+    //             Text(
+    //               "일정",
+    //               style: CorynTextStyle.xLargeBoldTextStyle,
+    //             ),
+    //             SizedBox(
+    //               height: 170,
+    //               child: CoinGoodNewsList(),
+    //             ),
+    //             Text(
+    //               "뉴스",
+    //               style: CorynTextStyle.xLargeBoldTextStyle,
+    //             ),
+    //             CoinNormalNewsList(),
+    //           ],
+    //         ),
+    //       ),
+    //     ),
+    //   ),
+    // );

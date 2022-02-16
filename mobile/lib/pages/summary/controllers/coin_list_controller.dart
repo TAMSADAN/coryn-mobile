@@ -49,7 +49,7 @@ class CoinListController extends SuperController {
     _updateIsFetching(false);
     if (stop == false) {
       _updateIsFetching(true);
-      await Future.delayed(Duration(seconds: 30), () => fetchCoinList());
+      await Future.delayed(Duration(seconds: 2), () => fetchCoinList());
     }
   }
 

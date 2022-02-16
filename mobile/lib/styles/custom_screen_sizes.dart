@@ -12,5 +12,5 @@ class CustomScreenSizes {
   static const double dropDownButtonMaxHeight = 200;
   static const double appBarHeight = 50;
   static const double appBarLeadingWidth = 100;
-  static const double tradigViewHeight = 400;
+  static const double tradigViewHeight = 300;
 }

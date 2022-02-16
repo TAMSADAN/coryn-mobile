@@ -24,10 +24,18 @@ class DetailController extends GetxController {
   bool fetchingCoin = true;
   bool fetchingNews = true;
   bool fetchingChart = true;
+  bool? isOkTradingView;
 
   @override
   void onInit() {
+    updateIsOkTradingView();
     super.onInit();
+  }
+
+  Future<void> updateIsOkTradingView() async {
+    isOkTradingView = await _tradingViewService.isOkTradingView(
+        coin.baseSymbol, coin.quoteSymbol, coin.platform);
+    update();
   }
 
   Future<String?> fetchTradingViewUri() async {
@@ -48,7 +56,6 @@ class DetailController extends GetxController {
       print("DetailController fetchTradingViewUri: uri parse error");
       return null;
     }
-    print(uri);
     return uri;
   }
 
