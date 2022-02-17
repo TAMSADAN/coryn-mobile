@@ -14,7 +14,7 @@ class CoinUpdateText extends StatelessWidget {
   Widget build(BuildContext context) {
     final DateFormat formatter = DateFormat('HH:mm:ss');
     return GetBuilder<CoinListController>(
-      builder: (_) => Text("업데이트 시간: " + formatter.format(_.updateTime),
+      builder: (_) => Text("업데이트 시간: " + formatter.format(_.updatedTime),
           style: TextStyle(
             color: CustomColors.grey,
             fontFamily: CustomFonts.context,

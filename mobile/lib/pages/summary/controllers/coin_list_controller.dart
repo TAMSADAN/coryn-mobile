@@ -8,12 +8,11 @@ import 'package:mobile/utils/coryn_static.dart';
 class CoinListController extends SuperController {
   final _coinService = CoinService();
   Map<String, List<Coin>> coinData = {};
-  List<Coin> orignCoinList = [];
   List<Coin> coinList = [];
 
-  String selectedPlaform = '업비트';
+  String selectedPlatform = 'UPBIT';
   String selectedMarket = '';
-  List<String> platformList = CorynStatic.platformKoreanNameList;
+  List<String> platformList = CorynStatic.platformEnglishNameList;
   List<String> marketList = [''];
 
   String search = "";
@@ -23,21 +22,46 @@ class CoinListController extends SuperController {
   int sortRate = 0;
   int sortKimp = 0;
 
-  DateTime updateTime = DateTime.now();
+  DateTime updatedTime = DateTime.now();
   bool stop = false;
   bool isFetching = false;
+  bool isPaused = false;
 
   @override
   void onInit() {
-    fetchCoinList();
+    loopFetchCoinData();
     super.onInit();
   }
 
-  void fetchCoinData(String platform) async {
+  Future<void> loopFetchCoinData() async {
+    await fetchCoinData(selectedPlatform);
+    await Future.delayed(const Duration(seconds: 3));
+    if (isPaused == false) {
+      await loopFetchCoinData();
+    }
+  }
+
+  Future<void> fetchCoinData(String platform) async {
+    if (isFetching == true) {
+      return;
+    }
+    _updateIsFetching(true);
     coinData[platform.toUpperCase()] =
-        await _coinService.fetchCoinList(platform) ??
+        await _coinService.fetchCoinList(platform.toUpperCase()) ??
             coinData[platform.toUpperCase()] ??
             [];
+    update();
+    _updateCoinList(selectedPlatform);
+    _updateUpdatedTime(DateTime.now());
+    _updateMarketList();
+    print("CoinListController fetchCoinData ${updatedTime}");
+    _updateIsFetching(false);
+    sort();
+  }
+
+  void _updateUpdatedTime(DateTime date) {
+    updatedTime = date;
+    update();
   }
 
   void _updateIsFetching(bool value) {
@@ -45,25 +69,24 @@ class CoinListController extends SuperController {
     update();
   }
 
-  void fetchCoinList() async {
-    _updateIsFetching(true);
-    orignCoinList = await CoinService()
-            .fetchCoinList(CorynStatic.platformList[selectedPlaform]!) ??
-        orignCoinList;
-    coinList = [...orignCoinList];
-    _updateMarketList(orignCoinList);
-    updateTime = DateTime.now();
-    sort();
+  void _updateIsPaused(bool value) {
+    isPaused = value;
     update();
-    print("CoinListController fetchCoinList ${updateTime}");
-    _updateIsFetching(false);
-    if (stop == false) {
-      _updateIsFetching(true);
-      await Future.delayed(Duration(seconds: 2), () => fetchCoinList());
-    }
   }
 
-  void _updateMarketList(List<Coin> coinList) {
+  void _updateCoinList(String platform) {
+    coinList = coinData[platform.toUpperCase()] ?? [];
+    update();
+  }
+
+  void sort() {
+    _updateCoinList(selectedPlatform);
+    _updateCoinListByTarget(selectedMarket);
+    _updateCoinListBySearch(search);
+    update();
+  }
+
+  void _updateMarketList() {
     marketList = [];
     for (Coin _coin in coinList) {
       if (marketList.contains(_coin.target)) continue;
@@ -77,13 +100,12 @@ class CoinListController extends SuperController {
 
   void updateSearch(String value) {
     search = value;
-    sort();
     update();
+    sort();
   }
 
   void updateSelectedPlatform(String value) {
-    selectedPlaform = value;
-    sort();
+    selectedPlatform = value;
     update();
   }
 
@@ -119,22 +141,16 @@ class CoinListController extends SuperController {
     sort();
   }
 
-  void sort() {
-    coinList = [...orignCoinList];
-    coinList = _remainSearch(coinList, search);
-    coinList = _remainMarket(coinList);
-    // if (sortName != 0) {
-    //   coinList = _sortByName(coinList);
-    // }
-    // if (sortPrice != 0) {
-    //   coinList = _sortByPrice(coinList);
-    // }
-    // if (sortRate != 0) {
-    //   coinList = _sortByRate(coinList);
-    // }
-    // if (sortKimp != 0) {
-    //   coinList = _sortByKimp(coinList);
-    // }
+  void _updateCoinListBySearch(String search) {
+    List<Coin> _coinList = [];
+    for (Coin _coin in coinList) {
+      if (_coin.koreanName != null && _coin.koreanName!.contains(search)) {
+        _coinList.add(_coin);
+      } else if (_coin.base.contains(search.toUpperCase())) {
+        _coinList.add(_coin);
+      }
+    }
+    coinList = _coinList;
     update();
   }
 
@@ -183,9 +199,9 @@ class CoinListController extends SuperController {
   //   return coinList;
   // }
 
-  List<Coin> _remainMarket(List<Coin> coinList) {
-    coinList.removeWhere((coin) => coin.target != selectedMarket);
-    return coinList;
+  void _updateCoinListByTarget(String target) {
+    coinList.removeWhere((_coin) => _coin.target != target);
+    update();
   }
 
   @override
@@ -200,19 +216,14 @@ class CoinListController extends SuperController {
 
   @override
   void onPaused() {
-    stop = true;
-    update();
+    _updateIsPaused(true);
     print("onPaused");
-    print(stop);
   }
 
   @override
   void onResumed() {
-    stop = false;
-    update();
-    if (isFetching == false) {
-      fetchCoinList();
-    }
+    _updateIsPaused(false);
+    loopFetchCoinData();
     print("onResumed");
   }
 }

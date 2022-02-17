@@ -57,7 +57,7 @@ class CoinItem extends StatelessWidget {
             SizedBox(
               width: ScreenUtil().screenWidth / 5,
               child: _textRateAndPrice(
-                coin.changeRate * 100,
+                coin.changeRate,
                 coin.changePrice,
               ),
             ),

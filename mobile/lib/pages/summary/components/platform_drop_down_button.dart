@@ -35,7 +35,7 @@ class PlatformDropDownButton extends StatelessWidget {
           // ),
           // const SizedBox(width: CorynSize.contextHorizontal),
           DropdownButton2(
-            value: _.selectedPlaform,
+            value: _.selectedPlatform,
             items: _.platformList.map((_value) {
               return DropdownMenuItem(
                   value: _value,

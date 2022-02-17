@@ -47,8 +47,8 @@ class UpbitService {
           koreanName: _upbitCoin.marketData.koreanName,
           englishName: _upbitCoin.marketData.englishName,
           tradePrice: _upbitCoin.priceData.tradePrice,
-          changeRate: _upbitCoin.priceData.changeRate,
-          changePrice: _upbitCoin.priceData.changePrice,
+          changeRate: _upbitCoin.priceData.signedChangeRate * 100,
+          changePrice: _upbitCoin.priceData.signedChangePrice,
           volume: _upbitCoin.priceData.accTradePrice24h,
         );
         coinList.add(_coin);

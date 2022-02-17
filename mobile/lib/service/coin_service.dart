@@ -7,9 +7,9 @@ import 'package:mobile/service/upbit_service.dart';
 class CoinService {
   Future<List<Coin>?> fetchCoinList(String platform) async {
     List<Coin>? coinList;
-    if (platform == "UPBIT") {
+    if (platform.toUpperCase() == "UPBIT") {
       coinList = await _fetchCoinListFromUpbit();
-    } else if (platform == "BINANCE") {
+    } else if (platform.toUpperCase() == "BINANCE") {
       coinList = await _fetchCoinListFromBinance();
     } else {
       print("CoinService fetchCoinList ${platform} 존재하지 않습니다.");
