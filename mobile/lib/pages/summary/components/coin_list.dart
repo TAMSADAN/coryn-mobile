@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile/pages/summary/components/coin_item.dart';
@@ -9,13 +10,15 @@ class CoinList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CoinListController>(
-      builder: (_) => ListView(
-        shrinkWrap: true,
-        padding: EdgeInsets.zero,
-        children: _.coinList.map((_coin) {
-          return CoinItem(coin: _coin);
-        }).toList(),
-      ),
+      builder: (_) => _.coinList.isEmpty
+          ? Center(child: CupertinoActivityIndicator())
+          : ListView(
+              shrinkWrap: true,
+              padding: EdgeInsets.zero,
+              children: _.coinList.map((_coin) {
+                return CoinItem(coin: _coin);
+              }).toList(),
+            ),
     );
   }
 }

@@ -39,9 +39,11 @@ class BinanceService {
 
   List<Coin>? parseCoinList(List<BinanceCoin> binanceCoinList) {
     List<Coin> coinList = [];
-
     try {
       for (var _binanceCoin in binanceCoinList) {
+        if (double.parse(_binanceCoin.priceData.lastPrice) == 0) {
+          continue;
+        }
         Coin _coin = Coin(
           platform: "BINANCE",
           base: _binanceCoin.marketData.baseAsset,
