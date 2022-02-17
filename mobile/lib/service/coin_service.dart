@@ -5,12 +5,14 @@ import 'package:mobile/service/binance_service.dart';
 import 'package:mobile/service/upbit_service.dart';
 
 class CoinService {
-  Future<List<Coin>?> fetchCoinList(String platform) async {
+  Future<List<Coin>?> fetchCoinList(
+      String platform, List<Coin> binanceCoinList) async {
     List<Coin>? coinList;
     if (platform.toUpperCase() == "UPBIT") {
-      coinList = await _fetchCoinListFromUpbit();
+      coinList = await _fetchCoinListFromUpbit(binanceCoinList);
     } else if (platform.toUpperCase() == "BINANCE") {
-      coinList = await _fetchCoinListFromBinance();
+      print("COinService fetchCoinList 바이낸스는 요청이 필요하지 않습니다.");
+      return null;
     } else {
       print("CoinService fetchCoinList ${platform} 존재하지 않습니다.");
       return null;
@@ -19,7 +21,8 @@ class CoinService {
     return coinList;
   }
 
-  Future<List<Coin>?> _fetchCoinListFromUpbit() async {
+  Future<List<Coin>?> _fetchCoinListFromUpbit(
+      List<Coin> binanceCoinList) async {
     final UpbitService _upbitService = UpbitService();
     final List<UpbitCoin>? _upbitCoinList =
         await _upbitService.fetchUpbitCoin();
@@ -28,12 +31,13 @@ class CoinService {
           "CoinService fetchCoinListFromUpbit _upbitCoinList is null or empty");
       return null;
     }
-    final List<Coin>? coinList = _upbitService.parseCoinList(_upbitCoinList);
+    final List<Coin>? coinList =
+        await _upbitService.parseCoinList(_upbitCoinList, binanceCoinList);
 
     return coinList;
   }
 
-  Future<List<Coin>?> _fetchCoinListFromBinance() async {
+  Future<List<Coin>?> fetchCoinListFromBinance() async {
     final BinanceService _binanceService = BinanceService();
     List<BinanceCoin>? _binanceCoinList =
         await _binanceService.fetchBinanceCoin();

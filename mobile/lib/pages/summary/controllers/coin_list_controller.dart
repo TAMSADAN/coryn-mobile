@@ -41,15 +41,23 @@ class CoinListController extends SuperController {
     }
   }
 
+  Future<void> fetchBinanceCoinData() async {
+    coinData["BINANCE"] = (await _coinService.fetchCoinListFromBinance()) ??
+        coinData["BINANCE"] ??
+        [];
+    update();
+  }
+
   Future<void> fetchCoinData(String platform) async {
     if (isFetching == true) {
       return;
     }
     _updateIsFetching(true);
-    coinData[platform.toUpperCase()] =
-        await _coinService.fetchCoinList(platform.toUpperCase()) ??
-            coinData[platform.toUpperCase()] ??
-            [];
+    await fetchBinanceCoinData();
+    coinData[platform.toUpperCase()] = (await _coinService.fetchCoinList(
+            platform.toUpperCase(), coinData["BINANCE"] ?? [])) ??
+        coinData[platform.toUpperCase()] ??
+        [];
     update();
     _updateCoinList(selectedPlatform);
     _updateUpdatedTime(DateTime.now());
@@ -106,6 +114,7 @@ class CoinListController extends SuperController {
 
   void updateSelectedPlatform(String value) {
     selectedPlatform = value;
+    sort();
     update();
   }
 

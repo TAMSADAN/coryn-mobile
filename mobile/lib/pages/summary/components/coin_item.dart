@@ -62,16 +62,16 @@ class CoinItem extends StatelessWidget {
               ),
             ),
 
-            // SizedBox(
-            //   width: CorynSize.contextHorizontal.w,
-            // ),
-            // SizedBox(
-            //   width: ScreenUtil().screenWidth / 5,
-            //   child: _textRateAndPrice(
-            //     0,
-            //     0,
-            //   ),
-            // ),
+            SizedBox(
+              width: CorynSize.contextHorizontal.w,
+            ),
+            SizedBox(
+              width: ScreenUtil().screenWidth / 5,
+              child: _textRateAndPrice(
+                coin.premiumRate != null ? coin.premiumRate! : 0,
+                coin.premiumPrice != null ? coin.premiumPrice! : 0,
+              ),
+            ),
           ],
         ),
       ),
@@ -176,10 +176,10 @@ class CoinItem extends StatelessWidget {
     if (ratePrice > 0) {
       formattedPrice += '+';
     }
-    if (ratePrice < 100) {
+    if (ratePrice.abs() < 1) {
       formattedPrice += double.parse(ratePrice.toStringAsFixed(2)).toString();
     } else {
-      formattedPrice += f.format(ratePrice.round()).toString();
+      formattedPrice = f.format(ratePrice.round()).toString();
     }
     return formattedPrice;
   }

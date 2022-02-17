@@ -43,15 +43,18 @@ class BinanceService {
     try {
       for (var _binanceCoin in binanceCoinList) {
         Coin _coin = Coin(
-            platform: "BINANCE",
-            base: _binanceCoin.marketData.baseAsset,
-            target: _binanceCoin.marketData.quoteAsset,
-            koreanName: null,
-            englishName: null,
-            tradePrice: double.parse(_binanceCoin.priceData.openPrice),
-            changeRate: double.parse(_binanceCoin.priceData.priceChangePercent),
-            changePrice: double.parse(_binanceCoin.priceData.priceChange),
-            volume: double.parse(_binanceCoin.priceData.volume));
+          platform: "BINANCE",
+          base: _binanceCoin.marketData.baseAsset,
+          target: _binanceCoin.marketData.quoteAsset,
+          koreanName: null,
+          englishName: null,
+          tradePrice: double.parse(_binanceCoin.priceData.lastPrice),
+          changeRate: double.parse(_binanceCoin.priceData.priceChangePercent),
+          changePrice: double.parse(_binanceCoin.priceData.priceChange),
+          volume: double.parse(_binanceCoin.priceData.volume),
+          premiumPrice: null,
+          premiumRate: null,
+        );
         coinList.add(_coin);
       }
     } catch (e) {

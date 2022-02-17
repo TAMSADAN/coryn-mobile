@@ -8,6 +8,8 @@ class Coin {
   final double changePrice;
   final double changeRate;
   final double volume;
+  final double? premiumPrice;
+  final double? premiumRate;
 
   Coin({
     required this.platform,
@@ -19,5 +21,7 @@ class Coin {
     required this.changePrice,
     required this.changeRate,
     required this.volume,
+    required this.premiumPrice,
+    required this.premiumRate,
   });
 }

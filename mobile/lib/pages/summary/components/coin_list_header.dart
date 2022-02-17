@@ -14,35 +14,39 @@ class CoinListHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        SizedBox(
-          width: ScreenUtil().screenWidth / 5,
-          child: _text("이름", MainAxisAlignment.start),
-        ),
-        // SizedBox(
-        //   width: CorynSize.contextHorizontal.w,
-        // ),
-        Spacer(),
-        SizedBox(
-          width: ScreenUtil().screenWidth / 5,
-          child: _text("현재가", MainAxisAlignment.end),
-        ),
-        SizedBox(
-          width: CorynSize.contextHorizontal.w,
-        ),
-        SizedBox(
-          width: ScreenUtil().screenWidth / 5,
-          child: _text("전일대비", MainAxisAlignment.end),
-        ),
-        // SizedBox(
-        //   width: CorynSize.contextHorizontal.w,
-        // ),
-        // SizedBox(
-        //   width: ScreenUtil().screenWidth / 5,
-        //   child: _text("김프", MainAxisAlignment.end),
-        // ),
-      ],
+    return GetBuilder<CoinListController>(
+      builder: (_) => Row(
+        children: [
+          SizedBox(
+            width: ScreenUtil().screenWidth / 5,
+            child: _text("이름", MainAxisAlignment.start),
+          ),
+          Spacer(),
+          SizedBox(
+            width: ScreenUtil().screenWidth / 5,
+            child: _text("현재가", MainAxisAlignment.end),
+          ),
+          SizedBox(
+            width: CorynSize.contextHorizontal.w,
+          ),
+          SizedBox(
+            width: ScreenUtil().screenWidth / 5,
+            child: _text("전일대비", MainAxisAlignment.end),
+          ),
+          if (_.selectedPlatform != "BINANCE")
+            Row(
+              children: [
+                SizedBox(
+                  width: CorynSize.contextHorizontal.w,
+                ),
+                SizedBox(
+                  width: ScreenUtil().screenWidth / 5,
+                  child: _text("프리미엄", MainAxisAlignment.end),
+                ),
+              ],
+            ),
+        ],
+      ),
     );
   }
 

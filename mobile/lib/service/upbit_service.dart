@@ -3,6 +3,8 @@ import 'package:mobile/models/upbit_coin.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:mobile/service/premium_service.dart';
+
 class UpbitService {
   Future<List<UpbitCoin>?> fetchUpbitCoin() async {
     List<UpbitCoin> upbitCoinList = [];
@@ -36,21 +38,37 @@ class UpbitService {
     return upbitCoinList;
   }
 
-  List<Coin>? parseCoinList(List<UpbitCoin> upbitCoinList) {
+  Future<List<Coin>?> parseCoinList(
+      List<UpbitCoin> upbitCoinList, List<Coin> binanceCoinList) async {
     List<Coin> coinList = [];
+    Map<String, double> quotationData = {
+      "KRWUSD": await PremiumService().fetchKrwUsd(),
+    };
     try {
       for (var _upbitCoin in upbitCoinList) {
+        String _base = _upbitCoin.marketData.market.split('-')[1];
+        String _target = _upbitCoin.marketData.market.split('-')[0];
+        double? _premiumPrice = PremiumService()
+            .getPremiumPrice(binanceCoinList, quotationData, _base, _target);
         Coin _coin = Coin(
           platform: "UPBIT",
-          base: _upbitCoin.marketData.market.split('-')[1],
-          target: _upbitCoin.marketData.market.split('-')[0],
+          base: _base,
+          target: _target,
           koreanName: _upbitCoin.marketData.koreanName,
           englishName: _upbitCoin.marketData.englishName,
           tradePrice: _upbitCoin.priceData.tradePrice,
           changeRate: _upbitCoin.priceData.signedChangeRate * 100,
           changePrice: _upbitCoin.priceData.signedChangePrice,
           volume: _upbitCoin.priceData.accTradePrice24h,
+          premiumRate: _premiumPrice != null
+              ? (_upbitCoin.priceData.tradePrice / _premiumPrice - 1) * 100
+              : null,
+          premiumPrice: _premiumPrice != null
+              ? _upbitCoin.priceData.tradePrice - _premiumPrice
+              : null,
         );
+        print(
+            "코인: ${_coin.base} 업비트 가격: ${_coin.tradePrice} 바이낸스 가격:$_premiumPrice");
         coinList.add(_coin);
       }
       return coinList;
