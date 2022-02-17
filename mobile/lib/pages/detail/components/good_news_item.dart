@@ -5,9 +5,9 @@ import 'package:mobile/styles/custom_colors.dart';
 import 'package:mobile/styles/custom_font_sizes.dart';
 import 'package:mobile/styles/custom_screen_sizes.dart';
 
-class NormalNewsItem extends StatelessWidget {
+class GoodNewsItem extends StatelessWidget {
   final News news;
-  const NormalNewsItem({Key? key, required this.news}) : super(key: key);
+  const GoodNewsItem({Key? key, required this.news}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +15,22 @@ class NormalNewsItem extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Container(
+          padding: EdgeInsets.fromLTRB(
+              CustomScreenSizes.goodNewsDdayBoxPaddingWidth.w,
+              0,
+              CustomScreenSizes.goodNewsDdayBoxPaddingWidth.w,
+              0),
+          decoration: BoxDecoration(color: Colors.grey[300]),
+          child: Text(
+            _parseToDday(news.targetingDate!),
+            style: TextStyle(
+              color: CustomColors.grey,
+              fontSize: CustomFontSizes.goodNewsDday.sp,
+            ),
+          ),
+        ),
+        SizedBox(height: CustomScreenSizes.goodNewsDdayBoxMarginHeight.h),
         Text(
           news.title,
           style: TextStyle(
@@ -27,7 +43,7 @@ class NormalNewsItem extends StatelessWidget {
         Row(
           children: [
             Text(
-              _parseToStringDate(news.postedDate!),
+              _parseToStringDate(news.targetingDate!),
               style: TextStyle(
                 color: CustomColors.black,
                 fontSize: CustomFontSizes.normalNewsSource.sp,
@@ -55,5 +71,18 @@ class NormalNewsItem extends StatelessWidget {
     stringDate += date.day.toString().padLeft(2, '0') + '일';
 
     return stringDate;
+  }
+
+  String _parseToDday(DateTime date) {
+    int day = DateTime.now().difference(date).inDays;
+    String np = "";
+
+    if (day > 0) {
+      np = "+";
+    } else if (day == 0) {
+      np = "-";
+    }
+
+    return "D" + np + day.toString();
   }
 }

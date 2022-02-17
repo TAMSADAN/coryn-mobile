@@ -117,7 +117,8 @@ class CoinCalendarModal extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.rectangle,
                     image: DecorationImage(
-                      image: NetworkImage(calendarModal.coin.logoUri),
+                      image: NetworkImage(
+                          "https://cryptoicon-api.vercel.app/api/icon/${calendarModal.coin.base}"),
                     ),
                   ),
                 ),
@@ -126,10 +127,7 @@ class CoinCalendarModal extends StatelessWidget {
                 width: CorynSize.contextHorizontal,
               ),
               Text(
-                calendarModal.coin.koreanName +
-                    "(" +
-                    calendarModal.coin.market.split("-")[1] +
-                    ")",
+                calendarModal.coin.base + "(" + calendarModal.coin.base + ")",
                 style: CustomTextStyles.largeBold,
               ),
             ],

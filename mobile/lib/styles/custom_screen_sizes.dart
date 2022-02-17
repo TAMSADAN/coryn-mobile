@@ -13,4 +13,8 @@ class CustomScreenSizes {
   static const double appBarHeight = 50;
   static const double appBarLeadingWidth = 100;
   static const double tradigViewHeight = 300;
+  static const double goodNewsDdayBoxPaddingWidth = 4;
+  static const double goodNewsDdayBoxPaddingHeight = 3;
+  static const double goodNewsDdayBoxMarginHeight = 3;
+  static const double newsVertical = 12;
 }

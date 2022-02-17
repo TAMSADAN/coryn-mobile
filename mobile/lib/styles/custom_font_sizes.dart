@@ -6,4 +6,5 @@ class CustomFontSizes {
   static const double leading = 14;
   static const double normalNewsTitle = 14;
   static const double normalNewsSource = 12;
+  static const double goodNewsDday = 11;
 }

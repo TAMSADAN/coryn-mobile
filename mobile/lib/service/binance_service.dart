@@ -44,8 +44,8 @@ class BinanceService {
       for (var _binanceCoin in binanceCoinList) {
         Coin _coin = Coin(
             platform: "BINANCE",
-            baseSymbol: _binanceCoin.marketData.baseAsset,
-            quoteSymbol: _binanceCoin.marketData.quoteAsset,
+            base: _binanceCoin.marketData.baseAsset,
+            target: _binanceCoin.marketData.quoteAsset,
             koreanName: null,
             englishName: null,
             tradePrice: double.parse(_binanceCoin.priceData.openPrice),

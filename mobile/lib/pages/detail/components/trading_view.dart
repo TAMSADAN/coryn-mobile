@@ -28,9 +28,16 @@ class TradingViewState extends State<TradingView> {
   Widget build(BuildContext context) {
     return GetBuilder<DetailController>(
       builder: (_) => _.isOkTradingView == null
-          ? CupertinoActivityIndicator()
+          ? SizedBox(
+              width: double.infinity,
+              height: CustomScreenSizes.tradigViewHeight.h,
+              child: CupertinoActivityIndicator(),
+            )
           : _.isOkTradingView == false
-              ? Text("차트가 존재하지 않습니다.")
+              ? SizedBox(
+                  width: double.infinity,
+                  height: CustomScreenSizes.tradigViewHeight.h,
+                  child: Text("차트가 존재하지 않습니다."))
               : GestureDetector(
                   onVerticalDragUpdate: (updateDetails) {},
                   child: SizedBox(

@@ -7,6 +7,7 @@ import 'package:mobile/pages/summary/controllers/coin_list_controller.dart';
 import 'package:mobile/utils/coryn_size.dart';
 import 'package:mobile/styles/custom_text_styles.dart';
 import 'package:intl/intl.dart';
+import 'package:mobile/utils/coryn_static.dart';
 
 class CoinItem extends StatelessWidget {
   final Coin coin;
@@ -30,8 +31,11 @@ class CoinItem extends StatelessWidget {
             SizedBox(
               width: ScreenUtil().screenWidth / 5,
               child: _twoLineText(
-                coin.baseSymbol + '/' + coin.quoteSymbol,
-                coin.koreanName ?? coin.baseSymbol,
+                coin.base + '/' + coin.target,
+                CorynStatic().parseToPlatformKoreanName(coin.platform) +
+                    ' (' +
+                    coin.platform +
+                    ')',
                 CrossAxisAlignment.start,
               ),
             ),

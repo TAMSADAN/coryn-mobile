@@ -1,10 +1,13 @@
 import 'package:get/get.dart';
 import 'package:http/http.dart';
+import 'package:mobile/service/coin_gecko_service.dart';
 import 'package:mobile/service/coin_service.dart';
 import 'package:mobile/models/coin.dart';
 import 'package:mobile/utils/coryn_static.dart';
 
 class CoinListController extends SuperController {
+  final _coinService = CoinService();
+  Map<String, List<Coin>> coinData = {};
   List<Coin> orignCoinList = [];
   List<Coin> coinList = [];
 
@@ -28,6 +31,13 @@ class CoinListController extends SuperController {
   void onInit() {
     fetchCoinList();
     super.onInit();
+  }
+
+  void fetchCoinData(String platform) async {
+    coinData[platform.toUpperCase()] =
+        await _coinService.fetchCoinList(platform) ??
+            coinData[platform.toUpperCase()] ??
+            [];
   }
 
   void _updateIsFetching(bool value) {
@@ -56,8 +66,8 @@ class CoinListController extends SuperController {
   void _updateMarketList(List<Coin> coinList) {
     marketList = [];
     for (Coin _coin in coinList) {
-      if (marketList.contains(_coin.quoteSymbol)) continue;
-      marketList.add(_coin.quoteSymbol);
+      if (marketList.contains(_coin.target)) continue;
+      marketList.add(_coin.target);
     }
     if (marketList.isNotEmpty && marketList.contains(selectedMarket) == false) {
       selectedMarket = marketList[0];
@@ -134,7 +144,7 @@ class CoinListController extends SuperController {
     for (var coin in coinList) {
       if (coin.koreanName != null && coin.koreanName!.contains(search)) {
         _coinList.add(coin);
-      } else if (coin.baseSymbol.contains(search.toUpperCase())) {
+      } else if (coin.base.contains(search.toUpperCase())) {
         _coinList.add(coin);
       }
     }
@@ -174,7 +184,7 @@ class CoinListController extends SuperController {
   // }
 
   List<Coin> _remainMarket(List<Coin> coinList) {
-    coinList.removeWhere((coin) => coin.quoteSymbol != selectedMarket);
+    coinList.removeWhere((coin) => coin.target != selectedMarket);
     return coinList;
   }
 

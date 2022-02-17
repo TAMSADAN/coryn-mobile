@@ -2,21 +2,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile/models/coin.dart';
-import 'package:mobile/pages/detail/components/coin_chart.dart';
-import 'package:mobile/pages/detail/components/coin_good_news_list.dart';
-import 'package:mobile/pages/detail/components/coin_normal_news_list.dart';
-import 'package:mobile/pages/detail/components/normal_news_item.dart';
+import 'package:mobile/pages/detail/components/good_news_list.dart';
 import 'package:mobile/pages/detail/components/trading_view.dart';
 import 'package:mobile/pages/detail/controllers/detail_controller.dart';
 import 'package:mobile/styles/custom_colors.dart';
 import 'package:mobile/styles/custom_font_sizes.dart';
 import 'package:mobile/styles/custom_screen_sizes.dart';
 import 'package:mobile/styles/custom_text_styles.dart';
-import 'package:mobile/utils/coryn_size.dart';
 import 'package:mobile/utils/coryn_static.dart';
-import 'package:mobile/utils/coryn_text_style.dart';
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
+import 'components/normal_news_list.dart';
 
 class DetailPage extends StatelessWidget {
   final Coin coin;
@@ -35,7 +32,7 @@ class DetailPage extends StatelessWidget {
         title: Column(
           children: [
             Text(
-              coin.baseSymbol + '/' + coin.quoteSymbol,
+              coin.base + '/' + coin.target,
               style: CustomTextStyles.blackBold,
             ),
             Text(
@@ -76,8 +73,10 @@ class DetailPage extends StatelessWidget {
           Expanded(
             child: ListView(
               shrinkWrap: true,
-              padding: EdgeInsets.zero,
+              padding: EdgeInsets.symmetric(
+                  horizontal: CustomScreenSizes.contextHorizontal.w),
               children: [
+                GoodNewsList(),
                 NormalNewsList(),
               ],
             ),

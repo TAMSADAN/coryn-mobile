@@ -1,7 +1,7 @@
 class Coin {
   final String platform;
-  final String baseSymbol;
-  final String quoteSymbol;
+  final String base;
+  final String target;
   final String? koreanName;
   final String? englishName;
   final double tradePrice;
@@ -11,8 +11,8 @@ class Coin {
 
   Coin({
     required this.platform,
-    required this.baseSymbol,
-    required this.quoteSymbol,
+    required this.base,
+    required this.target,
     required this.koreanName,
     required this.englishName,
     required this.tradePrice,

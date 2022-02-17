@@ -42,8 +42,8 @@ class UpbitService {
       for (var _upbitCoin in upbitCoinList) {
         Coin _coin = Coin(
           platform: "UPBIT",
-          baseSymbol: _upbitCoin.marketData.market.split('-')[1],
-          quoteSymbol: _upbitCoin.marketData.market.split('-')[0],
+          base: _upbitCoin.marketData.market.split('-')[1],
+          target: _upbitCoin.marketData.market.split('-')[0],
           koreanName: _upbitCoin.marketData.koreanName,
           englishName: _upbitCoin.marketData.englishName,
           tradePrice: _upbitCoin.priceData.tradePrice,
