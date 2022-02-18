@@ -11,9 +11,9 @@ class CoinListController extends SuperController {
   List<Coin> coinList = [];
 
   String selectedPlatform = 'UPBIT';
-  String selectedMarket = '';
+  String selectedTarget = '';
   List<String> platformList = CorynStatic.platformEnglishNameList;
-  List<String> marketList = [''];
+  List<String> targetList = [''];
 
   String search = "";
 
@@ -61,7 +61,7 @@ class CoinListController extends SuperController {
     update();
     _updateCoinList(selectedPlatform);
     _updateUpdatedTime(DateTime.now());
-    _updateMarketList();
+    _updateTargetList();
     print("CoinListController fetchCoinData ${updatedTime}");
     _updateIsFetching(false);
     sort();
@@ -89,19 +89,19 @@ class CoinListController extends SuperController {
 
   void sort() {
     _updateCoinList(selectedPlatform);
-    _updateCoinListByTarget(selectedMarket);
+    _updateCoinListByTarget(selectedTarget);
     _updateCoinListBySearch(search);
     update();
   }
 
-  void _updateMarketList() {
-    marketList = [];
+  void _updateTargetList() {
+    targetList = [];
     for (Coin _coin in coinList) {
-      if (marketList.contains(_coin.target)) continue;
-      marketList.add(_coin.target);
+      if (targetList.contains(_coin.target)) continue;
+      targetList.add(_coin.target);
     }
-    if (marketList.isNotEmpty && marketList.contains(selectedMarket) == false) {
-      selectedMarket = marketList[0];
+    if (targetList.isNotEmpty && targetList.contains(selectedTarget) == false) {
+      selectedTarget = targetList[0];
     }
     update();
   }
@@ -118,8 +118,8 @@ class CoinListController extends SuperController {
     update();
   }
 
-  void updateSelectedMarket(String value) {
-    selectedMarket = value;
+  void updateselectedTarget(String value) {
+    selectedTarget = value;
     sort();
     update();
   }

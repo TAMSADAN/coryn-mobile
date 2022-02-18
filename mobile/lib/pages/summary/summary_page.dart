@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:mobile/pages/ad_banner.dart';
-import 'package:mobile/pages/summary/components/market_drop_down_button.dart';
+import 'package:mobile/pages/summary/components/target_drop_down_button.dart';
 import 'package:mobile/pages/summary/components/platform_drop_down_button.dart';
 import 'package:mobile/pages/summary/controllers/coin_list_controller.dart';
 import 'package:mobile/styles/custom_screen_sizes.dart';
@@ -44,7 +44,7 @@ class _SummaryPageState extends State<SummaryPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 PlatformDropDownButton(),
-                MarketDropDownButton(),
+                TargetDropDownButton(),
               ],
             ),
             Container(

@@ -15,20 +15,42 @@ class GoodNewsItem extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          padding: EdgeInsets.fromLTRB(
-              CustomScreenSizes.goodNewsDdayBoxPaddingWidth.w,
-              0,
-              CustomScreenSizes.goodNewsDdayBoxPaddingWidth.w,
-              0),
-          decoration: BoxDecoration(color: Colors.grey[300]),
-          child: Text(
-            _parseToDday(news.targetingDate!),
-            style: TextStyle(
-              color: CustomColors.grey,
-              fontSize: CustomFontSizes.goodNewsDday.sp,
+        Row(
+          children: [
+            Container(
+              padding: EdgeInsets.fromLTRB(
+                  CustomScreenSizes.goodNewsDdayBoxPaddingWidth.w,
+                  0,
+                  CustomScreenSizes.goodNewsDdayBoxPaddingWidth.w,
+                  0),
+              decoration: BoxDecoration(color: Colors.blueAccent),
+              child: Text(
+                "일정",
+                style: TextStyle(
+                  color: CustomColors.white,
+                  fontSize: CustomFontSizes.goodNewsDday.sp,
+                ),
+              ),
             ),
-          ),
+            SizedBox(
+              width: CustomScreenSizes.newsTagPaddingWidth,
+            ),
+            Container(
+              padding: EdgeInsets.fromLTRB(
+                  CustomScreenSizes.goodNewsDdayBoxPaddingWidth.w,
+                  0,
+                  CustomScreenSizes.goodNewsDdayBoxPaddingWidth.w,
+                  0),
+              decoration: BoxDecoration(color: Colors.blueAccent),
+              child: Text(
+                _parseToDday(news.targetingDate!),
+                style: TextStyle(
+                  color: CustomColors.white,
+                  fontSize: CustomFontSizes.goodNewsDday.sp,
+                ),
+              ),
+            ),
+          ],
         ),
         SizedBox(height: CustomScreenSizes.goodNewsDdayBoxMarginHeight.h),
         Text(

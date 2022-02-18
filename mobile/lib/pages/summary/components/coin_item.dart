@@ -1,10 +1,9 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:mobile/models/coin.dart';
 import 'package:mobile/pages/detail/detail_page.dart';
-import 'package:mobile/pages/summary/controllers/coin_list_controller.dart';
-import 'package:mobile/utils/coryn_size.dart';
+import 'package:mobile/styles/custom_colors.dart';
+import 'package:mobile/styles/custom_screen_sizes.dart';
 import 'package:mobile/styles/custom_text_styles.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile/utils/coryn_static.dart';
@@ -12,8 +11,13 @@ import 'package:mobile/utils/coryn_static.dart';
 class CoinItem extends StatelessWidget {
   final Coin coin;
   final String platform;
+  final String target;
 
-  const CoinItem({Key? key, required this.coin, required this.platform})
+  const CoinItem(
+      {Key? key,
+      required this.coin,
+      required this.platform,
+      required this.target})
       : super(key: key);
 
   @override
@@ -31,7 +35,7 @@ class CoinItem extends StatelessWidget {
             width: ScreenUtil().screenWidth / 5,
             child: _twoLineText(
               coin.base + '/' + coin.target,
-              CorynStatic().parseToPlatformKoreanName(coin.platform) +
+              CorynStatic.platformData[coin.platform]! +
                   ' (' +
                   coin.platform +
                   ')',
@@ -48,7 +52,7 @@ class CoinItem extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: CorynSize.contextHorizontal.w,
+            width: CustomScreenSizes.coinListItemPaddingWidth.w,
           ),
           SizedBox(
             width: ScreenUtil().screenWidth / 5,
@@ -57,17 +61,17 @@ class CoinItem extends StatelessWidget {
               coin.changePrice,
             ),
           ),
-          if (platform != "BINANCE")
+          if (platform != "BINANCE" && target == "KRW")
             Row(
               children: [
                 SizedBox(
-                  width: CorynSize.contextHorizontal.w,
+                  width: CustomScreenSizes.coinListItemPaddingWidth.w,
                 ),
                 SizedBox(
                   width: ScreenUtil().screenWidth / 5,
                   child: _textRateAndPrice(
-                    coin.premiumRate != null ? coin.premiumRate! : 0,
-                    coin.premiumPrice != null ? coin.premiumPrice! : 0,
+                    coin.premiumRate,
+                    coin.premiumPrice,
                   ),
                 ),
               ],
@@ -111,9 +115,15 @@ class CoinItem extends StatelessWidget {
     );
   }
 
-  Widget _textRateAndPrice(double rate, double price) {
-    final TextStyle rateTextStyle =
-        rate > 0 ? CustomTextStyles.rateUp : CustomTextStyles.rateDown;
+  Widget _textRateAndPrice(double? rate, double? price) {
+    final Color _textColor = rate == null
+        ? CustomColors.black
+        : rate > 0
+            ? CustomColors.rateUp
+            : CustomColors.rateDown;
+
+    final _rateText = rate == null ? " " : _getFormattedRate(rate) + "%";
+    final _priceText = price == null ? " " : _getFormattedRatePrice(price);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
@@ -121,15 +131,17 @@ class CoinItem extends StatelessWidget {
         FittedBox(
           fit: BoxFit.fitWidth,
           child: Text(
-            _getFormattedRate(rate) + "%",
-            style: rateTextStyle,
+            _rateText,
+            style: TextStyle(color: _textColor),
           ),
         ),
         FittedBox(
           fit: BoxFit.fitWidth,
           child: Text(
-            _getFormattedRatePrice(price),
-            style: CustomTextStyles.greyNormal,
+            _priceText,
+            style: TextStyle(
+              color: CustomColors.grey,
+            ),
           ),
         )
       ],

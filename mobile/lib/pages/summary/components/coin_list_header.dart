@@ -7,7 +7,6 @@ import 'package:mobile/styles/custom_colors.dart';
 import 'package:mobile/styles/custom_font_sizes.dart';
 import 'package:mobile/styles/custom_fonts.dart';
 import 'package:mobile/styles/custom_screen_sizes.dart';
-import 'package:mobile/utils/coryn_size.dart';
 
 class CoinListHeader extends StatelessWidget {
   const CoinListHeader({Key? key}) : super(key: key);
@@ -15,37 +14,41 @@ class CoinListHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CoinListController>(
-      builder: (_) => Row(
-        children: [
-          SizedBox(
-            width: ScreenUtil().screenWidth / 5,
-            child: _text("이름", MainAxisAlignment.start),
-          ),
-          Spacer(),
-          SizedBox(
-            width: ScreenUtil().screenWidth / 5,
-            child: _text("현재가", MainAxisAlignment.end),
-          ),
-          SizedBox(
-            width: CorynSize.contextHorizontal.w,
-          ),
-          SizedBox(
-            width: ScreenUtil().screenWidth / 5,
-            child: _text("전일대비", MainAxisAlignment.end),
-          ),
-          if (_.selectedPlatform != "BINANCE")
-            Row(
-              children: [
-                SizedBox(
-                  width: CorynSize.contextHorizontal.w,
-                ),
-                SizedBox(
-                  width: ScreenUtil().screenWidth / 5,
-                  child: _text("프리미엄", MainAxisAlignment.end),
-                ),
-              ],
+      builder: (_) => Padding(
+        padding:
+            EdgeInsets.only(bottom: CustomScreenSizes.coinListPaddingHeight.h),
+        child: Row(
+          children: [
+            SizedBox(
+              width: ScreenUtil().screenWidth / 5,
+              child: _text("이름", MainAxisAlignment.start),
             ),
-        ],
+            Spacer(),
+            SizedBox(
+              width: ScreenUtil().screenWidth / 5,
+              child: _text("현재가", MainAxisAlignment.end),
+            ),
+            SizedBox(
+              width: CustomScreenSizes.coinListItemPaddingWidth.w,
+            ),
+            SizedBox(
+              width: ScreenUtil().screenWidth / 5,
+              child: _text("전일대비", MainAxisAlignment.end),
+            ),
+            if (_.selectedPlatform != "BINANCE" && _.selectedTarget == "KRW")
+              Row(
+                children: [
+                  SizedBox(
+                    width: CustomScreenSizes.coinListItemPaddingWidth.w,
+                  ),
+                  SizedBox(
+                    width: ScreenUtil().screenWidth / 5,
+                    child: _text("프리미엄", MainAxisAlignment.end),
+                  ),
+                ],
+              ),
+          ],
+        ),
       ),
     );
   }

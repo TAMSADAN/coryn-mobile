@@ -13,9 +13,11 @@ class NormalNewsList extends StatelessWidget {
     return GetBuilder<DetailController>(
       builder: (_) => Column(
         children: _.normalNewsList.map((_news) {
-          return Padding(
-            padding: EdgeInsets.only(bottom: CustomScreenSizes.newsVertical.h),
-            child: NormalNewsItem(news: _news),
+          return Column(
+            children: [
+              NormalNewsItem(news: _news),
+              Divider(),
+            ],
           );
         }).toList(),
       ),

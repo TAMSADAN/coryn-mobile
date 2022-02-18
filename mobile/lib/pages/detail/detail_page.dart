@@ -36,7 +36,7 @@ class DetailPage extends StatelessWidget {
               style: CustomTextStyles.blackBold,
             ),
             Text(
-              CorynStatic().parseToPlatformKoreanName(coin.platform) +
+              CorynStatic.platformData[coin.platform]! +
                   ' (' +
                   coin.platform +
                   ')',

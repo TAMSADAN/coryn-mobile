@@ -6,15 +6,15 @@ import 'package:mobile/pages/summary/controllers/coin_list_controller.dart';
 import 'package:mobile/styles/custom_screen_sizes.dart';
 import 'package:mobile/styles/custom_text_styles.dart';
 
-class MarketDropDownButton extends StatelessWidget {
-  const MarketDropDownButton({Key? key}) : super(key: key);
+class TargetDropDownButton extends StatelessWidget {
+  const TargetDropDownButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CoinListController>(
       builder: (_) => DropdownButton2(
-        value: _.selectedMarket,
-        items: _.marketList.map((_value) {
+        value: _.selectedTarget,
+        items: _.targetList.map((_value) {
           return DropdownMenuItem(
               value: _value,
               child: Text(
@@ -23,7 +23,7 @@ class MarketDropDownButton extends StatelessWidget {
               ));
         }).toList(),
         onChanged: (value) {
-          _.updateSelectedMarket(value.toString());
+          _.updateselectedTarget(value.toString());
         },
         buttonWidth: CustomScreenSizes.dropDownButtonWidth.w,
         dropdownMaxHeight: CustomScreenSizes.dropDownButtonMaxHeight.h,

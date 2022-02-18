@@ -13,9 +13,11 @@ class GoodNewsList extends StatelessWidget {
     return GetBuilder<DetailController>(
       builder: (_) => Column(
         children: _.goodNewsList.map((_news) {
-          return Padding(
-            padding: EdgeInsets.only(bottom: CustomScreenSizes.newsVertical.h),
-            child: GoodNewsItem(news: _news),
+          return Column(
+            children: [
+              GoodNewsItem(news: _news),
+              Divider(),
+            ],
           );
         }).toList(),
       ),
