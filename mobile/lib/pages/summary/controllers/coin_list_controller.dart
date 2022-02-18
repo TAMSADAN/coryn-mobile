@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:http/http.dart';
+import 'package:mobile/service/bithumb_service.dart';
 import 'package:mobile/service/coin_gecko_service.dart';
 import 'package:mobile/service/coin_service.dart';
 import 'package:mobile/models/coin.dart';
@@ -32,6 +33,9 @@ class CoinListController extends SuperController {
   @override
   void onInit() async {
     await _fetchCoinData("BINANCE");
+    for (String platform in platformList) {
+      _fetchCoinData(platform);
+    }
     loopFetchOtherCoinData();
     loopFetchBinanceCoinData();
     super.onInit();
