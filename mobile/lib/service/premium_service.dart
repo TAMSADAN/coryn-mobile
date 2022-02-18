@@ -44,15 +44,21 @@ class PremiumService {
       return null;
     }
 
-    double? _binanceBaseTargetPrice =
-        getBinancePrice(binanceCoinList, base, "BTC");
-    if (_binanceBaseTargetPrice == null || _binanceBaseTargetPrice == 0) {
-      print("PremiumService getPremiumPrice: _binanceBaseTargetPrice is null");
-      return null;
+    double? _binanceBaseTargetPrice;
+    if (base != "BTC") {
+      _binanceBaseTargetPrice = getBinancePrice(binanceCoinList, base, "BTC");
+      if (_binanceBaseTargetPrice == null || _binanceBaseTargetPrice == 0) {
+        print(
+            "PremiumService getPremiumPrice: _binanceBaseTargetPrice is null");
+        return null;
+      }
     }
     if (quotationData.containsKey(target + "USD")) {
+      if (base == "BTC") {
+        return _binanceBtcUsdtPrice * quotationData[target + "USD"]!;
+      }
       return _binanceBtcUsdtPrice *
-          _binanceBaseTargetPrice *
+          _binanceBaseTargetPrice! *
           quotationData[target + "USD"]!;
     } else {
       print("PremiumService getPremiumPrice: quotationData not key");

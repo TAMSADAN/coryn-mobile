@@ -11,8 +11,10 @@ import 'package:mobile/utils/coryn_static.dart';
 
 class CoinItem extends StatelessWidget {
   final Coin coin;
+  final String platform;
 
-  const CoinItem({Key? key, required this.coin}) : super(key: key);
+  const CoinItem({Key? key, required this.coin, required this.platform})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,57 +25,54 @@ class CoinItem extends StatelessWidget {
           MaterialPageRoute(builder: (context) => DetailPage(coin: coin)),
         );
       },
-      child: Padding(
-        padding:
-            const EdgeInsets.symmetric(vertical: CorynSize.contextHorizontal),
-        child: Row(
-          children: [
-            SizedBox(
-              width: ScreenUtil().screenWidth / 5,
-              child: _twoLineText(
-                coin.base + '/' + coin.target,
-                CorynStatic().parseToPlatformKoreanName(coin.platform) +
-                    ' (' +
-                    coin.platform +
-                    ')',
-                CrossAxisAlignment.start,
-              ),
+      child: Row(
+        children: [
+          SizedBox(
+            width: ScreenUtil().screenWidth / 5,
+            child: _twoLineText(
+              coin.base + '/' + coin.target,
+              CorynStatic().parseToPlatformKoreanName(coin.platform) +
+                  ' (' +
+                  coin.platform +
+                  ')',
+              CrossAxisAlignment.start,
             ),
-            // SizedBox(
-            //   width: CorynSize.contextHorizontal.w,
-            // ),
-            Spacer(),
-            SizedBox(
-              width: ScreenUtil().screenWidth / 5,
-              child: _twoLineText(
-                _getFromattedPrice(coin.tradePrice),
-                _getFromattedPrice(coin.volume),
-                CrossAxisAlignment.end,
-              ),
+          ),
+          Spacer(),
+          SizedBox(
+            width: ScreenUtil().screenWidth / 5,
+            child: _twoLineText(
+              _getFromattedPrice(coin.tradePrice),
+              _getFromattedPrice(coin.volume),
+              CrossAxisAlignment.end,
             ),
-            SizedBox(
-              width: CorynSize.contextHorizontal.w,
+          ),
+          SizedBox(
+            width: CorynSize.contextHorizontal.w,
+          ),
+          SizedBox(
+            width: ScreenUtil().screenWidth / 5,
+            child: _textRateAndPrice(
+              coin.changeRate,
+              coin.changePrice,
             ),
-            SizedBox(
-              width: ScreenUtil().screenWidth / 5,
-              child: _textRateAndPrice(
-                coin.changeRate,
-                coin.changePrice,
-              ),
+          ),
+          if (platform != "BINANCE")
+            Row(
+              children: [
+                SizedBox(
+                  width: CorynSize.contextHorizontal.w,
+                ),
+                SizedBox(
+                  width: ScreenUtil().screenWidth / 5,
+                  child: _textRateAndPrice(
+                    coin.premiumRate != null ? coin.premiumRate! : 0,
+                    coin.premiumPrice != null ? coin.premiumPrice! : 0,
+                  ),
+                ),
+              ],
             ),
-
-            SizedBox(
-              width: CorynSize.contextHorizontal.w,
-            ),
-            SizedBox(
-              width: ScreenUtil().screenWidth / 5,
-              child: _textRateAndPrice(
-                coin.premiumRate != null ? coin.premiumRate! : 0,
-                coin.premiumPrice != null ? coin.premiumPrice! : 0,
-              ),
-            ),
-          ],
-        ),
+        ],
       ),
     );
   }
