@@ -61,6 +61,9 @@ class MainPageController extends SuperController {
   }
 
   void onChanged(value) {
+    if (currentIndex != value) {
+      appOpenAdManager.showAdIfAvailable();
+    }
     currentIndex = value;
     if (currentIndex == 0) {
       if (Get.find<CoinListController>().isPaused == true) {

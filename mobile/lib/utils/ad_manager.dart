@@ -9,23 +9,25 @@ class AppOpenAdManager {
   bool _isShowingAd = false;
 
   final Duration maxCacheDuration = Duration(hours: 4);
-  DateTime? _appOpenLoadTime;
+  DateTime _appOpenLoadTime = DateTime(2021, 12, 24);
 
   void loadAd() {
-    AppOpenAd.load(
-      adUnitId: adUnitId,
-      orientation: AppOpenAd.orientationPortrait,
-      request: AdRequest(),
-      adLoadCallback: AppOpenAdLoadCallback(
-        onAdLoaded: (ad) {
-          _appOpenAd = ad;
-          _appOpenLoadTime = DateTime.now();
-        },
-        onAdFailedToLoad: (error) {
-          print('AppOpenAd failed to load: $error');
-        },
-      ),
-    );
+    if (DateTime.now().difference(_appOpenLoadTime).inSeconds > 20) {
+      AppOpenAd.load(
+        adUnitId: adUnitId,
+        orientation: AppOpenAd.orientationPortrait,
+        request: AdRequest(),
+        adLoadCallback: AppOpenAdLoadCallback(
+          onAdLoaded: (ad) {
+            _appOpenAd = ad;
+            _appOpenLoadTime = DateTime.now();
+          },
+          onAdFailedToLoad: (error) {
+            print('AppOpenAd failed to load: $error');
+          },
+        ),
+      );
+    }
   }
 
   bool get isAdAvailable {
