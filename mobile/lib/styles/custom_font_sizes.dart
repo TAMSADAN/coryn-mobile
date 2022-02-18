@@ -8,6 +8,6 @@ class CustomFontSizes {
   static const double normalNewsSource = 12;
   static const double goodNewsDday = 11;
   static const double calendarModalDate = 15;
-  static const double calendarModalItemHeader = 10;
+  static const double calendarModalItemHeader = 17;
   static const double calendarModealItem = 6;
 }
