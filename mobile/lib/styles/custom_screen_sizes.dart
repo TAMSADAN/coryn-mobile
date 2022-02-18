@@ -14,10 +14,9 @@ class CustomScreenSizes {
   static const double appBarLeadingWidth = 100;
   static const double tradigViewHeight = 300;
   static const double goodNewsDdayBoxPaddingWidth = 4;
-  static const double goodNewsDdayBoxPaddingHeight = 3;
-  static const double goodNewsDdayBoxMarginHeight = 3;
   static const double newsVertical = 12;
-  static const double newsTagPaddingWidth = 2;
+  static const double newsTagHorizontal = 2;
+  static const double newsItemVertical = 3;
   static const double coinListPaddingHeight = 10;
   static const double coinListItemPaddingWidth = 10;
 }

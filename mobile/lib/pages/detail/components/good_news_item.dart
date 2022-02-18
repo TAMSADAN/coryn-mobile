@@ -33,7 +33,7 @@ class GoodNewsItem extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: CustomScreenSizes.newsTagPaddingWidth,
+              width: CustomScreenSizes.newsTagHorizontal.w,
             ),
             Container(
               padding: EdgeInsets.fromLTRB(
@@ -52,7 +52,7 @@ class GoodNewsItem extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: CustomScreenSizes.goodNewsDdayBoxMarginHeight.h),
+        SizedBox(height: CustomScreenSizes.newsItemVertical.h),
         Text(
           news.title,
           style: TextStyle(
@@ -61,7 +61,7 @@ class GoodNewsItem extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: CustomScreenSizes.goodNewsDdayBoxMarginHeight.h),
+        SizedBox(height: CustomScreenSizes.newsItemVertical.h),
         Row(
           children: [
             Text(

@@ -15,6 +15,26 @@ class NormalNewsItem extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Row(
+          children: [
+            Container(
+              padding: EdgeInsets.fromLTRB(
+                  CustomScreenSizes.goodNewsDdayBoxPaddingWidth.w,
+                  0,
+                  CustomScreenSizes.goodNewsDdayBoxPaddingWidth.w,
+                  0),
+              decoration: BoxDecoration(color: Colors.grey[200]),
+              child: Text(
+                "구글 뉴스",
+                style: TextStyle(
+                  color: CustomColors.black,
+                  fontSize: CustomFontSizes.goodNewsDday.sp,
+                ),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: CustomScreenSizes.newsItemVertical.h),
         Text(
           news.title,
           style: TextStyle(
@@ -23,7 +43,7 @@ class NormalNewsItem extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: CustomScreenSizes.goodNewsDdayBoxMarginHeight.h),
+        SizedBox(height: CustomScreenSizes.newsItemVertical.h),
         Row(
           children: [
             Text(
