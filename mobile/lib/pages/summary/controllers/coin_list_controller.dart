@@ -3,7 +3,7 @@ import 'package:http/http.dart';
 import 'package:mobile/service/coin_gecko_service.dart';
 import 'package:mobile/service/coin_service.dart';
 import 'package:mobile/models/coin.dart';
-import 'package:mobile/utils/coryn_static.dart';
+import 'package:mobile/utils/secrets.dart';
 
 class CoinListController extends SuperController {
   final _coinService = CoinService();
@@ -12,7 +12,7 @@ class CoinListController extends SuperController {
 
   String selectedPlatform = 'UPBIT';
   String selectedTarget = '';
-  List<String> platformList = CorynStatic.platformEnglishNameList;
+  List<String> platformList = Secrets.platformEnglishNameList;
   List<String> targetList = [''];
 
   String search = "";

@@ -6,7 +6,7 @@ import 'package:mobile/styles/custom_colors.dart';
 import 'package:mobile/styles/custom_screen_sizes.dart';
 import 'package:mobile/styles/custom_text_styles.dart';
 import 'package:intl/intl.dart';
-import 'package:mobile/utils/coryn_static.dart';
+import 'package:mobile/utils/secrets.dart';
 
 class CoinItem extends StatelessWidget {
   final Coin coin;
@@ -35,10 +35,7 @@ class CoinItem extends StatelessWidget {
             width: ScreenUtil().screenWidth / 5,
             child: _twoLineText(
               coin.base + '/' + coin.target,
-              CorynStatic.platformData[coin.platform]! +
-                  ' (' +
-                  coin.platform +
-                  ')',
+              Secrets.platformData[coin.platform]! + ' (' + coin.platform + ')',
               CrossAxisAlignment.start,
             ),
           ),

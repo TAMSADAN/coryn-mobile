@@ -9,7 +9,7 @@ import 'package:mobile/styles/custom_colors.dart';
 import 'package:mobile/styles/custom_font_sizes.dart';
 import 'package:mobile/styles/custom_screen_sizes.dart';
 import 'package:mobile/styles/custom_text_styles.dart';
-import 'package:mobile/utils/coryn_static.dart';
+import 'package:mobile/utils/secrets.dart';
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -36,10 +36,7 @@ class DetailPage extends StatelessWidget {
               style: CustomTextStyles.blackBold,
             ),
             Text(
-              CorynStatic.platformData[coin.platform]! +
-                  ' (' +
-                  coin.platform +
-                  ')',
+              Secrets.platformData[coin.platform]! + ' (' + coin.platform + ')',
               style: CustomTextStyles.small,
             ),
           ],

@@ -25,7 +25,7 @@ class TargetDropDownButton extends StatelessWidget {
         onChanged: (value) {
           _.updateselectedTarget(value.toString());
         },
-        buttonWidth: CustomScreenSizes.dropDownButtonWidth.w,
+        buttonWidth: CustomScreenSizes.targetDropDownButtonWidth.w,
         dropdownMaxHeight: CustomScreenSizes.dropDownButtonMaxHeight.h,
       ),
     );

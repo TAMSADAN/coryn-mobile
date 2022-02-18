@@ -45,7 +45,7 @@ class PlatformDropDownButton extends StatelessWidget {
                   ));
             }).toList(),
             onChanged: (value) => _.updateSelectedPlatform(value.toString()),
-            buttonWidth: CustomScreenSizes.dropDownButtonWidth.w,
+            buttonWidth: CustomScreenSizes.platformDropDownButtonWidth.w,
           ),
         ],
       ),

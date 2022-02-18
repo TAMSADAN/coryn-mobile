@@ -8,7 +8,8 @@ class CustomScreenSizes {
 
   static const double calendarPageHorizontal = 3;
   static const double small = 1;
-  static const double dropDownButtonWidth = 80;
+  static const double platformDropDownButtonWidth = 100;
+  static const double targetDropDownButtonWidth = 70;
   static const double dropDownButtonMaxHeight = 200;
   static const double appBarHeight = 50;
   static const double appBarLeadingWidth = 100;
