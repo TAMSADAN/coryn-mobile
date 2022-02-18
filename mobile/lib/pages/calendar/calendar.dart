@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:mobile/models/coin.dart';
 import 'package:mobile/models/dto/news.dart';
 import 'package:mobile/pages/detail/components/good_news_item.dart';
+import 'package:mobile/pages/detail/detail_page.dart';
 import 'package:mobile/pages/summary/controllers/coin_list_controller.dart';
 import 'package:mobile/styles/custom_colors.dart';
 import 'package:mobile/styles/custom_font_sizes.dart';
@@ -40,8 +41,11 @@ class Calendar extends StatelessWidget {
                 showModalBottomSheet<void>(
                   context: context,
                   builder: (BuildContext context) {
-                    return _calendarModal(_.newsList,
-                        calendarTapDetails.appointments ?? [], _.today);
+                    return _calendarModal(
+                        _.newsList,
+                        calendarTapDetails.appointments ?? [],
+                        _.today,
+                        context);
                   },
                 );
               },
@@ -49,8 +53,8 @@ class Calendar extends StatelessWidget {
     );
   }
 
-  Widget _calendarModal(
-      List<News> newsList, List<dynamic> appointmentList, DateTime today) {
+  Widget _calendarModal(List<News> newsList, List<dynamic> appointmentList,
+      DateTime today, BuildContext context) {
     final _coinListController = Get.find<CoinListController>();
 
     double modalHeight = CustomScreenSizes.calendarModalVertical.h;
@@ -84,6 +88,65 @@ class Calendar extends StatelessWidget {
 
     List<Widget> itemList = [];
     for (Appointment appointment in appointmentList) {
+      bool _isCoinList = false;
+      List<Widget> _coinList =
+          _coinListController.coinData.entries.map((entry) {
+        List<Widget> _itemList = [];
+        for (Coin _coin in entry.value) {
+          if (_coin.base == appointment.subject) {
+            _isCoinList = true;
+            _itemList.add(Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DetailPage(coin: _coin)),
+                  ),
+                  child: Container(
+                    child: Column(
+                      children: [
+                        Container(
+                          width: CustomFontSizes.calendarModalItemHeader.sp,
+                          height: CustomFontSizes.calendarModalItemHeader.sp,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.rectangle,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(15)),
+                            image: DecorationImage(
+                              image: AssetImage(
+                                  Secrets.platformImageData[entry.key]!),
+                            ),
+                          ),
+                        ),
+                        Text(
+                          _coin.base + "-" + _coin.target,
+                          style: TextStyle(
+                              color: CustomColors.black,
+                              fontSize: CustomFontSizes.calendarModealItem.sp),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ));
+          }
+        }
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: _itemList
+              .map((e) => Row(children: [
+                    e,
+                    VerticalDivider(),
+                  ]))
+              .toList(),
+        );
+      }).toList();
+
       itemList.add(
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,62 +177,23 @@ class Calendar extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
-              height: CustomScreenSizes.calendarModalItemVertical.h,
-            ),
-            SizedBox(
-              height:
-                  CustomScreenSizes.calendarModalItemHorizontalListViewHeight.h,
-              child: ListView(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                children: _coinListController.coinData.entries.map((entry) {
-                  List<Widget> _itemList = [];
-                  for (Coin _coin in entry.value) {
-                    if (_coin.base == appointment.subject) {
-                      _itemList.add(Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: CustomFontSizes.calendarModalItemHeader.sp,
-                            height: CustomFontSizes.calendarModalItemHeader.sp,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.rectangle,
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(15)),
-                              image: DecorationImage(
-                                image: AssetImage(
-                                    Secrets.platformImageData[entry.key]!),
-                              ),
-                            ),
-                          ),
-                          Text(
-                            _coin.base + "-" + _coin.target,
-                            style: TextStyle(
-                                color: CustomColors.black,
-                                fontSize:
-                                    CustomFontSizes.calendarModealItem.sp),
-                          ),
-                        ],
-                      ));
-                    }
-                  }
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: _itemList
-                        .map((e) => Row(children: [
-                              e,
-                              VerticalDivider(),
-                            ]))
-                        .toList(),
-                  );
-                }).toList(),
-              ),
-            ),
+            if (_isCoinList)
+              Column(children: [
+                SizedBox(
+                  height: CustomScreenSizes.calendarModalItemVertical.h,
+                ),
+                SizedBox(
+                  height: CustomScreenSizes
+                      .calendarModalItemHorizontalListViewHeight.h,
+                  child: ListView(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      children: _coinList),
+                ),
+              ]),
             Padding(
-              padding: EdgeInsets.only(top: CustomScreenSizes.newsVertical.h),
+              padding:
+                  EdgeInsets.only(top: CustomScreenSizes.newsItemVertical.h),
               child: Column(
                 children: newsList
                     .where((_news) => _news.base == appointment.subject)
