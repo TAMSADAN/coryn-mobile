@@ -53,7 +53,7 @@ class DetailPage extends StatelessWidget {
               },
             ),
             Text(
-              "리스트",
+              "이전",
               style: TextStyle(
                 color: CustomColors.leading,
                 fontSize: CustomFontSizes.leading.sp,
@@ -85,54 +85,3 @@ class DetailPage extends StatelessWidget {
     );
   }
 }
-
-
-    // GetBuilder<DetailController>(
-    //   builder: (_) => Scaffold(
-    //     appBar: AppBar(
-    //       elevation: 0,
-    //       toolbarHeight: 30,
-    //       backgroundColor: Colors.white,
-    //       leading: IconButton(
-    //         icon: const Icon(Icons.arrow_back, color: Colors.black),
-    //         onPressed: () {
-    //           Get.delete<DetailController>();
-    //           Navigator.pop(context);
-    //         },
-    //       ),
-    //       centerTitle: true,
-    //     ),
-    //     backgroundColor: Colors.white,
-    //     body: SingleChildScrollView(
-    //       child: Padding(
-    //         padding: const EdgeInsets.fromLTRB(
-    //           CorynSize.pageHorizontal,
-    //           CorynSize.pageVertical,
-    //           CorynSize.pageHorizontal,
-    //           0.0,
-    //         ),
-    //         child: Column(
-    //           mainAxisSize: MainAxisSize.min,
-    //           crossAxisAlignment: CrossAxisAlignment.start,
-    //           children: const [
-    //             // CoinInfo(),
-    //             CoinChart(),
-    //             Text(
-    //               "일정",
-    //               style: CorynTextStyle.xLargeBoldTextStyle,
-    //             ),
-    //             SizedBox(
-    //               height: 170,
-    //               child: CoinGoodNewsList(),
-    //             ),
-    //             Text(
-    //               "뉴스",
-    //               style: CorynTextStyle.xLargeBoldTextStyle,
-    //             ),
-    //             CoinNormalNewsList(),
-    //           ],
-    //         ),
-    //       ),
-    //     ),
-    //   ),
-    // );

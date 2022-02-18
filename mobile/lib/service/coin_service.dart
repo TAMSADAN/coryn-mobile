@@ -1,9 +1,11 @@
 import 'package:mobile/models/binance_coin.dart';
 import 'package:mobile/models/bithumb_coin.dart';
 import 'package:mobile/models/coin.dart';
+import 'package:mobile/models/coinone_coin.dart';
 import 'package:mobile/models/upbit_coin.dart';
 import 'package:mobile/service/binance_service.dart';
 import 'package:mobile/service/bithumb_service.dart';
+import 'package:mobile/service/coinone_service.dart';
 import 'package:mobile/service/upbit_service.dart';
 
 class CoinService {
@@ -14,6 +16,8 @@ class CoinService {
       coinList = await _fetchCoinListFromUpbit(binanceCoinList);
     } else if (platform.toUpperCase() == "BITHUMB") {
       coinList = await _fetchCoinListFromBithumb(binanceCoinList);
+    } else if (platform.toUpperCase() == "COINONE") {
+      coinList = await _fetchCoinListFromCoinone(binanceCoinList);
     } else if (platform.toUpperCase() == "BINANCE") {
       print("COinService fetchCoinList 바이낸스는 요청이 필요하지 않습니다.");
       return null;
@@ -21,6 +25,22 @@ class CoinService {
       print("CoinService fetchCoinList ${platform} 존재하지 않습니다.");
       return null;
     }
+
+    return coinList;
+  }
+
+  Future<List<Coin>?> _fetchCoinListFromCoinone(
+      List<Coin> binanceCoinList) async {
+    final CoinoneService _coinoneService = CoinoneService();
+    final List<CoinoneCoin>? _coinoneCoinList =
+        await _coinoneService.fetchCoinoneCoin();
+    if (_coinoneCoinList == null || _coinoneCoinList.isEmpty) {
+      print(
+          "CoinService fetchCoinListFromUpbit _coinoneCoinList is null or empty");
+      return null;
+    }
+    final List<Coin>? coinList = await _coinoneService.parseToCoinList(
+        _coinoneCoinList, binanceCoinList);
 
     return coinList;
   }

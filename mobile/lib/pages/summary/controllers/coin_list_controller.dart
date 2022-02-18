@@ -4,6 +4,7 @@ import 'package:mobile/service/bithumb_service.dart';
 import 'package:mobile/service/coin_gecko_service.dart';
 import 'package:mobile/service/coin_service.dart';
 import 'package:mobile/models/coin.dart';
+import 'package:mobile/service/coinone_service.dart';
 import 'package:mobile/service/coryn_service.dart';
 import 'package:mobile/utils/secrets.dart';
 
