@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:mobile/pages/summary/controllers/coin_list_controller.dart';
 import 'package:mobile/pages/summary/summary_page.dart';
 import 'package:mobile/pages/calendar/calendar_page.dart';
 import 'package:mobile/utils/ad_manager.dart';
@@ -60,6 +62,13 @@ class MainPageController extends SuperController {
 
   void onChanged(value) {
     currentIndex = value;
+    if (currentIndex == 1) {
+      if (Get.find<CoinListController>().isPaused == true) {
+        Get.find<CoinListController>().onResumed();
+      }
+    } else {
+      Get.find<CoinListController>().onPaused();
+    }
     update();
   }
 

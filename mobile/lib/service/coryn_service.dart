@@ -6,13 +6,13 @@ import 'dart:convert';
 import 'package:mobile/utils/secrets.dart';
 
 class CorynService {
-  String parseToNewsUrl(String base, String type, int limit) {
+  String parseToNewsUrl(String? base, String? type, int? limit) {
     String url = Secrets.corynBaseUrl +
-        "/news?ticker=$base&type=$type&limit=${limit.toString()}";
+        "/news?ticker=${base ?? ""}&type=${type ?? ""}&limit=${limit != null ? limit.toString() : ""}";
     return url;
   }
 
-  Future<List<News>?> fetchNews(String base, String type, int limit) async {
+  Future<List<News>?> fetchNews(String? base, String? type, int? limit) async {
     final String _newsUrl = parseToNewsUrl(base, type, limit);
     final response = await http.get(Uri.parse(_newsUrl));
     List<News> newsList = [];
@@ -21,7 +21,6 @@ class CorynService {
       if (response.statusCode == 200) {
         for (var _json
             in json.decode(utf8.decode(response.bodyBytes))["news"]) {
-          print(_json);
           News _news = News.fromJson(_json);
 
           newsList.add(_news);

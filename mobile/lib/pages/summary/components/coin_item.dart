@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/models/coin.dart';
@@ -31,17 +32,64 @@ class CoinItem extends StatelessWidget {
       },
       child: Row(
         children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: ScreenUtil().screenWidth / 30,
+                height: ScreenUtil().screenWidth / 30,
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: NetworkImage(
+                          "https://cryptoicon-api.vercel.app/api/icon/${coin.base.toLowerCase()}"),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: CustomScreenSizes.coinListItemImagePaddingHeight.h,
+              ),
+              Center(
+                child: Icon(
+                  CupertinoIcons.star,
+                  size: ScreenUtil().screenWidth / 30,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(width: CustomScreenSizes.coinListItemImageHorizontal.w),
           SizedBox(
-            width: ScreenUtil().screenWidth / 5,
-            child: _twoLineText(
-              coin.base + '/' + coin.target,
-              Secrets.platformData[coin.platform]! + ' (' + coin.platform + ')',
-              CrossAxisAlignment.start,
+            width: ScreenUtil().screenWidth / 5.5,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                FittedBox(
+                  fit: BoxFit.fitWidth,
+                  child: Text(
+                    coin.base + '/' + coin.target,
+                    style: CustomTextStyles.blackNormal,
+                  ),
+                ),
+                FittedBox(
+                  fit: BoxFit.fitWidth,
+                  child: Text(
+                    Secrets.platformData[coin.platform]! +
+                        ' (' +
+                        coin.platform +
+                        ')',
+                    style: CustomTextStyles.greyNormal,
+                  ),
+                )
+              ],
             ),
           ),
           Spacer(),
           SizedBox(
-            width: ScreenUtil().screenWidth / 5,
+            width: ScreenUtil().screenWidth / 5.5,
             child: _twoLineText(
               _getFromattedPrice(coin.tradePrice),
               _getFromattedPrice(coin.volume),
@@ -52,7 +100,7 @@ class CoinItem extends StatelessWidget {
             width: CustomScreenSizes.coinListItemPaddingWidth.w,
           ),
           SizedBox(
-            width: ScreenUtil().screenWidth / 5,
+            width: ScreenUtil().screenWidth / 5.5,
             child: _textRateAndPrice(
               coin.changeRate,
               coin.changePrice,
@@ -65,7 +113,7 @@ class CoinItem extends StatelessWidget {
                   width: CustomScreenSizes.coinListItemPaddingWidth.w,
                 ),
                 SizedBox(
-                  width: ScreenUtil().screenWidth / 5,
+                  width: ScreenUtil().screenWidth / 5.5,
                   child: _textRateAndPrice(
                     coin.premiumRate,
                     coin.premiumPrice,

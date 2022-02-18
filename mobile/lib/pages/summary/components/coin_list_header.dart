@@ -20,19 +20,19 @@ class CoinListHeader extends StatelessWidget {
         child: Row(
           children: [
             SizedBox(
-              width: ScreenUtil().screenWidth / 5,
-              child: _text("이름", MainAxisAlignment.start),
+              width: ScreenUtil().screenWidth / 5.5,
+              child: _text("코인", MainAxisAlignment.start),
             ),
             Spacer(),
             SizedBox(
-              width: ScreenUtil().screenWidth / 5,
+              width: ScreenUtil().screenWidth / 5.5,
               child: _text("현재가", MainAxisAlignment.end),
             ),
             SizedBox(
               width: CustomScreenSizes.coinListItemPaddingWidth.w,
             ),
             SizedBox(
-              width: ScreenUtil().screenWidth / 5,
+              width: ScreenUtil().screenWidth / 5.5,
               child: _text("전일대비", MainAxisAlignment.end),
             ),
             if (_.selectedPlatform != "BINANCE" && _.selectedTarget == "KRW")
@@ -42,7 +42,7 @@ class CoinListHeader extends StatelessWidget {
                     width: CustomScreenSizes.coinListItemPaddingWidth.w,
                   ),
                   SizedBox(
-                    width: ScreenUtil().screenWidth / 5,
+                    width: ScreenUtil().screenWidth / 5.5,
                     child: _text("프리미엄", MainAxisAlignment.end),
                   ),
                 ],

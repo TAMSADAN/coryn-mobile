@@ -8,7 +8,7 @@ import 'package:mobile/utils/secrets.dart';
 
 class CoinListController extends SuperController {
   final _coinService = CoinService();
-  Map<String, List<Coin>> coinData = {};
+  final Map<String, List<Coin>> coinData = {};
   List<Coin> coinList = [];
 
   String selectedPlatform = 'UPBIT';
@@ -25,48 +25,66 @@ class CoinListController extends SuperController {
 
   DateTime updatedTime = DateTime.now();
   bool stop = false;
-  bool isFetching = false;
+  bool isFetchingOtherCoinData = false;
+  bool isFetchingBinanceCoinData = false;
   bool isPaused = false;
 
   @override
-  void onInit() {
-    loopFetchCoinData();
-    CorynService().fetchNews("BTC", "normal", 10);
+  void onInit() async {
+    await _fetchCoinData("BINANCE");
+    loopFetchOtherCoinData();
+    loopFetchBinanceCoinData();
     super.onInit();
   }
 
-  Future<void> loopFetchCoinData() async {
-    await fetchCoinData(selectedPlatform);
+  Future<void> loopFetchOtherCoinData() async {
+    _updateIsFetchingOtherCoinData(true);
+    print("CoinListController loopFetchOtherCoinData: is loop");
+    if (selectedPlatform.toUpperCase() != "BINANCE") {
+      await _fetchCoinData(selectedPlatform.toUpperCase());
+      _updateCoinList(selectedPlatform);
+      _updateUpdatedTime(DateTime.now());
+      _updateTargetList();
+      sort();
+    }
     await Future.delayed(const Duration(seconds: 3));
     if (isPaused == false) {
-      await loopFetchCoinData();
+      await loopFetchOtherCoinData();
     }
+    _updateIsFetchingOtherCoinData(false);
   }
 
-  Future<void> fetchBinanceCoinData() async {
-    coinData["BINANCE"] = (await _coinService.fetchCoinListFromBinance()) ??
-        coinData["BINANCE"] ??
-        [];
-    update();
+  Future<void> loopFetchBinanceCoinData() async {
+    print("CoinListController loopFetchBinanceCoinData: is loop");
+    _updateIsFetchingBinanceCoinData(true);
+    await _fetchCoinData("BINANCE");
+    if (selectedPlatform == "BINANCE") {
+      _updateUpdatedTime(DateTime.now());
+      _updateCoinList(selectedPlatform);
+      _updateTargetList();
+      sort();
+    }
+    await Future.delayed(const Duration(seconds: 3));
+    if (isPaused == false) {
+      await loopFetchBinanceCoinData();
+    }
+    _updateIsFetchingBinanceCoinData(false);
   }
 
-  Future<void> fetchCoinData(String platform) async {
-    if (isFetching == true) {
-      return;
+  Future<void> _fetchCoinData(String platform) async {
+    if (platform == "BINANCE") {
+      coinData["BINANCE"] = (await _coinService.fetchCoinListFromBinance()) ??
+          coinData["BINANCE"] ??
+          [];
+      update();
+    } else {
+      coinData[platform.toUpperCase()] = (await _coinService.fetchCoinList(
+              platform.toUpperCase(), coinData["BINANCE"] ?? [])) ??
+          coinData[platform.toUpperCase()] ??
+          [];
+      update();
     }
-    _updateIsFetching(true);
-    await fetchBinanceCoinData();
-    coinData[platform.toUpperCase()] = (await _coinService.fetchCoinList(
-            platform.toUpperCase(), coinData["BINANCE"] ?? [])) ??
-        coinData[platform.toUpperCase()] ??
-        [];
-    update();
-    _updateCoinList(selectedPlatform);
-    _updateUpdatedTime(DateTime.now());
-    _updateTargetList();
-    print("CoinListController fetchCoinData ${updatedTime}");
-    _updateIsFetching(false);
-    sort();
+    print("CoinListController _fetchCoinData: ${platform} - ${DateTime.now()}");
   }
 
   void _updateUpdatedTime(DateTime date) {
@@ -74,8 +92,13 @@ class CoinListController extends SuperController {
     update();
   }
 
-  void _updateIsFetching(bool value) {
-    isFetching = value;
+  void _updateIsFetchingOtherCoinData(bool value) {
+    isFetchingOtherCoinData = value;
+    update();
+  }
+
+  void _updateIsFetchingBinanceCoinData(bool value) {
+    isFetchingBinanceCoinData = value;
     update();
   }
 
@@ -234,7 +257,8 @@ class CoinListController extends SuperController {
   @override
   void onResumed() {
     _updateIsPaused(false);
-    loopFetchCoinData();
+    if (isFetchingBinanceCoinData == false) loopFetchBinanceCoinData();
+    if (isFetchingOtherCoinData == false) loopFetchOtherCoinData();
     print("onResumed");
   }
 }

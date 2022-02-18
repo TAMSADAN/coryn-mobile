@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile/pages/summary/components/coin_item.dart';
 import 'package:mobile/pages/summary/controllers/coin_list_controller.dart';
-import 'package:mobile/utils/coryn_static.dart';
+import 'package:mobile/utils/secrets.dart';
 
 class CoinList extends StatelessWidget {
   const CoinList({Key? key}) : super(key: key);

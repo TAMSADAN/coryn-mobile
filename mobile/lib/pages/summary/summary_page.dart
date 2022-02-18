@@ -13,14 +13,9 @@ import 'package:mobile/pages/summary/components/coin_update_text.dart';
 import 'components/coin_list_header.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SummaryPage extends StatefulWidget {
+class SummaryPage extends StatelessWidget {
   const SummaryPage({Key? key}) : super(key: key);
 
-  @override
-  State<SummaryPage> createState() => _SummaryPageState();
-}
-
-class _SummaryPageState extends State<SummaryPage> {
   @override
   Widget build(BuildContext context) {
     final _coinListController = Get.put(CoinListController());
