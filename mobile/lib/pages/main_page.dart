@@ -25,12 +25,12 @@ class MainPage extends StatelessWidget {
           onTap: (value) => _.onChanged(value),
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.calendar),
-              label: '캘린더',
-            ),
-            BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.bitcoin_circle),
               label: '리스트',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.calendar),
+              label: '캘린더',
             ),
             // BottomNavigationBarItem(
             //   icon: Icon(CupertinoIcons.info),
@@ -46,11 +46,11 @@ class MainPage extends StatelessWidget {
 class MainPageController extends SuperController {
   late AppOpenAdManager appOpenAdManager;
   final List<Widget> widgetList = [
-    CalendarPage(),
     SummaryPage(),
+    CalendarPage(),
     // InformationPage(),
   ];
-  int currentIndex = 1;
+  int currentIndex = 0;
 
   @override
   void onInit() {
@@ -62,7 +62,7 @@ class MainPageController extends SuperController {
 
   void onChanged(value) {
     currentIndex = value;
-    if (currentIndex == 1) {
+    if (currentIndex == 0) {
       if (Get.find<CoinListController>().isPaused == true) {
         Get.find<CoinListController>().onResumed();
       }
