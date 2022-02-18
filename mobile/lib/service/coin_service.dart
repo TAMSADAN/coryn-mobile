@@ -32,7 +32,7 @@ class CoinService {
       return null;
     }
     final List<Coin>? coinList =
-        await _upbitService.parseCoinList(_upbitCoinList, binanceCoinList);
+        await _upbitService.parseToCoinList(_upbitCoinList, binanceCoinList);
 
     return coinList;
   }

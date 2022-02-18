@@ -68,14 +68,16 @@ class DetailPage extends StatelessWidget {
         children: [
           TradingView(),
           Expanded(
-            child: ListView(
-              shrinkWrap: true,
-              padding: EdgeInsets.symmetric(
-                  horizontal: CustomScreenSizes.contextHorizontal.w),
-              children: [
-                GoodNewsList(),
-                NormalNewsList(),
-              ],
+            child: Scrollbar(
+              child: ListView(
+                shrinkWrap: true,
+                padding: EdgeInsets.symmetric(
+                    horizontal: CustomScreenSizes.contextHorizontal.w),
+                children: [
+                  GoodNewsList(),
+                  NormalNewsList(),
+                ],
+              ),
             ),
           ),
         ],

@@ -3,6 +3,7 @@ import 'package:http/http.dart';
 import 'package:mobile/service/coin_gecko_service.dart';
 import 'package:mobile/service/coin_service.dart';
 import 'package:mobile/models/coin.dart';
+import 'package:mobile/service/coryn_service.dart';
 import 'package:mobile/utils/secrets.dart';
 
 class CoinListController extends SuperController {
@@ -30,6 +31,7 @@ class CoinListController extends SuperController {
   @override
   void onInit() {
     loopFetchCoinData();
+    CorynService().fetchNews("BTC", "normal", 10);
     super.onInit();
   }
 

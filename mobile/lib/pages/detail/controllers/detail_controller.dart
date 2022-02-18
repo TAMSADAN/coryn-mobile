@@ -3,12 +3,13 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:mobile/models/coin.dart';
 import 'package:mobile/models/dto/news.dart';
+import 'package:mobile/service/coryn_service.dart';
 import 'package:mobile/service/news_service.dart';
 import 'package:mobile/service/trading_view_service.dart';
 
 class DetailController extends GetxController {
   final Coin coin;
-  final _newsService = NewsService();
+  final _corynService = CorynService();
   final _tradingViewService = TradingViewService();
 
   List<News> normalNewsList = [];
@@ -48,12 +49,9 @@ class DetailController extends GetxController {
 
   void fetchNewsList() async {
     _updateIsOkNews(false);
-    List<News> _newsList =
-        await _newsService.fetchMarketNews(coin.target + "-" + coin.base);
-    for (var _news in _newsList) {
-      if (_news.newsType == "good") goodNewsList.add(_news);
-      if (_news.newsType == "normal") normalNewsList.add(_news);
-    }
+    normalNewsList =
+        await _corynService.fetchNews(coin.base, "normal", 100) ?? [];
+    goodNewsList = await _corynService.fetchNews(coin.base, "good", 10) ?? [];
     _updateIsOkNews(true);
     update();
   }

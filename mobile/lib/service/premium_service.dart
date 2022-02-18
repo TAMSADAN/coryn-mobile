@@ -40,7 +40,7 @@ class PremiumService {
     double? _binanceBtcUsdtPrice =
         getBinancePrice(binanceCoinList, "BTC", "USDT");
     if (_binanceBtcUsdtPrice == null || _binanceBtcUsdtPrice == 0) {
-      print("PremiumService getPremiumPrice: _binanceBtcUsdtPrice is null");
+      // print("PremiumService getPremiumPrice: _binanceBtcUsdtPrice is null");
       return null;
     }
 
@@ -48,8 +48,7 @@ class PremiumService {
     if (base != "BTC") {
       _binanceBaseTargetPrice = getBinancePrice(binanceCoinList, base, "BTC");
       if (_binanceBaseTargetPrice == null || _binanceBaseTargetPrice == 0) {
-        print(
-            "PremiumService getPremiumPrice: _binanceBaseTargetPrice is null");
+        // print("PremiumService getPremiumPrice: _binanceBaseTargetPrice is null");
         return null;
       }
     }
@@ -61,7 +60,7 @@ class PremiumService {
           _binanceBaseTargetPrice! *
           quotationData[target + "USD"]!;
     } else {
-      print("PremiumService getPremiumPrice: quotationData not key");
+      // print("PremiumService getPremiumPrice: quotationData not key");
       return null;
     }
   }

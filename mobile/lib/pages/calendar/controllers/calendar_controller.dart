@@ -55,26 +55,26 @@ class CorynCalendarController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    updateCalendarList();
+    // updateCalendarList();
   }
 
-  void updateCalendarList() async {
-    List<News> _newsList;
-    _updateIsLoading(true);
-    _newsList = await _newsService.fetchGoodNews();
-    for (int i = 0; i < _newsList.length; i++) {
-      List<String> _symbolList = [];
-      for (var _market in _newsList[i].marketList) {
-        var _symbol = _market.toString().split("-")[1];
-        if (!_symbolList.contains(_symbol)) {
-          _symbolList.add(_symbol);
-          calendarList.add(Calendar(market: _market, news: _newsList[i]));
-        }
-      }
-    }
-    update();
-    _updateIsLoading(false);
-  }
+  // void updateCalendarList() async {
+  //   List<News> _newsList;
+  //   _updateIsLoading(true);
+  //   _newsList = await _newsService.fetchGoodNews();
+  //   for (int i = 0; i < _newsList.length; i++) {
+  //     List<String> _symbolList = [];
+  //     for (var _market in _newsList[i].) {
+  //       var _symbol = _market.toString().split("-")[1];
+  //       if (!_symbolList.contains(_symbol)) {
+  //         _symbolList.add(_symbol);
+  //         calendarList.add(Calendar(market: _market, news: _newsList[i]));
+  //       }
+  //     }
+  //   }
+  //   update();
+  //   _updateIsLoading(false);
+  // }
 
   void _updateIsLoading(bool currentStatus) {
     isLoading = currentStatus;

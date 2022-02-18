@@ -38,7 +38,7 @@ class UpbitService {
     return upbitCoinList;
   }
 
-  Future<List<Coin>?> parseCoinList(
+  Future<List<Coin>?> parseToCoinList(
       List<UpbitCoin> upbitCoinList, List<Coin> binanceCoinList) async {
     List<Coin> coinList = [];
     Map<String, double> quotationData = {
@@ -67,8 +67,7 @@ class UpbitService {
               ? _upbitCoin.priceData.tradePrice - _premiumPrice
               : null,
         );
-        print(
-            "코인: ${_coin.base} 업비트 가격: ${_coin.tradePrice} 바이낸스 가격:$_premiumPrice");
+        // print("코인: ${_coin.base} 업비트 가격: ${_coin.tradePrice} 바이낸스 가격:$_premiumPrice");
         coinList.add(_coin);
       }
       return coinList;

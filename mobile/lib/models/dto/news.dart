@@ -1,27 +1,28 @@
 class News {
   final int id;
+  final String base;
   final String title;
   final DateTime? postedDate;
   final DateTime? targetingDate;
-  final String newsType;
+  final String type;
   final String source;
   final String url;
-  final List<dynamic> marketList;
 
   News({
     required this.id,
+    required this.base,
     required this.title,
     required this.postedDate,
     required this.targetingDate,
-    required this.newsType,
+    required this.type,
     required this.source,
     required this.url,
-    required this.marketList,
   });
 
   factory News.fromJson(Map<String, dynamic> json) {
     return News(
       id: json["id"],
+      base: json["ticker"],
       title: json["title"],
       postedDate: json["posted_date"] != null
           ? DateTime.parse(json["posted_date"])
@@ -29,10 +30,9 @@ class News {
       targetingDate: json["targeting_date"] != null
           ? DateTime.parse(json["targeting_date"])
           : null,
-      newsType: json["news_type"],
+      type: json["type"],
       source: json["source"],
       url: json["url"],
-      marketList: json["market_list"],
     );
   }
 
