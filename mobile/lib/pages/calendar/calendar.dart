@@ -1,12 +1,17 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:mobile/models/coin.dart';
 import 'package:mobile/models/dto/news.dart';
 import 'package:mobile/pages/detail/components/good_news_item.dart';
+import 'package:mobile/pages/summary/controllers/coin_list_controller.dart';
 import 'package:mobile/styles/custom_colors.dart';
 import 'package:mobile/styles/custom_font_sizes.dart';
 import 'package:mobile/styles/custom_screen_sizes.dart';
+import 'package:mobile/utils/secrets.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:mobile/pages/calendar/controllers/calendar_controller.dart'
     as coryn;
@@ -31,11 +36,12 @@ class Calendar extends StatelessWidget {
                 appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
               ),
               onTap: (calendarTapDetails) {
+                _.updateToday(calendarTapDetails.date!);
                 showModalBottomSheet<void>(
                   context: context,
                   builder: (BuildContext context) {
-                    return _calendarModal(
-                        _.newsList, calendarTapDetails.appointments ?? []);
+                    return _calendarModal(_.newsList,
+                        calendarTapDetails.appointments ?? [], _.today);
                   },
                 );
               },
@@ -43,7 +49,10 @@ class Calendar extends StatelessWidget {
     );
   }
 
-  Widget _calendarModal(List<News> newsList, List<dynamic> appointmentList) {
+  Widget _calendarModal(
+      List<News> newsList, List<dynamic> appointmentList, DateTime today) {
+    final _coinListController = Get.find<CoinListController>();
+
     double modalHeight = CustomScreenSizes.calendarModalVertical.h;
     double headerHeight = CustomScreenSizes.calendarModalHeaderVertical.h;
     double headerPaddingHeight =
@@ -56,14 +65,20 @@ class Calendar extends StatelessWidget {
       child: SizedBox(
         height: headerHeight,
         child: FittedBox(
-            fit: BoxFit.fitHeight,
-            child: Text(
-              "22년 02월 18일",
-              style: TextStyle(
-                color: CustomColors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            )),
+          fit: BoxFit.fitHeight,
+          child: Text(
+            today.year.toString().replaceRange(0, 2, "") +
+                "년 " +
+                today.month.toString().padLeft(2, '0') +
+                "월 " +
+                today.day.toString().padLeft(2, '0') +
+                '일',
+            style: TextStyle(
+              color: CustomColors.black,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
       ),
     );
 
@@ -71,6 +86,7 @@ class Calendar extends StatelessWidget {
     for (Appointment appointment in appointmentList) {
       itemList.add(
         Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
@@ -97,6 +113,60 @@ class Calendar extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+            SizedBox(
+              height: CustomScreenSizes.calendarModalItemVertical.h,
+            ),
+            SizedBox(
+              height:
+                  CustomScreenSizes.calendarModalItemHorizontalListViewHeight.h,
+              child: ListView(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                children: _coinListController.coinData.entries.map((entry) {
+                  List<Widget> _itemList = [];
+                  for (Coin _coin in entry.value) {
+                    if (_coin.base == appointment.subject) {
+                      _itemList.add(Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: CustomFontSizes.calendarModalItemHeader.sp,
+                            height: CustomFontSizes.calendarModalItemHeader.sp,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.rectangle,
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(15)),
+                              image: DecorationImage(
+                                image: AssetImage(
+                                    Secrets.platformImageData[entry.key]!),
+                              ),
+                            ),
+                          ),
+                          Text(
+                            _coin.base + "-" + _coin.target,
+                            style: TextStyle(
+                                color: CustomColors.black,
+                                fontSize:
+                                    CustomFontSizes.calendarModealItem.sp),
+                          ),
+                        ],
+                      ));
+                    }
+                  }
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: _itemList
+                        .map((e) => Row(children: [
+                              e,
+                              VerticalDivider(),
+                            ]))
+                        .toList(),
+                  );
+                }).toList(),
+              ),
             ),
             Padding(
               padding: EdgeInsets.only(top: CustomScreenSizes.newsVertical.h),

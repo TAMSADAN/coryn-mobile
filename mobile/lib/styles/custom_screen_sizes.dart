@@ -23,8 +23,11 @@ class CustomScreenSizes {
   static const double coinListItemImageHorizontal = 3;
   static const double coinListItemImagePaddingHeight = 1;
   static const double calendarModalItemHeaderHorizontal = 5;
+  static const double calendarModalItemVertical = 5;
+  static const double calendarModalItemHorizontal = 5;
   static const double calendarModalVertical = 400;
   static const double calendarModalHeaderPaddingHeight = 10;
   static const double calendarModalHeaderVertical = 25;
   static const double calendarModalPaddingWidth = 10;
+  static const double calendarModalItemHorizontalListViewHeight = 30;
 }

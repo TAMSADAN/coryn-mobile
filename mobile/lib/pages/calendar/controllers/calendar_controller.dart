@@ -14,6 +14,7 @@ class CalendarController extends GetxController {
   final _corynService = CorynService();
 
   List<News> newsList = [];
+  DateTime today = DateTime.now();
   bool isLoading = false;
 
   @override
@@ -31,6 +32,11 @@ class CalendarController extends GetxController {
 
   void _updateIsLoading(bool currentStatus) {
     isLoading = currentStatus;
+    update();
+  }
+
+  void updateToday(DateTime value) {
+    today = value;
     update();
   }
 }

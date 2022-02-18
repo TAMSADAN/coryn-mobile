@@ -77,10 +77,11 @@ class CoinItem extends StatelessWidget {
                 FittedBox(
                   fit: BoxFit.fitWidth,
                   child: Text(
-                    Secrets.platformData[coin.platform]! +
-                        ' (' +
-                        coin.platform +
-                        ')',
+                    coin.koreanName ??
+                        Secrets.platformData[coin.platform]! +
+                            ' (' +
+                            coin.platform +
+                            ')',
                     style: CustomTextStyles.greyNormal,
                   ),
                 )
