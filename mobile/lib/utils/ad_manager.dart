@@ -9,7 +9,7 @@ class AppOpenAdManager {
   bool _isShowingAd = false;
 
   final Duration maxCacheDuration = Duration(hours: 4);
-  DateTime _appOpenLoadTime = DateTime(2021, 12, 24);
+  DateTime _appOpenLoadTime = DateTime.now();
 
   void loadAd() {
     if (DateTime.now().difference(_appOpenLoadTime).inSeconds > 20) {
@@ -45,7 +45,7 @@ class AppOpenAdManager {
       return;
     }
 
-    if (DateTime.now().subtract(maxCacheDuration).isAfter(_appOpenLoadTime!)) {
+    if (DateTime.now().subtract(maxCacheDuration).isAfter(_appOpenLoadTime)) {
       print('Maximum cache duration exceeded. Loading another ad.');
       _appOpenAd!.dispose();
       _appOpenAd = null;

@@ -1,4 +1,7 @@
 class CustomScreenSizes {
+  static const double itemHeight = 20;
+  static const double itemVertical = 3;
+
   static const double pageVertical = 50;
   static const double pageHorizontal = 20;
   static const double componentVertical = 8;
@@ -29,5 +32,5 @@ class CustomScreenSizes {
   static const double calendarModalHeaderPaddingHeight = 10;
   static const double calendarModalHeaderVertical = 25;
   static const double calendarModalPaddingWidth = 10;
-  static const double calendarModalItemHorizontalListViewHeight = 30;
+  static const double calendarModalItemHorizontalListViewHeight = 35;
 }

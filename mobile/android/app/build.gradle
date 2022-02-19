@@ -44,9 +44,9 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.O2Apps.coho"
-        minSdkVersion 19
+        minSdkVersion 20
         targetSdkVersion 31
-        versionCode 10
+        versionCode 11
         versionName "1.7.3"
     }
 

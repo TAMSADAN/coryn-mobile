@@ -2,7 +2,8 @@
     package="com.O2Apps.coho">
    <application
         android:label="coryn"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true" >
         <activity
             android:exported="true"
             android:name=".MainActivity"
