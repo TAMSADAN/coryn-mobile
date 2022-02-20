@@ -7,7 +7,10 @@ import 'package:mobile/styles/custom_screen_sizes.dart';
 
 class NormalNewsItem extends StatelessWidget {
   final News news;
-  const NormalNewsItem({Key? key, required this.news}) : super(key: key);
+
+  final double _newsTagPadding = CustomScreenSizes.newsTagPadding.w;
+
+  NormalNewsItem({Key? key, required this.news}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +18,18 @@ class NormalNewsItem extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // 뉴스 태그
+        Container(
+          padding: EdgeInsets.fromLTRB(_newsTagPadding, 0, _newsTagPadding, 0),
+          decoration: BoxDecoration(color: Colors.grey[200]),
+          child: Text(
+            "구글 뉴스",
+            style: TextStyle(
+              color: CustomColors.black,
+              fontSize: CustomFontSizes.goodNewsDday.sp,
+            ),
+          ),
+        ),
         Row(
           children: [
             Container(

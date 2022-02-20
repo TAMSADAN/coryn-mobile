@@ -1,6 +1,9 @@
 class CustomScreenSizes {
-  static const double itemHeight = 20;
+  static const double itemHeight = 15;
+  static const double itemHorizontal = 2;
   static const double itemVertical = 3;
+
+  static const double newsTagPadding = 2;
 
   static const double pageVertical = 50;
   static const double pageHorizontal = 20;
