@@ -41,25 +41,13 @@ class DetailPage extends StatelessWidget {
             ),
           ],
         ),
-        leading: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.black),
-              onPressed: () {
-                Get.delete<DetailController>();
-                Navigator.pop(context, true);
-              },
-            ),
-            Text(
-              "이전",
-              style: TextStyle(
-                color: CustomColors.leading,
-                fontSize: CustomFontSizes.leading.sp,
-              ),
-            ),
-          ],
+        leading: IconButton(
+          alignment: Alignment.centerLeft,
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Get.delete<DetailController>();
+            Navigator.pop(context, true);
+          },
         ),
         centerTitle: true,
       ),

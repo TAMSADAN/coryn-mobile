@@ -7,11 +7,97 @@ import 'package:mobile/styles/custom_screen_sizes.dart';
 
 class GoodNewsItem extends StatelessWidget {
   final News news;
-  const GoodNewsItem({Key? key, required this.news}) : super(key: key);
+
+  final double _itemHeight = CustomScreenSizes.itemHeight.h;
+  final double _itemHorizontalSpace = CustomScreenSizes.itemHorizontal.w;
+  final double _newsTagPadding = CustomScreenSizes.newsTagPadding.w;
+  final double _itemVerticalSpace = CustomScreenSizes.itemVertical.h;
+
+  GoodNewsItem({Key? key, required this.news}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // 뉴스 태그
+        Row(
+          children: [
+            Container(
+              padding:
+                  EdgeInsets.fromLTRB(_newsTagPadding, 0, _newsTagPadding, 0),
+              decoration: const BoxDecoration(color: CustomColors.blue),
+              child: SizedBox(
+                height: _itemHeight,
+                child: const FittedBox(
+                  fit: BoxFit.fitHeight,
+                  alignment: Alignment.center,
+                  child: Text(
+                    "일정",
+                    style: TextStyle(
+                      color: CustomColors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(width: _itemHorizontalSpace),
+            Container(
+              padding:
+                  EdgeInsets.fromLTRB(_newsTagPadding, 0, _newsTagPadding, 0),
+              decoration: const BoxDecoration(color: CustomColors.blue),
+              child: SizedBox(
+                height: _itemHeight,
+                child: FittedBox(
+                  fit: BoxFit.fitHeight,
+                  alignment: Alignment.center,
+                  child: Text(
+                    _parseToDday(news.targetingDate!),
+                    style: const TextStyle(
+                      color: CustomColors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+
+        // 제목
+        SizedBox(height: _itemVerticalSpace),
+        Text(
+          news.title,
+          style: TextStyle(
+            color: CustomColors.black,
+            fontSize: _itemHeight,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(height: _itemVerticalSpace),
+        Row(
+          children: [
+            Text(
+              _parseToStringDate(news.postedDate!),
+              style: TextStyle(
+                color: CustomColors.black,
+                fontSize: _itemHeight,
+              ),
+            ),
+            Spacer(),
+            Text(
+              news.source,
+              style: TextStyle(
+                color: CustomColors.black,
+                fontSize: _itemHeight,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+
+    Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
