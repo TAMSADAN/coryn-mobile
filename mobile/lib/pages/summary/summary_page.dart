@@ -51,7 +51,7 @@ class SummaryPage extends StatelessWidget {
             ),
             CoinListHeader(),
             const Expanded(child: CoinList()),
-            // const AdBanner(),
+            const AdBanner(),
           ],
         ),
       ),
