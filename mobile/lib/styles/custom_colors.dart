@@ -9,4 +9,14 @@ class CustomColors {
   static const Color rateDown = Colors.blueAccent;
   static const Color leading = Colors.blueAccent;
   static const Color white = Colors.white;
+  static Color getRandomColor() {
+    List<Color> randomColors = [
+      Color(0xff7C83FD),
+      // Color(0xffF25287),
+      // Color(0xffECA3F5),
+      // Color(0xff81B214),
+      // Color(0xffFFAB73),
+    ];
+    return (randomColors..shuffle()).first;
+  }
 }

@@ -91,13 +91,17 @@ class CoinItem extends StatelessWidget {
                 child: FittedBox(
                   fit: BoxFit.fitHeight,
                   alignment: Alignment.centerLeft,
-                  child: Text(
-                    coin.koreanName ??
-                        Secrets.platformData[coin.platform]! +
-                            ' (' +
-                            coin.platform +
-                            ')',
-                    style: CustomTextStyles.greyNormal,
+                  child: Container(
+                    width: _itemWidth,
+                    child: Text(
+                      coin.koreanName ??
+                          Secrets.platformData[coin.platform]! +
+                              ' (' +
+                              coin.platform +
+                              ')',
+                      overflow: TextOverflow.ellipsis,
+                      style: CustomTextStyles.greyNormal,
+                    ),
                   ),
                 ),
               ),

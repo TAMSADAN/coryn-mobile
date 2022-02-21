@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -269,7 +269,7 @@ class Calendar extends StatelessWidget {
             startTime: _news.targetingDate!,
             endTime: _news.targetingDate!,
             subject: _news.base,
-            color: Colors.blueAccent,
+            color: CustomColors.getRandomColor(),
             isAllDay: true,
             id: _news.base,
           ),

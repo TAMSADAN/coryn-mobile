@@ -1,5 +1,5 @@
 class CustomScreenSizes {
-  static const double itemHeight = 15;
+  static const double itemHeight = 14.5;
   static const double itemHorizontal = 2;
   static const double itemVertical = 5;
   static const double itemHeaderHeight = 25;
