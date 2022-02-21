@@ -13,7 +13,7 @@ class Helpers {
     String formattedPrice;
     var f = NumberFormat('###,###,###,###');
 
-    if (value < 100) {
+    if (value < 1) {
       formattedPrice = value.toString();
     } else {
       formattedPrice = f.format(value.round()).toString();

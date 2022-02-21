@@ -1,167 +1,183 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter/cupertino.dart';
-// import 'package:get/get.dart';
-// import 'package:mobile/models/calendar_modal.dart';
-// import 'package:mobile/pages/calendar/controllers/calendar_controller.dart';
-// import 'package:mobile/pages/detail/detail_page.dart';
-// import 'package:mobile/utils/coryn_size.dart';
-// import 'package:mobile/styles/custom_text_styles.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobile/models/coin.dart';
+import 'package:mobile/models/dto/news.dart';
+import 'package:mobile/pages/detail/components/good_news_item.dart';
+import 'package:mobile/pages/detail/detail_page.dart';
+import 'package:mobile/styles/custom_screen_sizes.dart';
+import 'package:mobile/utils/secrets.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-// import 'package:mobile/utils/coryn_colors.dart';
-// import 'package:url_launcher/url_launcher.dart';
+class CalendarModal extends StatelessWidget {
+  final Map<String, List<Coin>> coinData;
+  final List<News> newsList;
+  final List<dynamic> appointmentList;
+  final DateTime today;
+  final BuildContext context;
 
-// class CoinCalendarModal extends StatelessWidget {
-//   const CoinCalendarModal({Key? key}) : super(key: key);
+  final double _itemHeaderHeight = CustomScreenSizes.itemHeaderHeight.h;
+  final double _itemHeight = CustomScreenSizes.itemHeight.h;
+  final double _itemVerticalSpace = CustomScreenSizes.itemVertical.h;
+  final double _itemHorizontalSpace = CustomScreenSizes.itemHorizontal.w;
+  final double _itemImageHorizontalSpace =
+      CustomScreenSizes.itemHorizontal.w / 2.0;
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return GetBuilder<CalendarController>(
-//         builder: (_) => DraggableScrollableSheet(
-//             initialChildSize: 0.4,
-//             minChildSize: 0.2,
-//             maxChildSize: 0.6,
-//             builder: (BuildContext context, ScrollController scrollController) {
-//               return Container(
-//                 width: double.infinity,
-//                 decoration: BoxDecoration(
-//                   color: Colors.white,
-//                   borderRadius: const BorderRadius.only(
-//                     topLeft: Radius.circular(30),
-//                     topRight: Radius.circular(30),
-//                   ),
-//                   boxShadow: [
-//                     BoxShadow(
-//                       color: Colors.grey.withOpacity(0.5),
-//                       spreadRadius: 3.5,
-//                       blurRadius: 10,
-//                       offset: Offset(0, 3), // changes position of shadow
-//                     ),
-//                   ],
-//                 ),
-//                 child: ListView(
-//                   padding: EdgeInsets.zero,
-//                   controller: scrollController,
-//                   children: [
-//                     _.isLoading
-//                         ? CupertinoActivityIndicator()
-//                         : _itemList(_.today, _.calendarModalList, context)
-//                   ],
-//                 ),
-//               );
-//             }));
-//   }
+  CalendarModal({
+    Key? key,
+    required this.coinData,
+    required this.newsList,
+    required this.appointmentList,
+    required this.today,
+    required this.context,
+  }) : super(key: key);
 
-//   Widget _itemList(DateTime today, List<CalendarModal> calendarModalList,
-//       BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(horizontal: CorynSize.pageHorizontal),
-//       child: Column(
-//         children: [
-//           const SizedBox(
-//             height: CorynSize.componentVertical * 2.0,
-//           ),
-//           Container(
-//             width: 40,
-//             height: 2,
-//             color: CorynColors.defaultColor,
-//           ),
-//           const SizedBox(
-//             height: CorynSize.componentVertical * 2.0,
-//           ),
-//           Text(
-//             today.year.toString().replaceRange(0, 2, "") +
-//                 "." +
-//                 today.month.toString().padLeft(2, '0') +
-//                 "." +
-//                 today.day.toString().padLeft(2, '0'),
-//             style: CustomTextStyles.largeBold,
-//           ),
-//           const SizedBox(
-//             height: CorynSize.componentVertical * 2.0,
-//           ),
-//           if (calendarModalList.isEmpty)
-//             const Center(
-//                 child: Text(
-//               "일정이 없습니다.",
-//               style: CustomTextStyles.large,
-//             )),
-//           ...calendarModalList.map((_calendarModal) {
-//             return _item(_calendarModal, context);
-//           }).toList(),
-//         ],
-//       ),
-//     );
-//   }
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(height: _itemHeight / 2),
+        SizedBox(
+          height: _itemHeaderHeight,
+          child: FittedBox(
+            fit: BoxFit.fitHeight,
+            child: Text(
+              today.year.toString().replaceRange(0, 2, "") +
+                  "년 " +
+                  today.month.toString().padLeft(2, '0') +
+                  "월 " +
+                  today.day.toString().padLeft(2, '0') +
+                  '일',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+        SizedBox(height: _itemHeight / 2),
+        Container(
+          height: CustomScreenSizes.calendarModalVertical.h,
+          child: ListView(
+            children: [
+              _itemList(),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
 
-//   Widget _item(CalendarModal calendarModal, BuildContext context) {
-//     return Column(
-//       crossAxisAlignment: CrossAxisAlignment.start,
-//       children: [
-//         GestureDetector(
-//           // onTap: () => Navigator.push(
-//           //   context,
-//           //   MaterialPageRoute(
-//           //       builder: (context) =>
-//           //           DetailPage(market: calendarModal.coin.market)),
-//           // ),
-//           child: Row(
-//             children: [
-//               Container(
-//                 decoration: BoxDecoration(
-//                   shape: BoxShape.rectangle,
-//                   borderRadius: const BorderRadius.all(Radius.circular(15)),
-//                   color: Colors.grey[50],
-//                 ),
-//                 child: Container(
-//                   padding: const EdgeInsets.all(15),
-//                   decoration: BoxDecoration(
-//                     shape: BoxShape.rectangle,
-//                     image: DecorationImage(
-//                       image: NetworkImage(
-//                           "https://cryptoicon-api.vercel.app/api/icon/${calendarModal.coin.base}"),
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//               const SizedBox(
-//                 width: CorynSize.contextHorizontal,
-//               ),
-//               Text(
-//                 calendarModal.coin.base + "(" + calendarModal.coin.base + ")",
-//                 style: CustomTextStyles.largeBold,
-//               ),
-//             ],
-//           ),
-//         ),
-//         Padding(
-//           padding: const EdgeInsets.only(left: 40),
-//           child: Column(
-//             mainAxisAlignment: MainAxisAlignment.start,
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: calendarModal.newsList.map((news) {
-//               return GestureDetector(
-//                 onTap: () => _launchURL(news.url),
-//                 child: Padding(
-//                   padding: const EdgeInsets.only(bottom: 5.0),
-//                   child: Text(
-//                     news.targetingDate!.month.toString().padLeft(2, '0') +
-//                         "/" +
-//                         news.targetingDate!.day.toString().padLeft(2, '0') +
-//                         " " +
-//                         news.title,
-//                     style: CustomTextStyles.middle,
-//                   ),
-//                 ),
-//               );
-//             }).toList(),
-//           ),
-//         ),
-//         const SizedBox(height: CorynSize.contextVertical * 2.0),
-//       ],
-//     );
-//   }
+  Widget _itemList() {
+    List<Widget> _newsItemList = [];
+    List<Widget> _platformButtonList = [];
+    for (Appointment appointment in appointmentList) {
+      // 아이템 헤더
+      Widget _newsItemHeader = Row(
+        children: [
+          Container(
+            width: _itemHeaderHeight,
+            height: _itemHeaderHeight,
+            decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              borderRadius: const BorderRadius.all(Radius.circular(15)),
+              image: DecorationImage(
+                image: NetworkImage(
+                    "https://cryptoicon-api.vercel.app/api/icon/${appointment.subject.toLowerCase()}"),
+              ),
+            ),
+          ),
+          SizedBox(width: _itemImageHorizontalSpace),
+          SizedBox(
+            height: _itemHeaderHeight,
+            child: FittedBox(
+              fit: BoxFit.fitHeight,
+              child: Text(appointment.subject),
+            ),
+          )
+        ],
+      );
+      _newsItemList.add(_newsItemHeader);
+      _newsItemList.add(SizedBox(height: _itemVerticalSpace * 2));
+      // 플랫폼 버튼 리스트
+      coinData.forEach(
+        (key, value) {
+          for (Coin _coin in value) {
+            if (_coin.base == appointment.subject) {
+              Widget _platformButton = GestureDetector(
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => DetailPage(coin: _coin)),
+                ),
+                child: Container(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Column(
+                        children: [
+                          Container(
+                            width: _itemHeight,
+                            height: _itemHeight,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.rectangle,
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(15)),
+                              image: DecorationImage(
+                                image: AssetImage(
+                                    Secrets.platformImageData[_coin.platform]!),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: _itemVerticalSpace),
+                          SizedBox(
+                            height: _itemHeight,
+                            child: FittedBox(
+                              fit: BoxFit.fitHeight,
+                              child: Text(_coin.base + '-' + _coin.target),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Container(
+                          height: _itemHeight * 2 + _itemHorizontalSpace,
+                          child: VerticalDivider()),
+                    ],
+                  ),
+                ),
+              );
 
-//   void _launchURL(_url) async {
-//     if (!await launch(_url)) throw 'Could not launch $_url';
-//   }
-// }
+              _platformButtonList.add(_platformButton);
+            }
+          }
+        },
+      );
+      if (_platformButtonList.isNotEmpty)
+        _newsItemList.add(
+          Container(
+            height: _itemHeight * 3 + _itemHorizontalSpace,
+            child: ListView(
+              padding: EdgeInsets.zero,
+              scrollDirection: Axis.horizontal,
+              children: [..._platformButtonList],
+            ),
+          ),
+        );
+      _platformButtonList.clear();
+      // 호재
+      List<Widget> _goodNewsItemList = [];
+      for (News _news in newsList) {
+        if (_news.base == appointment.subject) {
+          _goodNewsItemList.add(GoodNewsItem(news: _news));
+          _goodNewsItemList.add(Divider());
+        }
+      }
+
+      _newsItemList.add(Column(
+        children: _goodNewsItemList,
+      ));
+    }
+
+    return Column(
+      children: _newsItemList,
+    );
+  }
+}

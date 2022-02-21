@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mobile/models/coin.dart';
 import 'package:mobile/models/dto/news.dart';
+import 'package:mobile/pages/calendar/calendar_modal.dart';
 import 'package:mobile/pages/detail/components/good_news_item.dart';
 import 'package:mobile/pages/detail/detail_page.dart';
 import 'package:mobile/pages/summary/controllers/coin_list_controller.dart';
@@ -23,6 +24,8 @@ class Calendar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _coinListController = Get.find<CoinListController>();
+
     return GetBuilder<coryn.CalendarController>(
       builder: (_) => _.isLoading
           ? const CupertinoActivityIndicator()
@@ -41,11 +44,21 @@ class Calendar extends StatelessWidget {
                 showModalBottomSheet<void>(
                   context: context,
                   builder: (BuildContext context) {
-                    return _calendarModal(
-                        _.newsList,
-                        calendarTapDetails.appointments ?? [],
-                        _.today,
-                        context);
+                    return Padding(
+                      padding: const EdgeInsets.fromLTRB(
+                        CustomScreenSizes.pageHorizontal,
+                        0.0,
+                        CustomScreenSizes.pageHorizontal,
+                        0.0,
+                      ),
+                      child: CalendarModal(
+                        coinData: _coinListController.coinData,
+                        newsList: _.newsList,
+                        appointmentList: calendarTapDetails.appointments ?? [],
+                        today: _.today,
+                        context: context,
+                      ),
+                    );
                   },
                 );
               },

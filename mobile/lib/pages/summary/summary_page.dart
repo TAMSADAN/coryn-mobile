@@ -44,7 +44,7 @@ class SummaryPage extends StatelessWidget {
             ),
             Container(
               alignment: Alignment.centerRight,
-              child: const CoinUpdateText(),
+              child: CoinUpdateText(),
             ),
             SizedBox(
               height: CustomScreenSizes.contextVertical.h,

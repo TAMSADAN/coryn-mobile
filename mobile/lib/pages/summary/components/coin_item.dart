@@ -166,7 +166,7 @@ class CoinItem extends StatelessWidget {
                       child: FittedBox(
                         fit: BoxFit.fitHeight,
                         alignment: Alignment.centerRight,
-                        child: _textRate(coin.changeRate),
+                        child: _textRate(coin.premiumRate),
                       ),
                     ),
                     SizedBox(height: _itemVerticalSpace),
@@ -176,7 +176,7 @@ class CoinItem extends StatelessWidget {
                       child: FittedBox(
                         fit: BoxFit.fitHeight,
                         alignment: Alignment.centerRight,
-                        child: _textSubPrice(coin.tradePrice),
+                        child: _textSubPrice(coin.premiumPrice),
                       ),
                     ),
                   ],
@@ -188,7 +188,9 @@ class CoinItem extends StatelessWidget {
     );
   }
 
-  Widget _textRate(double rate) {
+  Widget _textRate(double? rate) {
+    if (rate == null)
+      return Text("X", style: TextStyle(color: CustomColors.black));
     String _text = Helpers.parseToScaledRateText(rate) + "%";
     Color _color = rate == 0
         ? CustomColors.black
@@ -211,8 +213,15 @@ class CoinItem extends StatelessWidget {
         ));
   }
 
-  Widget _textSubPrice(double price) {
-    String _text = Helpers.parseToFormattedText(price);
+  Widget _textSubPrice(double? price) {
+    if (price == null)
+      return Text("X", style: TextStyle(color: CustomColors.grey));
+
+    String _text;
+    if (price < 10)
+      _text = Helpers.parseToScaledRateText(price);
+    else
+      _text = Helpers.parseToFormattedText(price);
 
     return Text(_text,
         style: const TextStyle(
