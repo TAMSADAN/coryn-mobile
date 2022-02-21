@@ -58,9 +58,17 @@ class CoinItem extends StatelessWidget {
                 ),
               ),
               SizedBox(height: _itemVerticalSpace),
-              Icon(
-                CupertinoIcons.star,
-                size: _itemHeight,
+              SizedBox(
+                width: _itemHeight,
+                height: _itemHeight,
+                child: FittedBox(
+                  fit: BoxFit.fill,
+                  child: Center(
+                    child: Icon(
+                      CupertinoIcons.star,
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
